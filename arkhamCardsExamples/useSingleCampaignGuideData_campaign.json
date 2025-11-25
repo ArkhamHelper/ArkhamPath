@@ -1,0 +1,1322 @@
+{
+    "remote": true,
+    "campaign": {
+      "__typename": "campaign",
+      "id": 97435,
+      "updated_at": "2025-11-09T16:16:43.663581+00:00",
+      "uuid": "b64cfbd2-bd62-4d34-b8b2-4bffd7e07b81",
+      "name": "Вер и спиз (Кампания А)",
+      "deleted": null,
+      "cycleCode": "tdea",
+      "standaloneId": null,
+      "difficulty": "standard",
+      "campaignNotes": {
+        "counts": [],
+        "sections": [],
+        "investigatorNotes": {
+          "counts": [],
+          "sections": []
+        }
+      },
+      "chaosBag": {
+        "0": 2,
+        "+1": 1,
+        "-1": 2,
+        "-2": 2,
+        "-3": 1,
+        "-4": 1,
+        "skull": 3,
+        "tablet": 2,
+        "cultist": 1,
+        "auto_fail": 1,
+        "elder_sign": 1
+      },
+      "showInterludes": true,
+      "scenarioResults": [
+        {
+          "scenario": "Подготовка к кампании",
+          "interlude": true,
+          "resolution": "",
+          "scenarioCode": "$campaign_setup"
+        },
+        {
+          "scenario": "Пролог",
+          "interlude": true,
+          "resolution": "",
+          "scenarioCode": "tde_prologue"
+        },
+        {
+          "scenario": "За вратами сна",
+          "interlude": false,
+          "resolution": "R2",
+          "scenarioCode": "beyond_the_gates_of_sleep"
+        },
+        {
+          "scenario": "Чёрный кот",
+          "interlude": true,
+          "resolution": "",
+          "scenarioCode": "the_black_cat"
+        }
+      ],
+      "weaknessSet": {
+        "packCodes": [
+          "core",
+          "dwl",
+          "ptc",
+          "tfa",
+          "tcu",
+          "tde",
+          "rtdwl",
+          "rtptc",
+          "nat",
+          "har",
+          "win",
+          "jac",
+          "ste"
+        ],
+        "assignedCards": {}
+      },
+      "guided": true,
+      "guide_version": 3,
+      "tarot_reading": null,
+      "archived": false,
+      "owner_id": "kxZCx7AxzOOKiss1cepgSKvkBIF2",
+      "investigators": [
+        {
+          "__typename": "campaign_investigator",
+          "id": "97435-06001",
+          "investigator": "06001"
+        },
+        {
+          "__typename": "campaign_investigator",
+          "id": "97435-03002",
+          "investigator": "03002"
+        }
+      ],
+      "investigator_data": [
+        {
+          "__typename": "investigator_data",
+          "spentXp": null,
+          "addedCards": [
+            "04040"
+          ],
+          "ignoreStoryAssets": [],
+          "removedCards": [
+            "01000"
+          ],
+          "cardCounts": {},
+          "specialXp": {},
+          "availableXp": 20,
+          "id": "97435 06001",
+          "campaign_id": 97435,
+          "investigator": "06001",
+          "mental": null,
+          "physical": null,
+          "insane": null,
+          "killed": null,
+          "storyAssets": [
+            "06059"
+          ]
+        },
+        {
+          "__typename": "investigator_data",
+          "spentXp": null,
+          "addedCards": [
+            "03040"
+          ],
+          "ignoreStoryAssets": [],
+          "removedCards": [
+            "01000"
+          ],
+          "cardCounts": {},
+          "specialXp": {},
+          "availableXp": 20,
+          "id": "97435 03002",
+          "campaign_id": 97435,
+          "investigator": "03002",
+          "mental": null,
+          "physical": null,
+          "insane": null,
+          "killed": null,
+          "storyAssets": []
+        }
+      ],
+      "latest_decks": [
+        {
+          "__typename": "latest_decks",
+          "deck": {
+            "__typename": "campaign_deck",
+            "owner": {
+              "__typename": "users",
+              "id": "faCtEzrnxiTlU6biiI2DKSN1q1v2",
+              "handle": "BambinaMar"
+            },
+            "campaign": {
+              "__typename": "campaign",
+              "id": 97435,
+              "uuid": "b64cfbd2-bd62-4d34-b8b2-4bffd7e07b81",
+              "name": "Вер и спиз (Кампания А)",
+              "cycleCode": "tdea"
+            },
+            "investigator_data": {
+              "__typename": "investigator_data",
+              "id": "97435 03002",
+              "killed": null,
+              "insane": null,
+              "physical": null,
+              "mental": null
+            },
+            "previous_deck": {
+              "__typename": "campaign_deck",
+              "arkhamdb_user": null,
+              "content": {
+                "meta": {},
+                "name": "Вер и спиз",
+                "uuid": "b9dfada0-ffcd-4d26-8820-c809d7a9ce4d",
+                "local": true,
+                "slots": {
+                  "01033": 2,
+                  "01036": 1,
+                  "01039": 2,
+                  "01073": 1,
+                  "01080": 2,
+                  "01093": 2,
+                  "02033": 2,
+                  "02192": 1,
+                  "03010": 1,
+                  "03011": 1,
+                  "03036": 1,
+                  "03039": 1,
+                  "03040": 1,
+                  "03114": 1,
+                  "03231": 1,
+                  "04036": 2,
+                  "04200": 1,
+                  "04203": 1,
+                  "05110": 1,
+                  "05119": 1,
+                  "05154": 2,
+                  "05159": 1,
+                  "06034": 3,
+                  "06112": 1
+                },
+                "problem": "",
+                "spentXp": 0,
+                "version": "0.3",
+                "taboo_id": null,
+                "sideSlots": [],
+                "nextDeckId": {
+                  "uuid": "40e859c5-fa5c-402b-a62f-80c6c927c54f",
+                  "local": true
+                },
+                "date_update": "2025-11-09T16:04:40.459Z",
+                "date_creation": "2025-11-08T18:26:06.750Z",
+                "scenarioCount": 0,
+                "xp_adjustment": 0,
+                "description_md": "",
+                "investigator_code": "03002",
+                "ignoreDeckLimitSlots": {}
+              },
+              "content_hash": "3442e1c2cb940e50c625359e95558131dd4abd10",
+              "investigator": "03002",
+              "id": 1724135,
+              "owner_id": "faCtEzrnxiTlU6biiI2DKSN1q1v2",
+              "arkhamdb_id": null,
+              "local_uuid": "b9dfada0-ffcd-4d26-8820-c809d7a9ce4d",
+              "campaign_id": 97435
+            },
+            "arkhamdb_user": null,
+            "content": {
+              "xp": 12,
+              "meta": {},
+              "name": "Вер и спиз",
+              "uuid": "40e859c5-fa5c-402b-a62f-80c6c927c54f",
+              "local": true,
+              "slots": {
+                "60526": 2,
+                "01033": 2,
+                "01036": 1,
+                "01039": 2,
+                "01073": 1,
+                "01080": 2,
+                "02033": 1,
+                "02035": 1,
+                "02192": 1,
+                "03010": 1,
+                "03011": 1,
+                "03036": 1,
+                "03039": 1,
+                "03114": 1,
+                "03231": 1,
+                "04036": 2,
+                "04200": 1,
+                "04203": 1,
+                "05110": 1,
+                "05154": 2,
+                "05159": 1,
+                "05194": 1,
+                "06034": 3,
+                "06236": 1
+              },
+              "problem": "",
+              "spentXp": 12,
+              "version": "1.2",
+              "taboo_id": 0,
+              "sideSlots": [],
+              "date_update": "2025-11-09T16:19:19.757Z",
+              "exile_string": "",
+              "date_creation": "2025-11-09T16:04:57.656Z",
+              "scenarioCount": 0,
+              "xp_adjustment": 0,
+              "description_md": "",
+              "previousDeckId": {
+                "uuid": "b9dfada0-ffcd-4d26-8820-c809d7a9ce4d",
+                "local": true
+              },
+              "investigator_code": "03002",
+              "ignoreDeckLimitSlots": {}
+            },
+            "content_hash": "e60953dce5c67c32c059bd8f61f0dec81bc5cffb",
+            "investigator": "03002",
+            "id": 1726245,
+            "owner_id": "faCtEzrnxiTlU6biiI2DKSN1q1v2",
+            "arkhamdb_id": null,
+            "local_uuid": "40e859c5-fa5c-402b-a62f-80c6c927c54f",
+            "campaign_id": 97435
+          }
+        },
+        {
+          "__typename": "latest_decks",
+          "deck": {
+            "__typename": "campaign_deck",
+            "owner": {
+              "__typename": "users",
+              "id": "kxZCx7AxzOOKiss1cepgSKvkBIF2",
+              "handle": "Nichi_R"
+            },
+            "campaign": {
+              "__typename": "campaign",
+              "id": 97435,
+              "uuid": "b64cfbd2-bd62-4d34-b8b2-4bffd7e07b81",
+              "name": "Вер и спиз (Кампания А)",
+              "cycleCode": "tdea"
+            },
+            "investigator_data": {
+              "__typename": "investigator_data",
+              "id": "97435 06001",
+              "killed": null,
+              "insane": null,
+              "physical": null,
+              "mental": null
+            },
+            "previous_deck": {
+              "__typename": "campaign_deck",
+              "arkhamdb_user": 127786,
+              "content": {
+                "id": 5484806,
+                "xp": 12,
+                "meta": {},
+                "name": "Вер и спиз",
+                "tags": "guardian",
+                "slots": {
+                  "60107": 2,
+                  "60112": 1,
+                  "60117": 2,
+                  "60118": 2,
+                  "01016": 2,
+                  "01021": 2,
+                  "01025": 2,
+                  "01028": 2,
+                  "02158": 1,
+                  "02184": 1,
+                  "03272": 2,
+                  "04017": 2,
+                  "04040": 1,
+                  "05022": 2,
+                  "05118": 2,
+                  "06006": 1,
+                  "06007": 1,
+                  "06018": 1,
+                  "06059": 1,
+                  "06111": 2,
+                  "06155": 2,
+                  "06276": 1
+                },
+                "problem": null,
+                "spentXp": 12,
+                "user_id": 127786,
+                "version": "0.2",
+                "taboo_id": null,
+                "sideSlots": {
+                  "60125": 2,
+                  "02158": 1,
+                  "05192": 2
+                },
+                "nextDeckId": {
+                  "id": 5485509,
+                  "uuid": "5485509",
+                  "local": false,
+                  "arkhamdb_user": 127786
+                },
+                "date_update": "2025-11-09T19:42:14+00:00",
+                "exile_string": null,
+                "date_creation": "2025-11-09T16:13:49+00:00",
+                "xp_adjustment": 0,
+                "description_md": "",
+                "previousDeckId": {
+                  "id": 5482039,
+                  "uuid": "5482039",
+                  "local": false,
+                  "arkhamdb_user": 127786
+                },
+                "investigator_code": "06001",
+                "investigator_name": "Tommy Muldoon",
+                "ignoreDeckLimitSlots": {}
+              },
+              "content_hash": "5f72730e37b0a7689b0501f0eed80814535a48e8",
+              "investigator": "06001",
+              "id": 1726296,
+              "owner_id": "kxZCx7AxzOOKiss1cepgSKvkBIF2",
+              "arkhamdb_id": 5484806,
+              "local_uuid": null,
+              "campaign_id": 97435
+            },
+            "arkhamdb_user": 127786,
+            "content": {
+              "id": 5485509,
+              "xp": 8,
+              "meta": {},
+              "name": "Вер и спиз",
+              "tags": "guardian",
+              "slots": {
+                "60107": 2,
+                "60112": 1,
+                "60117": 2,
+                "60118": 2,
+                "01016": 2,
+                "01021": 2,
+                "01025": 2,
+                "01028": 2,
+                "02158": 1,
+                "02184": 1,
+                "03272": 2,
+                "04017": 2,
+                "04040": 1,
+                "05022": 2,
+                "05118": 2,
+                "06006": 1,
+                "06007": 1,
+                "06018": 1,
+                "06059": 1,
+                "06111": 2,
+                "06155": 2,
+                "06276": 1
+              },
+              "problem": null,
+              "spentXp": null,
+              "user_id": 127786,
+              "version": "0.1",
+              "taboo_id": null,
+              "sideSlots": {
+                "60125": 2,
+                "02158": 1,
+                "05192": 2
+              },
+              "date_update": "2025-11-09T19:42:14+00:00",
+              "exile_string": null,
+              "date_creation": "2025-11-09T19:42:14+00:00",
+              "xp_adjustment": null,
+              "description_md": "",
+              "previousDeckId": {
+                "id": 5484806,
+                "uuid": "5484806",
+                "local": false,
+                "arkhamdb_user": 127786
+              },
+              "investigator_code": "06001",
+              "investigator_name": "Tommy Muldoon",
+              "ignoreDeckLimitSlots": {}
+            },
+            "content_hash": "1a7d933de1982609a101724df048e474db4be52f",
+            "investigator": "06001",
+            "id": 1726682,
+            "owner_id": "kxZCx7AxzOOKiss1cepgSKvkBIF2",
+            "arkhamdb_id": 5485509,
+            "local_uuid": null,
+            "campaign_id": 97435
+          }
+        }
+      ],
+      "link_a_campaign": null,
+      "link_b_campaign": null,
+      "linked_campaign": {
+        "__typename": "campaign",
+        "id": 97434,
+        "uuid": "57dc793a-4572-43d5-9102-aa0a50524ad3"
+      }
+    },
+    "campaignInvestigatorData": {
+      "06001": {
+        "storyAssets": [
+          "06059"
+        ]
+      },
+      "03002": {
+        "storyAssets": []
+      }
+    },
+    "updatedAt": "2025-11-09T16:16:43.663Z",
+    "owner_id": "kxZCx7AxzOOKiss1cepgSKvkBIF2",
+    "investigators": [
+      "06001",
+      "03002"
+    ],
+    "id": {
+      "campaignId": "b64cfbd2-bd62-4d34-b8b2-4bffd7e07b81",
+      "serverId": 97435
+    },
+    "archived": false,
+    "uuid": "b64cfbd2-bd62-4d34-b8b2-4bffd7e07b81",
+    "name": "Вер и спиз (Кампания А)",
+    "guided": true,
+    "difficulty": "standard",
+    "latestScenarioResult": {
+      "scenario": "Чёрный кот",
+      "interlude": true,
+      "resolution": "",
+      "scenarioCode": "the_black_cat"
+    },
+    "cycleCode": "tdea",
+    "standaloneId": null,
+    "deleted": false,
+    "fullCampaign": {
+      "__typename": "campaign",
+      "id": 97435,
+      "updated_at": "2025-11-09T16:16:43.663581+00:00",
+      "uuid": "b64cfbd2-bd62-4d34-b8b2-4bffd7e07b81",
+      "name": "Вер и спиз (Кампания А)",
+      "deleted": null,
+      "cycleCode": "tdea",
+      "standaloneId": null,
+      "difficulty": "standard",
+      "campaignNotes": {
+        "counts": [],
+        "sections": [],
+        "investigatorNotes": {
+          "counts": [],
+          "sections": []
+        }
+      },
+      "chaosBag": {
+        "0": 2,
+        "+1": 1,
+        "-1": 2,
+        "-2": 2,
+        "-3": 1,
+        "-4": 1,
+        "skull": 3,
+        "tablet": 2,
+        "cultist": 1,
+        "auto_fail": 1,
+        "elder_sign": 1
+      },
+      "showInterludes": true,
+      "scenarioResults": [
+        {
+          "scenario": "Подготовка к кампании",
+          "interlude": true,
+          "resolution": "",
+          "scenarioCode": "$campaign_setup"
+        },
+        {
+          "scenario": "Пролог",
+          "interlude": true,
+          "resolution": "",
+          "scenarioCode": "tde_prologue"
+        },
+        {
+          "scenario": "За вратами сна",
+          "interlude": false,
+          "resolution": "R2",
+          "scenarioCode": "beyond_the_gates_of_sleep"
+        },
+        {
+          "scenario": "Чёрный кот",
+          "interlude": true,
+          "resolution": "",
+          "scenarioCode": "the_black_cat"
+        }
+      ],
+      "weaknessSet": {
+        "packCodes": [
+          "core",
+          "dwl",
+          "ptc",
+          "tfa",
+          "tcu",
+          "tde",
+          "rtdwl",
+          "rtptc",
+          "nat",
+          "har",
+          "win",
+          "jac",
+          "ste"
+        ],
+        "assignedCards": {}
+      },
+      "guided": true,
+      "guide_version": 3,
+      "tarot_reading": null,
+      "archived": false,
+      "owner_id": "kxZCx7AxzOOKiss1cepgSKvkBIF2",
+      "investigators": [
+        {
+          "__typename": "campaign_investigator",
+          "id": "97435-06001",
+          "investigator": "06001"
+        },
+        {
+          "__typename": "campaign_investigator",
+          "id": "97435-03002",
+          "investigator": "03002"
+        }
+      ],
+      "investigator_data": [
+        {
+          "__typename": "investigator_data",
+          "spentXp": null,
+          "addedCards": [
+            "04040"
+          ],
+          "ignoreStoryAssets": [],
+          "removedCards": [
+            "01000"
+          ],
+          "cardCounts": {},
+          "specialXp": {},
+          "availableXp": 20,
+          "id": "97435 06001",
+          "campaign_id": 97435,
+          "investigator": "06001",
+          "mental": null,
+          "physical": null,
+          "insane": null,
+          "killed": null,
+          "storyAssets": [
+            "06059"
+          ]
+        },
+        {
+          "__typename": "investigator_data",
+          "spentXp": null,
+          "addedCards": [
+            "03040"
+          ],
+          "ignoreStoryAssets": [],
+          "removedCards": [
+            "01000"
+          ],
+          "cardCounts": {},
+          "specialXp": {},
+          "availableXp": 20,
+          "id": "97435 03002",
+          "campaign_id": 97435,
+          "investigator": "03002",
+          "mental": null,
+          "physical": null,
+          "insane": null,
+          "killed": null,
+          "storyAssets": []
+        }
+      ],
+      "latest_decks": [
+        {
+          "__typename": "latest_decks",
+          "deck": {
+            "__typename": "campaign_deck",
+            "owner": {
+              "__typename": "users",
+              "id": "faCtEzrnxiTlU6biiI2DKSN1q1v2",
+              "handle": "BambinaMar"
+            },
+            "campaign": {
+              "__typename": "campaign",
+              "id": 97435,
+              "uuid": "b64cfbd2-bd62-4d34-b8b2-4bffd7e07b81",
+              "name": "Вер и спиз (Кампания А)",
+              "cycleCode": "tdea"
+            },
+            "investigator_data": {
+              "__typename": "investigator_data",
+              "id": "97435 03002",
+              "killed": null,
+              "insane": null,
+              "physical": null,
+              "mental": null
+            },
+            "previous_deck": {
+              "__typename": "campaign_deck",
+              "arkhamdb_user": null,
+              "content": {
+                "meta": {},
+                "name": "Вер и спиз",
+                "uuid": "b9dfada0-ffcd-4d26-8820-c809d7a9ce4d",
+                "local": true,
+                "slots": {
+                  "01033": 2,
+                  "01036": 1,
+                  "01039": 2,
+                  "01073": 1,
+                  "01080": 2,
+                  "01093": 2,
+                  "02033": 2,
+                  "02192": 1,
+                  "03010": 1,
+                  "03011": 1,
+                  "03036": 1,
+                  "03039": 1,
+                  "03040": 1,
+                  "03114": 1,
+                  "03231": 1,
+                  "04036": 2,
+                  "04200": 1,
+                  "04203": 1,
+                  "05110": 1,
+                  "05119": 1,
+                  "05154": 2,
+                  "05159": 1,
+                  "06034": 3,
+                  "06112": 1
+                },
+                "problem": "",
+                "spentXp": 0,
+                "version": "0.3",
+                "taboo_id": null,
+                "sideSlots": [],
+                "nextDeckId": {
+                  "uuid": "40e859c5-fa5c-402b-a62f-80c6c927c54f",
+                  "local": true
+                },
+                "date_update": "2025-11-09T16:04:40.459Z",
+                "date_creation": "2025-11-08T18:26:06.750Z",
+                "scenarioCount": 0,
+                "xp_adjustment": 0,
+                "description_md": "",
+                "investigator_code": "03002",
+                "ignoreDeckLimitSlots": {}
+              },
+              "content_hash": "3442e1c2cb940e50c625359e95558131dd4abd10",
+              "investigator": "03002",
+              "id": 1724135,
+              "owner_id": "faCtEzrnxiTlU6biiI2DKSN1q1v2",
+              "arkhamdb_id": null,
+              "local_uuid": "b9dfada0-ffcd-4d26-8820-c809d7a9ce4d",
+              "campaign_id": 97435
+            },
+            "arkhamdb_user": null,
+            "content": {
+              "xp": 12,
+              "meta": {},
+              "name": "Вер и спиз",
+              "uuid": "40e859c5-fa5c-402b-a62f-80c6c927c54f",
+              "local": true,
+              "slots": {
+                "60526": 2,
+                "01033": 2,
+                "01036": 1,
+                "01039": 2,
+                "01073": 1,
+                "01080": 2,
+                "02033": 1,
+                "02035": 1,
+                "02192": 1,
+                "03010": 1,
+                "03011": 1,
+                "03036": 1,
+                "03039": 1,
+                "03114": 1,
+                "03231": 1,
+                "04036": 2,
+                "04200": 1,
+                "04203": 1,
+                "05110": 1,
+                "05154": 2,
+                "05159": 1,
+                "05194": 1,
+                "06034": 3,
+                "06236": 1
+              },
+              "problem": "",
+              "spentXp": 12,
+              "version": "1.2",
+              "taboo_id": 0,
+              "sideSlots": [],
+              "date_update": "2025-11-09T16:19:19.757Z",
+              "exile_string": "",
+              "date_creation": "2025-11-09T16:04:57.656Z",
+              "scenarioCount": 0,
+              "xp_adjustment": 0,
+              "description_md": "",
+              "previousDeckId": {
+                "uuid": "b9dfada0-ffcd-4d26-8820-c809d7a9ce4d",
+                "local": true
+              },
+              "investigator_code": "03002",
+              "ignoreDeckLimitSlots": {}
+            },
+            "content_hash": "e60953dce5c67c32c059bd8f61f0dec81bc5cffb",
+            "investigator": "03002",
+            "id": 1726245,
+            "owner_id": "faCtEzrnxiTlU6biiI2DKSN1q1v2",
+            "arkhamdb_id": null,
+            "local_uuid": "40e859c5-fa5c-402b-a62f-80c6c927c54f",
+            "campaign_id": 97435
+          }
+        },
+        {
+          "__typename": "latest_decks",
+          "deck": {
+            "__typename": "campaign_deck",
+            "owner": {
+              "__typename": "users",
+              "id": "kxZCx7AxzOOKiss1cepgSKvkBIF2",
+              "handle": "Nichi_R"
+            },
+            "campaign": {
+              "__typename": "campaign",
+              "id": 97435,
+              "uuid": "b64cfbd2-bd62-4d34-b8b2-4bffd7e07b81",
+              "name": "Вер и спиз (Кампания А)",
+              "cycleCode": "tdea"
+            },
+            "investigator_data": {
+              "__typename": "investigator_data",
+              "id": "97435 06001",
+              "killed": null,
+              "insane": null,
+              "physical": null,
+              "mental": null
+            },
+            "previous_deck": {
+              "__typename": "campaign_deck",
+              "arkhamdb_user": 127786,
+              "content": {
+                "id": 5484806,
+                "xp": 12,
+                "meta": {},
+                "name": "Вер и спиз",
+                "tags": "guardian",
+                "slots": {
+                  "60107": 2,
+                  "60112": 1,
+                  "60117": 2,
+                  "60118": 2,
+                  "01016": 2,
+                  "01021": 2,
+                  "01025": 2,
+                  "01028": 2,
+                  "02158": 1,
+                  "02184": 1,
+                  "03272": 2,
+                  "04017": 2,
+                  "04040": 1,
+                  "05022": 2,
+                  "05118": 2,
+                  "06006": 1,
+                  "06007": 1,
+                  "06018": 1,
+                  "06059": 1,
+                  "06111": 2,
+                  "06155": 2,
+                  "06276": 1
+                },
+                "problem": null,
+                "spentXp": 12,
+                "user_id": 127786,
+                "version": "0.2",
+                "taboo_id": null,
+                "sideSlots": {
+                  "60125": 2,
+                  "02158": 1,
+                  "05192": 2
+                },
+                "nextDeckId": {
+                  "id": 5485509,
+                  "uuid": "5485509",
+                  "local": false,
+                  "arkhamdb_user": 127786
+                },
+                "date_update": "2025-11-09T19:42:14+00:00",
+                "exile_string": null,
+                "date_creation": "2025-11-09T16:13:49+00:00",
+                "xp_adjustment": 0,
+                "description_md": "",
+                "previousDeckId": {
+                  "id": 5482039,
+                  "uuid": "5482039",
+                  "local": false,
+                  "arkhamdb_user": 127786
+                },
+                "investigator_code": "06001",
+                "investigator_name": "Tommy Muldoon",
+                "ignoreDeckLimitSlots": {}
+              },
+              "content_hash": "5f72730e37b0a7689b0501f0eed80814535a48e8",
+              "investigator": "06001",
+              "id": 1726296,
+              "owner_id": "kxZCx7AxzOOKiss1cepgSKvkBIF2",
+              "arkhamdb_id": 5484806,
+              "local_uuid": null,
+              "campaign_id": 97435
+            },
+            "arkhamdb_user": 127786,
+            "content": {
+              "id": 5485509,
+              "xp": 8,
+              "meta": {},
+              "name": "Вер и спиз",
+              "tags": "guardian",
+              "slots": {
+                "60107": 2,
+                "60112": 1,
+                "60117": 2,
+                "60118": 2,
+                "01016": 2,
+                "01021": 2,
+                "01025": 2,
+                "01028": 2,
+                "02158": 1,
+                "02184": 1,
+                "03272": 2,
+                "04017": 2,
+                "04040": 1,
+                "05022": 2,
+                "05118": 2,
+                "06006": 1,
+                "06007": 1,
+                "06018": 1,
+                "06059": 1,
+                "06111": 2,
+                "06155": 2,
+                "06276": 1
+              },
+              "problem": null,
+              "spentXp": null,
+              "user_id": 127786,
+              "version": "0.1",
+              "taboo_id": null,
+              "sideSlots": {
+                "60125": 2,
+                "02158": 1,
+                "05192": 2
+              },
+              "date_update": "2025-11-09T19:42:14+00:00",
+              "exile_string": null,
+              "date_creation": "2025-11-09T19:42:14+00:00",
+              "xp_adjustment": null,
+              "description_md": "",
+              "previousDeckId": {
+                "id": 5484806,
+                "uuid": "5484806",
+                "local": false,
+                "arkhamdb_user": 127786
+              },
+              "investigator_code": "06001",
+              "investigator_name": "Tommy Muldoon",
+              "ignoreDeckLimitSlots": {}
+            },
+            "content_hash": "1a7d933de1982609a101724df048e474db4be52f",
+            "investigator": "06001",
+            "id": 1726682,
+            "owner_id": "kxZCx7AxzOOKiss1cepgSKvkBIF2",
+            "arkhamdb_id": 5485509,
+            "local_uuid": null,
+            "campaign_id": 97435
+          }
+        }
+      ],
+      "link_a_campaign": null,
+      "link_b_campaign": null,
+      "linked_campaign": {
+        "__typename": "campaign",
+        "id": 97434,
+        "uuid": "57dc793a-4572-43d5-9102-aa0a50524ad3"
+      }
+    },
+    "investigatorData": {
+      "06001": {
+        "storyAssets": [
+          "06059"
+        ],
+        "specialXp": {},
+        "availableXp": 20,
+        "ignoreStoryAssets": [],
+        "addedCards": [
+          "04040"
+        ],
+        "removedCards": [
+          "01000"
+        ]
+      },
+      "03002": {
+        "storyAssets": [],
+        "specialXp": {},
+        "availableXp": 20,
+        "ignoreStoryAssets": [],
+        "addedCards": [
+          "03040"
+        ],
+        "removedCards": [
+          "01000"
+        ]
+      }
+    },
+    "fullLatestDecks": [
+      {
+        "id": {
+          "serverId": 1726245,
+          "local": true,
+          "uuid": "40e859c5-fa5c-402b-a62f-80c6c927c54f"
+        },
+        "investigator": "03002",
+        "name": "Вер и спиз",
+        "date_update": "2025-11-09T16:19:19.757Z",
+        "campaign_id": {
+          "campaignId": "b64cfbd2-bd62-4d34-b8b2-4bffd7e07b81",
+          "serverId": 97435
+        },
+        "tags": [],
+        "owner": {
+          "handle": "BambinaMar",
+          "id": "faCtEzrnxiTlU6biiI2DKSN1q1v2"
+        },
+        "deck": {
+          "xp": 12,
+          "meta": {},
+          "name": "Вер и спиз",
+          "uuid": "40e859c5-fa5c-402b-a62f-80c6c927c54f",
+          "local": true,
+          "slots": {
+            "60526": 2,
+            "01033": 2,
+            "01036": 1,
+            "01039": 2,
+            "01073": 1,
+            "01080": 2,
+            "02033": 1,
+            "02035": 1,
+            "02192": 1,
+            "03010": 1,
+            "03011": 1,
+            "03036": 1,
+            "03039": 1,
+            "03114": 1,
+            "03231": 1,
+            "04036": 2,
+            "04200": 1,
+            "04203": 1,
+            "05110": 1,
+            "05154": 2,
+            "05159": 1,
+            "05194": 1,
+            "06034": 3,
+            "06236": 1
+          },
+          "problem": "",
+          "spentXp": 12,
+          "version": "1.2",
+          "taboo_id": 0,
+          "sideSlots": [],
+          "date_update": "2025-11-09T16:19:19.757Z",
+          "exile_string": "",
+          "date_creation": "2025-11-09T16:04:57.656Z",
+          "scenarioCount": 0,
+          "xp_adjustment": 0,
+          "description_md": "",
+          "previousDeckId": {
+            "uuid": "b9dfada0-ffcd-4d26-8820-c809d7a9ce4d",
+            "local": true
+          },
+          "investigator_code": "03002",
+          "ignoreDeckLimitSlots": {}
+        },
+        "previousDeck": {
+          "meta": {},
+          "name": "Вер и спиз",
+          "uuid": "b9dfada0-ffcd-4d26-8820-c809d7a9ce4d",
+          "local": true,
+          "slots": {
+            "01033": 2,
+            "01036": 1,
+            "01039": 2,
+            "01073": 1,
+            "01080": 2,
+            "01093": 2,
+            "02033": 2,
+            "02192": 1,
+            "03010": 1,
+            "03011": 1,
+            "03036": 1,
+            "03039": 1,
+            "03040": 1,
+            "03114": 1,
+            "03231": 1,
+            "04036": 2,
+            "04200": 1,
+            "04203": 1,
+            "05110": 1,
+            "05119": 1,
+            "05154": 2,
+            "05159": 1,
+            "06034": 3,
+            "06112": 1
+          },
+          "problem": "",
+          "spentXp": 0,
+          "version": "0.3",
+          "taboo_id": null,
+          "sideSlots": [],
+          "nextDeckId": {
+            "uuid": "40e859c5-fa5c-402b-a62f-80c6c927c54f",
+            "local": true
+          },
+          "date_update": "2025-11-09T16:04:40.459Z",
+          "date_creation": "2025-11-08T18:26:06.750Z",
+          "scenarioCount": 0,
+          "xp_adjustment": 0,
+          "description_md": "",
+          "investigator_code": "03002",
+          "ignoreDeckLimitSlots": {}
+        },
+        "campaign": {
+          "id": {
+            "campaignId": "b64cfbd2-bd62-4d34-b8b2-4bffd7e07b81",
+            "serverId": 97435
+          },
+          "name": "Вер и спиз (Кампания А)",
+          "trauma": {},
+          "cycleCode": "tdea"
+        }
+      },
+      {
+        "id": {
+          "id": 5485509,
+          "arkhamdb_user": 127786,
+          "local": false,
+          "uuid": "5485509",
+          "serverId": 1726682
+        },
+        "investigator": "06001",
+        "name": "Вер и спиз",
+        "date_update": "2025-11-09T19:42:14+00:00",
+        "campaign_id": {
+          "campaignId": "b64cfbd2-bd62-4d34-b8b2-4bffd7e07b81",
+          "serverId": 97435
+        },
+        "tags": [
+          "guardian"
+        ],
+        "owner": {
+          "handle": "Nichi_R",
+          "id": "kxZCx7AxzOOKiss1cepgSKvkBIF2"
+        },
+        "deck": {
+          "id": 5485509,
+          "xp": 8,
+          "meta": {},
+          "name": "Вер и спиз",
+          "tags": "guardian",
+          "slots": {
+            "60107": 2,
+            "60112": 1,
+            "60117": 2,
+            "60118": 2,
+            "01016": 2,
+            "01021": 2,
+            "01025": 2,
+            "01028": 2,
+            "02158": 1,
+            "02184": 1,
+            "03272": 2,
+            "04017": 2,
+            "04040": 1,
+            "05022": 2,
+            "05118": 2,
+            "06006": 1,
+            "06007": 1,
+            "06018": 1,
+            "06059": 1,
+            "06111": 2,
+            "06155": 2,
+            "06276": 1
+          },
+          "problem": null,
+          "spentXp": null,
+          "user_id": 127786,
+          "version": "0.1",
+          "taboo_id": null,
+          "sideSlots": {
+            "60125": 2,
+            "02158": 1,
+            "05192": 2
+          },
+          "date_update": "2025-11-09T19:42:14+00:00",
+          "exile_string": null,
+          "date_creation": "2025-11-09T19:42:14+00:00",
+          "xp_adjustment": null,
+          "description_md": "",
+          "previousDeckId": {
+            "id": 5484806,
+            "uuid": "5484806",
+            "local": false,
+            "arkhamdb_user": 127786
+          },
+          "investigator_code": "06001",
+          "investigator_name": "Tommy Muldoon",
+          "ignoreDeckLimitSlots": {}
+        },
+        "previousDeck": {
+          "id": 5484806,
+          "xp": 12,
+          "meta": {},
+          "name": "Вер и спиз",
+          "tags": "guardian",
+          "slots": {
+            "60107": 2,
+            "60112": 1,
+            "60117": 2,
+            "60118": 2,
+            "01016": 2,
+            "01021": 2,
+            "01025": 2,
+            "01028": 2,
+            "02158": 1,
+            "02184": 1,
+            "03272": 2,
+            "04017": 2,
+            "04040": 1,
+            "05022": 2,
+            "05118": 2,
+            "06006": 1,
+            "06007": 1,
+            "06018": 1,
+            "06059": 1,
+            "06111": 2,
+            "06155": 2,
+            "06276": 1
+          },
+          "problem": null,
+          "spentXp": 12,
+          "user_id": 127786,
+          "version": "0.2",
+          "taboo_id": null,
+          "sideSlots": {
+            "60125": 2,
+            "02158": 1,
+            "05192": 2
+          },
+          "nextDeckId": {
+            "id": 5485509,
+            "uuid": "5485509",
+            "local": false,
+            "arkhamdb_user": 127786
+          },
+          "date_update": "2025-11-09T19:42:14+00:00",
+          "exile_string": null,
+          "date_creation": "2025-11-09T16:13:49+00:00",
+          "xp_adjustment": 0,
+          "description_md": "",
+          "previousDeckId": {
+            "id": 5482039,
+            "uuid": "5482039",
+            "local": false,
+            "arkhamdb_user": 127786
+          },
+          "investigator_code": "06001",
+          "investigator_name": "Tommy Muldoon",
+          "ignoreDeckLimitSlots": {}
+        },
+        "campaign": {
+          "id": {
+            "campaignId": "b64cfbd2-bd62-4d34-b8b2-4bffd7e07b81",
+            "serverId": 97435
+          },
+          "name": "Вер и спиз (Кампания А)",
+          "trauma": {},
+          "cycleCode": "tdea"
+        }
+      }
+    ],
+    "showInterludes": true,
+    "guideVersion": 3,
+    "chaosBag": {
+      "0": 2,
+      "+1": 1,
+      "-1": 2,
+      "-2": 2,
+      "-3": 1,
+      "-4": 1,
+      "skull": 3,
+      "tablet": 2,
+      "cultist": 1,
+      "auto_fail": 1,
+      "elder_sign": 1
+    },
+    "weaknessSet": {
+      "packCodes": [
+        "core",
+        "dwl",
+        "ptc",
+        "tfa",
+        "tcu",
+        "tde",
+        "rtdwl",
+        "rtptc",
+        "nat",
+        "har",
+        "win",
+        "jac",
+        "ste"
+      ],
+      "assignedCards": {}
+    },
+    "campaignNotes": {
+      "counts": [],
+      "sections": [],
+      "investigatorNotes": {
+        "counts": [],
+        "sections": []
+      }
+    },
+    "scenarioResults": [
+      {
+        "scenario": "Подготовка к кампании",
+        "interlude": true,
+        "resolution": "",
+        "scenarioCode": "$campaign_setup"
+      },
+      {
+        "scenario": "Пролог",
+        "interlude": true,
+        "resolution": "",
+        "scenarioCode": "tde_prologue"
+      },
+      {
+        "scenario": "За вратами сна",
+        "interlude": false,
+        "resolution": "R2",
+        "scenarioCode": "beyond_the_gates_of_sleep"
+      },
+      {
+        "scenario": "Чёрный кот",
+        "interlude": true,
+        "resolution": "",
+        "scenarioCode": "the_black_cat"
+      }
+    ],
+    "linkedCampaignId": {
+      "campaignId": "57dc793a-4572-43d5-9102-aa0a50524ad3",
+      "serverId": 97434
+    }
+  }

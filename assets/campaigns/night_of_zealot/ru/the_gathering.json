@@ -1,0 +1,52 @@
+{
+    "id": "the_gathering",
+    "id_AC": "torch",
+    "name": "Встреча",
+    "resolutions": [
+      {
+        "code": "investigators_defeated",
+        "title": "Исход не достигнут",
+        "isDefeat": true,
+        "effects": [
+          "house_standing",
+          "ghoul_priest_alive",
+          "earn_lita"
+        ]
+      },
+      {
+        "code": "burn_down_house",
+        "title": "Исход 1",
+        "description": "Сжечь дом",
+        "achieveWay": "Выбрать вариант \"Сжечь дом\" в сцене 3b",
+        "effects": [
+          "house_burned",
+          "earn_lita",
+          "mental_trauma",
+          "earn_xp"
+        ]
+      },
+      {
+        "code": "not_burn_down_house",
+        "title": "Исход 2",
+        "description": "Не сжигать дом",
+        "achieveWay": "Выбрать вариант \"Не сжигать дом\" в сцене 3b",
+        "effects": [
+          "house_standing",
+          "lead_investigator_xp",
+          "earn_xp"
+        ]
+      },
+      {
+        "code": "death_in_house",
+        "title": "Исход 3",
+        "description": "Смерть в доме",
+        "achieveWay": "Достигнуть замысла 3b с текущей сценой 1 или 2",
+        "effects": [
+          "lita_finds_others",
+          "house_standing",
+          "ghoul_priest_alive",
+          "killed"
+        ]
+      }
+    ]
+}
