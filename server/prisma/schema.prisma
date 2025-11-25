@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Campaign {
+  id Int @default(autoincrement()) @id
+  dateCreate DateTime @default(now())
+  dateUpdate DateTime @updatedAt
+
+  name String
+  userResults Json
+  journalNotes String[]
+
+  userId Int
+  difficultyId Int
+
+  user User @relation(references: [id], fields: [userId])
+  difficulty CampaignDifficulty @relation(references: [id], fields: [difficultyId]) 
+}
+
+model CampaignDifficulty {
+  id Int @default(autoincrement()) @id
+  dateCreate DateTime @default(now())
+  dateUpdate DateTime @updatedAt
+
+  name String
+
+  campaigns Campaign[]
+}
+
+model CycleSchema {  
+  dateCreate DateTime @default(now())
+  dateUpdate DateTime @updatedAt
+
+  data Json
+  userId Int
+  code String
+  dateLastFetchArkhamCards DateTime
+
+  user User @relation(references: [id], fields: [userId])
+
+  @@id([userId, code])
+}
+
+model User {
+  id Int @default(autoincrement()) @id
+  dateCreate DateTime @default(now())
+  dateUpdate DateTime @updatedAt
+
+  campaigns Campaign[]
+
+  cycleSchemas CycleSchema[]
+}

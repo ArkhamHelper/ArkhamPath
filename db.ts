@@ -32,5 +32,5 @@ interface Campaign {
     name: string
     difficulty: string
     journalNotes: string[] //Коды (id) записей журнала 
-    userResults: JSON[] //{*scenarioCode*: *resolutionCode*}
+    userResults: JSON //{*scenarioCode*: *resolutionCode*}
 }
