@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Campaign {
-  id Int @default(autoincrement()) @id
+  id String @default(uuid()) @id
   dateCreate DateTime @default(now())
   dateUpdate DateTime @updatedAt
 
@@ -22,15 +22,15 @@ model Campaign {
   userResults Json
   journalNotes String[]
 
-  userId Int
-  difficultyId Int
+  userId String
+  difficultyId String
 
   user User @relation(references: [id], fields: [userId])
   difficulty CampaignDifficulty @relation(references: [id], fields: [difficultyId]) 
 }
 
 model CampaignDifficulty {
-  id Int @default(autoincrement()) @id
+  id String @default(uuid()) @id
   dateCreate DateTime @default(now())
   dateUpdate DateTime @updatedAt
 
@@ -44,7 +44,7 @@ model CycleSchema {
   dateUpdate DateTime @updatedAt
 
   data Json
-  userId Int
+  userId String
   code String
   dateLastFetchArkhamCards DateTime
 
@@ -54,7 +54,7 @@ model CycleSchema {
 }
 
 model User {
-  id Int @default(autoincrement()) @id
+  id String @default(uuid()) @id
   dateCreate DateTime @default(now())
   dateUpdate DateTime @updatedAt
 
