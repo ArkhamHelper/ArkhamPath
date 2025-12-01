@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Campaign {
+  id String @default(uuid()) @id
+  dateCreate DateTime @default(now())
+  dateUpdate DateTime @updatedAt
+
+  name String
+  userResults Json
+  journalNotes String[]
+
+  userId String
+  difficultyId String
+
+  user User @relation(references: [id], fields: [userId])
+  difficulty CampaignDifficulty @relation(references: [id], fields: [difficultyId]) 
+}
+
+model CampaignDifficulty {
+  id String @default(uuid()) @id
+  dateCreate DateTime @default(now())
+  dateUpdate DateTime @updatedAt
+
+  name String
+
+  campaigns Campaign[]
+}
+
+model CycleSchema {  
+  dateCreate DateTime @default(now())
+  dateUpdate DateTime @updatedAt
+
+  data Json
+  code String
+  userId String
+  dateLastFetchArkhamCards DateTime
+
+  user User @relation(references: [id], fields: [userId])
+
+  @@id([userId, code])
+}
+
+model User {
+  id String @default(uuid()) @id
+  dateCreate DateTime @default(now())
+  dateUpdate DateTime @updatedAt
+
+  campaigns Campaign[]
+  cycleSchemas CycleSchema[]
+}
