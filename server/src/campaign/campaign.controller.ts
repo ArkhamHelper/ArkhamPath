@@ -1,24 +1,29 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { CampaignSchema } from './schema/campaign.schema';
-import { GetCampaignDto } from './dto/campaign.dto';
+import { GetCampaignQuery } from './dto/campaign.dto';
 import { CampaignService } from './campaign.service';
+import { ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('campaigns')
 export class CampaignController {
   constructor(private campaignService: CampaignService) {}
 
   @Get('/')
-  async getCampaigns(dto: GetCampaignDto): Promise<CampaignSchema[]> {
+  @ApiQuery({ type: GetCampaignQuery })
+  @ApiResponse({ type: CampaignSchema, isArray: true })
+  async getCampaigns(
+    @Query() query: GetCampaignQuery,
+  ): Promise<CampaignSchema[]> {
     const campaigns: CampaignSchema[] = [];
 
-    if (dto.id) {
-      const foundCampaign = await this.campaignService.findOneById(dto.id);
+    if (query.id) {
+      const foundCampaign = await this.campaignService.findOneById(query.id);
       campaigns.push(foundCampaign);
     }
 
-    if (dto.userId) {
+    if (query.userId) {
       const foundCampaigns = await this.campaignService.findManyByUserId(
-        dto.userId,
+        query.userId,
       );
       campaigns.push(...foundCampaigns);
     }

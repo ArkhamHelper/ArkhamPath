@@ -1,14 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { CampaignRepository } from './campaign.repository';
 import { CampaignSchema } from './schema/campaign.schema';
-import { PrismaService } from 'src/tools/prisma/prisma.service';
 
 @Injectable()
 export class CampaignService {
-  constructor(
-    private campaignRepository: CampaignRepository,
-    private prisma: PrismaService,
-  ) {}
+  constructor(private campaignRepository: CampaignRepository) {}
 
   async findOneById(id: string): Promise<CampaignSchema> {
     const campaign = await this.campaignRepository.findOneById(id);

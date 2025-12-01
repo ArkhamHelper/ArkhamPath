@@ -17,7 +17,6 @@ function addSwagger(app: INestApplication) {
     .setTitle('Your API')
     .setDescription('API description')
     .setVersion('1.0')
-    .addTag('api')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

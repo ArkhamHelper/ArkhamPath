@@ -1,6 +1,8 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 
-export class GetCampaignDto {
+export type GetCampaignDto = GetCampaignQuery;
+
+export class GetCampaignQuery {
   @ApiPropertyOptional({ description: 'ID кампании' })
   id?: string;
 
