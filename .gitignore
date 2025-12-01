@@ -1,2 +1,4 @@
 .vscode/
 .arkhamCardsExamples/
+./node_modules
+server-old/
