@@ -11,6 +11,10 @@ describe('GetManyCampaigns', () => {
     infrastructure.campaignRepository.set(fixture.campaigns);
   });
 
+  it('should throw error on invalid userId', async () => {
+    expect('TODO: add user repository').toBeUndefined();
+  });
+
   it('should find only by userId', async () => {
     const campaigns = await getCampaigns({
       userId: '1',

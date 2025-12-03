@@ -12,8 +12,8 @@ export class CampaignModel {
   };
 
   constructor(campaign: Partial<CampaignModel>) {
-    this.journalNotes = [];
     this.userResults = {};
+    this.journalNotes = [];
 
     Object.assign(this, campaign);
   }
