@@ -1,7 +1,7 @@
-import { PrismaService } from 'src/tools/prisma/prisma.service';
+import { PrismaService } from '../../tools/prisma/prisma.service';
 import { CampaignDifficultyModel } from '../model/difficulty.model';
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { IBaseRepository } from 'src/tools/interface/base.repository';
+import { IBaseRepository } from '../../tools/interface/base.repository';
 
 export interface ICampaignDifficultyRepository extends IBaseRepository<CampaignDifficultyModel> {}
 @Injectable()

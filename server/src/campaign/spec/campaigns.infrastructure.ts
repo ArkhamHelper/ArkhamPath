@@ -3,12 +3,16 @@ import { CampaignFakeRepository } from '../repository/test/campaignFake.reposito
 import { CampaignDifficultyFakeRepository } from '../repository/test/difficultyFake.repository';
 
 export class CampaignsInfrastructure {
-  constructor(
-    public campaignRepository = new CampaignFakeRepository(),
-    public difficultyRepository = new CampaignDifficultyFakeRepository(),
-    public campaignService = new CampaignService(
+  public campaignService: CampaignService;
+  public campaignRepository: CampaignFakeRepository;
+  public difficultyRepository: CampaignDifficultyFakeRepository;
+
+  constructor() {
+    this.campaignRepository = new CampaignFakeRepository();
+    this.difficultyRepository = new CampaignDifficultyFakeRepository();
+    this.campaignService = new CampaignService(
       this.campaignRepository,
       this.difficultyRepository,
-    ),
-  ) {}
+    );
+  }
 }

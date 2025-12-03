@@ -1,4 +1,4 @@
-import { CampaignModel } from 'src/campaign/model/campaign.model';
+import { CampaignModel } from '../../../campaign/model/campaign.model';
 
 export class GetManyCampaignsFixture {
   campaigns: CampaignModel[] = [
@@ -26,7 +26,7 @@ export class GetManyCampaignsFixture {
       userResults: {},
       journalNotes: [],
       name: 'Carcosa User 1 Diff 1',
-      cycleCode: 'the-path_to_carcosa',
+      cycleCode: 'the_path_to_carcosa',
       difficulty: { id: 1, name: 'easy_difficulty' },
     }),
     new CampaignModel({

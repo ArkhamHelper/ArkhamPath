@@ -2,8 +2,8 @@ import { CampaignModel } from '../model/campaign.model';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CampaignDifficultyModel } from '../model/difficulty.model';
 import { Campaign } from '../../generated/prisma/client';
-import { PrismaService } from 'src/tools/prisma/prisma.service';
-import { IBaseRepository } from 'src/tools/interface/base.repository';
+import { PrismaService } from '../../tools/prisma/prisma.service';
+import { IBaseRepository } from '../../tools/interface/base.repository';
 
 export interface ICampaignRepository extends IBaseRepository<CampaignModel> {
   findManyByUserId(
