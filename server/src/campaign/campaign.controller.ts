@@ -1,8 +1,13 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { CampaignSchema } from './schema/campaign.schema';
-import { GetCampaignQuery } from './dto/campaign.dto';
+import { GetCampaignQuery } from './dto/getCampaign.dto';
 import { CampaignService } from './campaign.service';
-import { ApiQuery, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiQuery, ApiResponse } from '@nestjs/swagger';
+import { CreateCampaignBody } from './dto/createCampaign.dto';
+import {
+  UpdateCampaignBody,
+  UpdateCampaignParams,
+} from './dto/updateCampaign.dto';
 
 @Controller('campaigns')
 export class CampaignController {
@@ -29,5 +34,27 @@ export class CampaignController {
     }
 
     return campaigns;
+  }
+
+  @Post('/')
+  @ApiBody({ type: CreateCampaignBody })
+  @ApiResponse({ type: CampaignSchema })
+  async createCampaign(
+    @Body() body: CreateCampaignBody,
+  ): Promise<CampaignSchema> {
+    return this.campaignService.create(body);
+  }
+
+  @Post('/{id}')
+  @ApiBody({ type: UpdateCampaignBody })
+  @ApiResponse({ type: CampaignSchema })
+  async updateCampaign(
+    @Param() params: UpdateCampaignParams,
+    @Body() body: UpdateCampaignBody,
+  ): Promise<CampaignSchema> {
+    return this.campaignService.update({
+      ...body,
+      ...params,
+    });
   }
 }

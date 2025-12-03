@@ -1,11 +1,20 @@
 import { CampaignDifficultyModel } from './difficulty.model';
 
-export interface CampaignModel {
+export class CampaignModel {
   id: string;
   name: string;
+  userId: string;
+  cycleCode: string;
   journalNotes: string[];
+  difficulty: CampaignDifficultyModel;
   userResults: {
     [key: string]: string; // idScenario: idResolution
   };
-  difficulty: CampaignDifficultyModel;
+
+  constructor(campaign: Partial<CampaignModel>) {
+    this.journalNotes = [];
+    this.userResults = {};
+
+    Object.assign(this, campaign);
+  }
 }

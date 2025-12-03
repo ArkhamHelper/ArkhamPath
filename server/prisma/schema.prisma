@@ -14,18 +14,19 @@ model Campaign {
   dateUpdate DateTime @updatedAt
 
   name String
-  userResults Json
+  cycleCode String
+  userResults Json @default("{}")
   journalNotes String[]
 
   userId String
-  difficultyId String
+  difficultyId Int
 
   user User @relation(references: [id], fields: [userId])
   difficulty CampaignDifficulty @relation(references: [id], fields: [difficultyId]) 
 }
 
 model CampaignDifficulty {
-  id String @default(uuid()) @id
+  id Int @default(autoincrement()) @id
   dateCreate DateTime @default(now())
   dateUpdate DateTime @updatedAt
 

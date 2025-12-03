@@ -5,6 +5,7 @@ export class CampaignSchema {
   constructor(campaign: CampaignModel) {
     this.id = campaign.id;
     this.name = campaign.name;
+    this.cycleCode = campaign.cycleCode;
     this.difficulty = campaign.difficulty.name;
     this.journalNotes = campaign.journalNotes;
   }
@@ -14,6 +15,9 @@ export class CampaignSchema {
 
   @ApiProperty({ example: 'My campaign' })
   name: string;
+
+  @ApiProperty({ example: 'The Dunwich Legacy' })
+  cycleCode: string;
 
   @ApiProperty({ example: 'Hard' })
   difficulty: string;
