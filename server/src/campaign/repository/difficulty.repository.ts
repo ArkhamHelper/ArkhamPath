@@ -1,8 +1,11 @@
 import { PrismaService } from 'src/tools/prisma/prisma.service';
 import { CampaignDifficultyModel } from '../model/difficulty.model';
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { IBaseRepository } from 'src/tools/interface/base.repository';
+
+export interface ICampaignDifficultyRepository extends IBaseRepository<CampaignDifficultyModel> {}
 @Injectable()
-export class CampaignDifficultyRepository {
+export class CampaignDifficultyRepository implements ICampaignDifficultyRepository {
   constructor(private prisma: PrismaService) {}
 
   async findOneById(id: number): Promise<CampaignDifficultyModel> {
@@ -18,5 +21,17 @@ export class CampaignDifficultyRepository {
       id: foundDifficulty.id,
       name: foundDifficulty.name,
     };
+  }
+  async save(
+    difficulty: CampaignDifficultyModel,
+  ): Promise<CampaignDifficultyModel> {
+    return difficulty.id
+      ? this.prisma.campaignDifficulty.update({
+          where: { id: difficulty.id },
+          data: { name: difficulty.name },
+        })
+      : this.prisma.campaignDifficulty.create({
+          data: { name: difficulty.name },
+        });
   }
 }

@@ -1,22 +1,26 @@
 import { Injectable } from '@nestjs/common';
-import { CampaignRepository } from './repository/campaign.repository';
 import { CampaignSchema } from './schema/campaign.schema';
 import { CampaignModel } from './model/campaign.model';
 import { CreateCampaignDto } from './dto/createCampaign.dto';
-import { CampaignDifficultyRepository } from './repository/difficulty.repository';
+import { type ICampaignDifficultyRepository } from './repository/difficulty.repository';
 import { UpdateCampaignDto } from './dto/updateCampaign.dto';
 import { GetOneCampaignDto } from './dto/getOneCampaign.dto';
 import { GetManyCampaignsDto } from './dto/getManyCampaigns.dto';
+import { type ICampaignRepository } from './repository/campaign.repository';
 
 @Injectable()
 export class CampaignService {
   constructor(
-    private campaignRepository: CampaignRepository,
-    private difficultyRepository: CampaignDifficultyRepository,
+    private campaignRepository: ICampaignRepository,
+    private difficultyRepository: ICampaignDifficultyRepository,
   ) {}
 
   async findOneById(dto: GetOneCampaignDto): Promise<CampaignSchema> {
     const campaign = await this.campaignRepository.findOneById(dto.id);
+
+    if (!campaign) {
+      throw new Error(`Campaign with id ${dto.id} not found`);
+    }
 
     return new CampaignSchema(campaign);
   }
@@ -58,6 +62,10 @@ export class CampaignService {
     const foundCampaign = await this.campaignRepository.findOneById(
       campaign.id,
     );
+
+    if (!foundCampaign) {
+      throw new Error(`Campaign with id ${campaign.id} not found`);
+    }
 
     const campaignModel: CampaignModel = {
       ...foundCampaign,
