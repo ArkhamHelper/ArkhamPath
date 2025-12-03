@@ -20,9 +20,15 @@ export class CampaignRepository {
     return this.generateModel(foundCampaign);
   }
 
-  async findManyByUserId(userId: string): Promise<CampaignModel[]> {
+  async findManyByUserId(
+    userId: string,
+    limit?: number,
+    offset?: number,
+  ): Promise<CampaignModel[]> {
     const foundCampaigns = await this.prisma.campaign.findMany({
       where: { userId },
+      take: limit,
+      skip: offset,
     });
 
     return Promise.all(

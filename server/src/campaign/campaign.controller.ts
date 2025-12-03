@@ -1,39 +1,42 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { CampaignSchema } from './schema/campaign.schema';
-import { GetCampaignQuery } from './dto/getCampaign.dto';
+import { GetOneCampaignParams } from './dto/getOneCampaign.dto';
 import { CampaignService } from './campaign.service';
-import { ApiBody, ApiQuery, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiResponse } from '@nestjs/swagger';
 import { CreateCampaignBody } from './dto/createCampaign.dto';
 import {
   UpdateCampaignBody,
   UpdateCampaignParams,
 } from './dto/updateCampaign.dto';
+import { GetManyCampaignsQuery } from './dto/getManyCampaigns.dto';
 
 @Controller('campaigns')
 export class CampaignController {
   constructor(private campaignService: CampaignService) {}
 
   @Get('/')
-  @ApiQuery({ type: GetCampaignQuery })
   @ApiResponse({ type: CampaignSchema, isArray: true })
   async getCampaigns(
-    @Query() query: GetCampaignQuery,
+    @Query() query: GetManyCampaignsQuery,
   ): Promise<CampaignSchema[]> {
-    const campaigns: CampaignSchema[] = [];
+    return await this.campaignService.findManyByParams({
+      name: query.name,
+      limit: +query.limit,
+      offset: query.offset ? +query.offset : 0,
+      userId: query.userId,
+      cycleCode: query.cycleCode,
+      difficultyId: query.difficultyId,
+    });
+  }
 
-    if (query.id) {
-      const foundCampaign = await this.campaignService.findOneById(query.id);
-      campaigns.push(foundCampaign);
-    }
-
-    if (query.userId) {
-      const foundCampaigns = await this.campaignService.findManyByUserId(
-        query.userId,
-      );
-      campaigns.push(...foundCampaigns);
-    }
-
-    return campaigns;
+  @Get('/{id}')
+  @ApiResponse({ type: CampaignSchema })
+  async getCampaign(
+    @Param() params: GetOneCampaignParams,
+  ): Promise<CampaignSchema> {
+    return this.campaignService.findOneById({
+      id: params.id,
+    });
   }
 
   @Post('/')

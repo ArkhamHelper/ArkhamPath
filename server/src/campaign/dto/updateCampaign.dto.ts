@@ -5,7 +5,6 @@ export type UpdateCampaignDto = UpdateCampaignBody & UpdateCampaignParams;
 export class UpdateCampaignParams {
   @ApiProperty({
     type: 'string',
-    required: true,
     example: 'b742775b-403a-487f-b529-edf37aad6525',
   })
   id: string;

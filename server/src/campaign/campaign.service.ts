@@ -5,6 +5,8 @@ import { CampaignModel } from './model/campaign.model';
 import { CreateCampaignDto } from './dto/createCampaign.dto';
 import { CampaignDifficultyRepository } from './repository/difficulty.repository';
 import { UpdateCampaignDto } from './dto/updateCampaign.dto';
+import { GetOneCampaignDto } from './dto/getOneCampaign.dto';
+import { GetManyCampaignsDto } from './dto/getManyCampaigns.dto';
 
 @Injectable()
 export class CampaignService {
@@ -13,16 +15,28 @@ export class CampaignService {
     private difficultyRepository: CampaignDifficultyRepository,
   ) {}
 
-  async findOneById(id: string): Promise<CampaignSchema> {
-    const campaign = await this.campaignRepository.findOneById(id);
+  async findOneById(dto: GetOneCampaignDto): Promise<CampaignSchema> {
+    const campaign = await this.campaignRepository.findOneById(dto.id);
 
     return new CampaignSchema(campaign);
   }
 
-  async findManyByUserId(userId: string): Promise<CampaignSchema[]> {
-    const campaigns = await this.campaignRepository.findManyByUserId(userId);
+  async findManyByParams(dto: GetManyCampaignsDto): Promise<CampaignSchema[]> {
+    const campaigns = await this.campaignRepository.findManyByUserId(
+      dto.userId,
+      dto.limit,
+      dto.offset,
+    );
 
-    return campaigns.map((campaign) => new CampaignSchema(campaign));
+    const checkParams = (campaign: CampaignModel): boolean =>
+      (!dto.cycleCode || campaign.cycleCode === dto.cycleCode) &&
+      (!dto.difficultyId || campaign.difficulty.id === dto.difficultyId) &&
+      (!dto.name ||
+        campaign.name.toLowerCase().includes(dto.name.toLowerCase()));
+
+    return campaigns
+      .filter(checkParams)
+      .map((campaign) => new CampaignSchema(campaign));
   }
 
   async create(campaign: CreateCampaignDto): Promise<CampaignSchema> {
