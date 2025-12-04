@@ -8,6 +8,7 @@ import { GetOneCampaignDto } from './dto/getOneCampaign.dto';
 import { GetManyCampaignsDto } from './dto/getManyCampaigns.dto';
 import { type ICampaignRepository } from './repository/campaign.repository';
 import type { IUserRepository } from '../user/repository/user.repository';
+import type { DeleteCampaignDto } from './dto/deleteCampaign.dto';
 
 @Injectable()
 export class CampaignService {
@@ -88,6 +89,16 @@ export class CampaignService {
     const updatedCampaign = await this.campaignRepository.save(campaignModel);
 
     return new CampaignSchema(updatedCampaign);
+  }
+
+  async deleteCampaign(dto: DeleteCampaignDto): Promise<void> {
+    const foundCampaign = await this.campaignRepository.findOneById(dto.id);
+
+    if (!foundCampaign) {
+      throw new Error(`Campaign with id ${dto.id} not found`);
+    }
+
+    await this.campaignRepository.delete(dto.id);
   }
 
   private async findUserOrThrow(userId: string): Promise<void> {

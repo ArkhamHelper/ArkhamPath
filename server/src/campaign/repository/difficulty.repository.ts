@@ -34,4 +34,8 @@ export class CampaignDifficultyRepository implements ICampaignDifficultyReposito
           data: { name: difficulty.name },
         });
   }
+
+  async delete(id: number): Promise<void> {
+    await this.prisma.campaignDifficulty.delete({ where: { id } });
+  }
 }

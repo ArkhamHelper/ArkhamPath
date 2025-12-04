@@ -1,5 +1,5 @@
 import { CampaignModel } from '../model/campaign.model';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CampaignDifficultyModel } from '../model/difficulty.model';
 import { Campaign } from '../../generated/prisma/client';
 import { PrismaService } from '../../tools/prisma/prisma.service';
@@ -17,13 +17,13 @@ export interface ICampaignRepository extends IBaseRepository<CampaignModel> {
 export class CampaignRepository implements ICampaignRepository {
   constructor(private prisma: PrismaService) {}
 
-  async findOneById(id: string): Promise<CampaignModel> {
+  async findOneById(id: string): Promise<CampaignModel | undefined> {
     const foundCampaign = await this.prisma.campaign.findUnique({
       where: { id },
     });
 
     if (!foundCampaign) {
-      throw new NotFoundException(`Campaign with id ${id} not found`);
+      return undefined;
     }
 
     return this.generateModel(foundCampaign);
@@ -46,18 +46,6 @@ export class CampaignRepository implements ICampaignRepository {
   }
 
   async save(campaign: CampaignModel): Promise<CampaignModel> {
-    if (campaign.id) {
-      const foundCampaign = await this.prisma.campaign.findUnique({
-        where: { id: campaign.id },
-      });
-
-      if (!foundCampaign) {
-        throw new NotFoundException(
-          `Campaign with id ${campaign.id} not found`,
-        );
-      }
-    }
-
     const resultCampaign: Campaign = campaign.id
       ? await this.prisma.campaign.update({
           where: { id: campaign.id },
@@ -84,16 +72,15 @@ export class CampaignRepository implements ICampaignRepository {
     return this.generateModel(resultCampaign);
   }
 
-  private async generateModel(campaign: Campaign): Promise<CampaignModel> {
-    const foundDifficulty = await this.prisma.campaignDifficulty.findUnique({
-      where: { id: campaign.difficultyId },
-    });
+  async delete(id: string): Promise<void> {
+    await this.prisma.campaign.delete({ where: { id } });
+  }
 
-    if (!foundDifficulty) {
-      throw new NotFoundException(
-        `Difficulty with id ${campaign.difficultyId} not found'`,
-      );
-    }
+  private async generateModel(campaign: Campaign): Promise<CampaignModel> {
+    const foundDifficulty =
+      await this.prisma.campaignDifficulty.findUniqueOrThrow({
+        where: { id: campaign.difficultyId },
+      });
 
     const difficulty: CampaignDifficultyModel = {
       id: foundDifficulty.id,

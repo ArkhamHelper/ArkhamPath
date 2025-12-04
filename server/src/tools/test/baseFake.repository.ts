@@ -1,21 +1,16 @@
 import { isEqual, cloneDeep } from 'lodash';
+import type { IBaseRepository } from '../interface/base.repository';
 
 export interface IBaseFakeRepository<
   TModel extends { id: string | number; [key: string]: any },
-> {
-  /**
-   * @description Стандартные функции repository
-   */
-
-  save(model: TModel): Promise<TModel>;
-  findOneById(id: string | number): Promise<TModel | undefined>;
-
+> extends IBaseRepository<TModel> {
   /**
    * @description Функции для тестирования
    */
 
   set(models: TModel[]): void;
   wasSaved(model: TModel): boolean;
+  wasDeleted(id: string | number): boolean;
 
   /**
    * @description Функции для fakeRepository
@@ -45,6 +40,10 @@ export class BaseFakeRepository<
     }
 
     return model;
+  }
+
+  async delete(id: string | number): Promise<void> {
+    this.models = this.models.filter((m) => +m.id !== +id);
   }
 
   set(models: TModel[]): void {
@@ -84,6 +83,12 @@ export class BaseFakeRepository<
     }
 
     return true;
+  }
+
+  wasDeleted(id: string | number): boolean {
+    const found = this.models.find((m) => +m.id === +id);
+
+    return !found;
   }
 
   getAll(): TModel[] {

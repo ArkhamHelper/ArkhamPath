@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { CampaignSchema } from './schema/campaign.schema';
 import { GetOneCampaignParams } from './dto/getOneCampaign.dto';
 import { CampaignService } from './campaign.service';
@@ -9,6 +17,7 @@ import {
   UpdateCampaignParams,
 } from './dto/updateCampaign.dto';
 import { GetManyCampaignsQuery } from './dto/getManyCampaigns.dto';
+import type { DeleteCampaignParams } from './dto/deleteCampaign.dto';
 
 @Controller('campaigns')
 export class CampaignController {
@@ -59,5 +68,10 @@ export class CampaignController {
       ...body,
       ...params,
     });
+  }
+
+  @Delete('/{id}')
+  async deleteCampaign(@Param() params: DeleteCampaignParams): Promise<void> {
+    return this.campaignService.deleteCampaign(params);
   }
 }
