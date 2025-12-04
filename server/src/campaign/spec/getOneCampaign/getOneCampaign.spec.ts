@@ -11,14 +11,16 @@ describe('GetOneCampaign', () => {
     infrastructure.campaignRepository.set(fixture.campaigns);
   });
 
-  it('should throw error on invalid userId', async () => {
-    expect('TODO: add user repository').toBeUndefined();
-  });
-
   it('should find by id', async () => {
     const campaign = await getCampaign({ id: '2' });
 
     expect(campaign.id).toEqual('2');
+  });
+
+  it('should throw error on invalid campaign id', async () => {
+    await expect(getCampaign({ id: '3' })).rejects.toThrow(
+      'Campaign with id 3 not found',
+    );
   });
 
   function getCampaign(dto: GetOneCampaignDto): Promise<CampaignSchema> {

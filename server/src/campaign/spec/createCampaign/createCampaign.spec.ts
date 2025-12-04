@@ -9,17 +9,27 @@ describe('GetOneCampaign', () => {
   const infrastructure = new CampaignsInfrastructure();
 
   beforeEach(async () => {
+    infrastructure.userRepository.set(fixture.users);
     infrastructure.difficultyRepository.set(fixture.campaignDifficulties);
   });
 
-  it('should throw error on invalid userId', async () => {
-    expect('TODO: add user repository').toBeUndefined();
+  it('should create campaign', async () => {
+    const expected = fixture.expectedCampaign();
+
+    const createdCampaign = await createCampaign(
+      fixture.getDataForCreateCampaign(),
+    );
+
+    expect({ ...createdCampaign, id: `${createdCampaign.id}` }).toEqual(
+      expected.schema,
+    );
+    wasSaved(expected.model);
   });
 
-  it('should create campaign', async () => {
-    await createCampaign(fixture.getDataForCreateCampaign());
-
-    wasSaved(fixture.expectedCampaign());
+  it('should throw error on invalid userId', async () => {
+    await expect(
+      createCampaign(fixture.getDateWithInvalidUserId()),
+    ).rejects.toThrow('User with id 2 not found');
   });
 
   function createCampaign(dto: CreateCampaignDto): Promise<CampaignSchema> {

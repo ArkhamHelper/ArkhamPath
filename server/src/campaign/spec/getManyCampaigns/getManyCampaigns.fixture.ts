@@ -1,4 +1,5 @@
 import { CampaignModel } from '../../../campaign/model/campaign.model';
+import type { UserModel } from '../../../user/model/user.model';
 
 export class GetManyCampaignsFixture {
   campaigns: CampaignModel[] = [
@@ -38,5 +39,16 @@ export class GetManyCampaignsFixture {
       cycleCode: 'the_dunwich_legacy',
       difficulty: { id: 2, name: 'standard_difficulty' },
     }),
+  ];
+
+  users: UserModel[] = [
+    {
+      id: '1',
+      arkhamCardsId: 'b742775b-403a-487a-b529-edf37aad6525',
+    },
+    {
+      id: '2',
+      arkhamCardsId: 'b742775b-403a-487b-b529-edf37aad6521',
+    },
   ];
 }

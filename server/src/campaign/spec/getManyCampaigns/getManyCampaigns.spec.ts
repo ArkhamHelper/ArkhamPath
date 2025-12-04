@@ -8,11 +8,8 @@ describe('GetManyCampaigns', () => {
   const infrastructure = new CampaignsInfrastructure();
 
   beforeAll(async () => {
+    infrastructure.userRepository.set(fixture.users);
     infrastructure.campaignRepository.set(fixture.campaigns);
-  });
-
-  it('should throw error on invalid userId', async () => {
-    expect('TODO: add user repository').toBeUndefined();
   });
 
   it('should find only by userId', async () => {
@@ -52,6 +49,15 @@ describe('GetManyCampaigns', () => {
     });
 
     expect(campaigns.length).toEqual(2);
+  });
+
+  it('should throw error on invalid userId', async () => {
+    await expect(
+      getCampaigns({
+        userId: '3',
+        limit: 10,
+      }),
+    ).rejects.toThrow('User with id 3 not found');
   });
 
   function getCampaigns(dto: GetManyCampaignsDto): Promise<CampaignSchema[]> {

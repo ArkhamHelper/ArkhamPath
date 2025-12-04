@@ -1,4 +1,4 @@
-import { isEqual } from 'lodash';
+import { isEqual, cloneDeep } from 'lodash';
 
 export interface IBaseFakeRepository<
   TModel extends { id: string | number; [key: string]: any },
@@ -31,13 +31,13 @@ export class BaseFakeRepository<
   private models: TModel[] = [];
 
   async findOneById(id: string | number): Promise<TModel | undefined> {
-    return this.models.find((m) => m.id === id);
+    return this.models.find((m) => +m.id === +id);
   }
 
   async save(model: TModel): Promise<TModel> {
-    const foundModelIndex = this.models.findIndex((m) => m.id === model.id);
+    const foundModelIndex = this.models.findIndex((m) => +m.id === +model.id);
 
-    if (foundModelIndex > 0) {
+    if (foundModelIndex >= 0) {
       this.models[foundModelIndex] = model;
     } else {
       model.id = this.nextId();
@@ -48,7 +48,7 @@ export class BaseFakeRepository<
   }
 
   set(models: TModel[]): void {
-    this.models.push(...models);
+    this.models = cloneDeep(models);
   }
 
   wasSaved(model: TModel): boolean {
@@ -61,7 +61,6 @@ export class BaseFakeRepository<
 
     const missingFields = Object.keys(model).filter((key) => !(key in found));
     const mismatchedFields = Object.keys(model).filter(
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       (key) => key !== 'id' && key in found && !isEqual(found[key], model[key]),
     );
 

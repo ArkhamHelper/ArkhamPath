@@ -7,10 +7,12 @@ import { UpdateCampaignDto } from './dto/updateCampaign.dto';
 import { GetOneCampaignDto } from './dto/getOneCampaign.dto';
 import { GetManyCampaignsDto } from './dto/getManyCampaigns.dto';
 import { type ICampaignRepository } from './repository/campaign.repository';
+import type { IUserRepository } from '../user/repository/user.repository';
 
 @Injectable()
 export class CampaignService {
   constructor(
+    private userRepository: IUserRepository,
     private campaignRepository: ICampaignRepository,
     private difficultyRepository: ICampaignDifficultyRepository,
   ) {}
@@ -26,6 +28,8 @@ export class CampaignService {
   }
 
   async findManyByParams(dto: GetManyCampaignsDto): Promise<CampaignSchema[]> {
+    await this.findUserOrThrow(dto.userId);
+
     const campaigns = await this.campaignRepository.findManyByUserId(
       dto.userId,
       dto.limit,
@@ -44,6 +48,8 @@ export class CampaignService {
   }
 
   async create(campaign: CreateCampaignDto): Promise<CampaignSchema> {
+    await this.findUserOrThrow(campaign.userId);
+
     const foundDifficulty = await this.difficultyRepository.findOneById(
       campaign.difficultyId,
     );
@@ -70,6 +76,10 @@ export class CampaignService {
     const campaignModel: CampaignModel = {
       ...foundCampaign,
       name: campaign.name ? campaign.name : foundCampaign.name,
+      userResults: {
+        ...foundCampaign.userResults,
+        ...campaign.userResults,
+      },
       journalNotes: foundCampaign.journalNotes
         .filter((note) => !campaign.journalNotes?.remove.includes(note))
         .concat(campaign.journalNotes?.add ?? []),
@@ -78,5 +88,13 @@ export class CampaignService {
     const updatedCampaign = await this.campaignRepository.save(campaignModel);
 
     return new CampaignSchema(updatedCampaign);
+  }
+
+  private async findUserOrThrow(userId: string): Promise<void> {
+    const foundUser = await this.userRepository.findOneById(userId);
+
+    if (!foundUser) {
+      throw new Error(`User with id ${userId} not found`);
+    }
   }
 }
