@@ -4,15 +4,19 @@ import { CampaignController } from './campaign.controller';
 import { CampaignRepository } from './repository/campaign.repository';
 import { PrismaModule } from '../tools/prisma/prisma.module';
 import { CampaignDifficultyRepository } from './repository/difficulty.repository';
+import { UserModule } from '../user/user.module';
 
 @Module({
-  imports: [PrismaModule],
+  imports: [PrismaModule, UserModule],
 
   controllers: [CampaignController],
   providers: [
     CampaignService,
-    CampaignRepository,
-    CampaignDifficultyRepository,
+    { provide: 'ICampaignRepository', useClass: CampaignRepository },
+    {
+      provide: 'ICampaignDifficultyRepository',
+      useClass: CampaignDifficultyRepository,
+    },
   ],
 })
 export class CampaignModule {}

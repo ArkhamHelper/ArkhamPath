@@ -1,6 +1,6 @@
 import { PrismaService } from '../../tools/prisma/prisma.service';
 import { CampaignDifficultyModel } from '../model/difficulty.model';
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { IBaseRepository } from '../../tools/interface/base.repository';
 
 export interface ICampaignDifficultyRepository extends IBaseRepository<CampaignDifficultyModel> {}
@@ -8,13 +8,13 @@ export interface ICampaignDifficultyRepository extends IBaseRepository<CampaignD
 export class CampaignDifficultyRepository implements ICampaignDifficultyRepository {
   constructor(private prisma: PrismaService) {}
 
-  async findOneById(id: number): Promise<CampaignDifficultyModel> {
+  async findOneById(id: number): Promise<CampaignDifficultyModel | undefined> {
     const foundDifficulty = await this.prisma.campaignDifficulty.findUnique({
       where: { id },
     });
 
     if (!foundDifficulty) {
-      throw new NotFoundException(`Difficulty with id ${id} not found`);
+      return undefined;
     }
 
     return {
