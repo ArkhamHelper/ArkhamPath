@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CampaignSchema } from './schema/campaign.schema';
 import { CampaignModel } from './model/campaign.model';
 import { CreateCampaignDto } from './dto/createCampaign.dto';
@@ -27,7 +27,7 @@ export class CampaignService {
     const campaign = await this.campaignRepository.findOneById(dto.id);
 
     if (!campaign) {
-      throw new Error(`Campaign with id ${dto.id} not found`);
+      throw new NotFoundException(`Campaign with id ${dto.id} not found`);
     }
 
     return new CampaignSchema(campaign);
@@ -76,7 +76,7 @@ export class CampaignService {
     );
 
     if (!foundCampaign) {
-      throw new Error(`Campaign with id ${campaign.id} not found`);
+      throw new NotFoundException(`Campaign with id ${campaign.id} not found`);
     }
 
     const campaignModel: CampaignModel = {
@@ -100,7 +100,7 @@ export class CampaignService {
     const foundCampaign = await this.campaignRepository.findOneById(dto.id);
 
     if (!foundCampaign) {
-      throw new Error(`Campaign with id ${dto.id} not found`);
+      throw new NotFoundException(`Campaign with id ${dto.id} not found`);
     }
 
     await this.campaignRepository.delete(dto.id);
