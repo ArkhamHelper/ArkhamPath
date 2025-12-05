@@ -10,7 +10,7 @@ import {
 import { CampaignSchema } from './schema/campaign.schema';
 import { GetOneCampaignParams } from './dto/getOneCampaign.dto';
 import { CampaignService } from './campaign.service';
-import { ApiBody, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { CreateCampaignBody } from './dto/createCampaign.dto';
 import {
   UpdateCampaignBody,
@@ -23,7 +23,7 @@ import type { DeleteCampaignParams } from './dto/deleteCampaign.dto';
 export class CampaignController {
   constructor(private campaignService: CampaignService) {}
 
-  @Get('/')
+  @Get('')
   @ApiResponse({ type: CampaignSchema, isArray: true })
   async getCampaigns(
     @Query() query: GetManyCampaignsQuery,
@@ -38,7 +38,7 @@ export class CampaignController {
     });
   }
 
-  @Get('/{id}')
+  @Get(':id')
   @ApiResponse({ type: CampaignSchema })
   async getCampaign(
     @Param() params: GetOneCampaignParams,
@@ -48,7 +48,7 @@ export class CampaignController {
     });
   }
 
-  @Post('/')
+  @Post('')
   @ApiBody({ type: CreateCampaignBody })
   @ApiResponse({ type: CampaignSchema })
   async createCampaign(
@@ -57,7 +57,7 @@ export class CampaignController {
     return this.campaignService.create(body);
   }
 
-  @Post('/{id}')
+  @Post(':id')
   @ApiBody({ type: UpdateCampaignBody })
   @ApiResponse({ type: CampaignSchema })
   async updateCampaign(
@@ -70,7 +70,8 @@ export class CampaignController {
     });
   }
 
-  @Delete('/{id}')
+  @Delete(':id')
+  @ApiParam({ name: 'id', type: 'string' })
   async deleteCampaign(@Param() params: DeleteCampaignParams): Promise<void> {
     return this.campaignService.deleteCampaign(params);
   }
