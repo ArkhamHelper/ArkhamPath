@@ -10,10 +10,30 @@ import type { CreateUserDto } from './dto/createUser.dto';
 import * as bcrypt from 'bcrypt';
 import { UserModel } from './model/user.model';
 import type { UpdateUserDto } from './dto/updateUser.dto';
+import type { AuthUserDto } from './dto/authUser.dto';
 
 @Injectable()
 export class UserService {
   constructor(private userRepository: IUserRepository) {}
+
+  async auth(dto: AuthUserDto): Promise<UserSchema> {
+    const foundUser = await this.userRepository.findOneByEmail(dto.email);
+
+    if (!foundUser) {
+      throw new NotFoundException(`User with email ${dto.email} not found`);
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      dto.password,
+      foundUser.password,
+    );
+
+    if (!isPasswordValid) {
+      throw new BadRequestException(`Password is incorrect`);
+    }
+
+    return new UserSchema(foundUser);
+  }
 
   async getOne(dto: GetOneUserDto): Promise<UserSchema> {
     const foundUser = await this.userRepository.findOneById(dto.id);
