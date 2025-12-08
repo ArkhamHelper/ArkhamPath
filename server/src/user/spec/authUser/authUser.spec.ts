@@ -5,13 +5,13 @@ import { AuthUserFixture } from './authUser.fixture';
 
 describe('AuthUser', () => {
   let fixture: AuthUserFixture;
-  let infrastructure: UserInfrastructure;
+  let fake: UserInfrastructure;
 
   beforeEach(() => {
     fixture = new AuthUserFixture();
-    infrastructure = new UserInfrastructure();
+    fake = new UserInfrastructure();
 
-    infrastructure.userRepository.set(fixture.users);
+    fake.userRepository.set(fixture.users);
   });
 
   it('should auth user', async () => {
@@ -38,6 +38,6 @@ describe('AuthUser', () => {
   });
 
   function auth(dto: AuthUserDto): Promise<UserSchema> {
-    return infrastructure.userService.auth(dto);
+    return fake.userService.auth(dto);
   }
 });

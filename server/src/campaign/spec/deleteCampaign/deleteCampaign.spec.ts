@@ -4,13 +4,13 @@ import { DeleteCampaignFixture } from './deleteCampaign.fixture';
 
 describe('DeleteCampaign', () => {
   let fixture: DeleteCampaignFixture;
-  let infrastructure: CampaignsInfrastructure;
+  let fake: CampaignsInfrastructure;
 
   beforeEach(() => {
     fixture = new DeleteCampaignFixture();
-    infrastructure = new CampaignsInfrastructure();
+    fake = new CampaignsInfrastructure();
 
-    infrastructure.campaignRepository.set(fixture.campaigns);
+    fake.campaignRepository.set(fixture.campaigns);
   });
 
   it('should delete campaign', async () => {
@@ -26,10 +26,10 @@ describe('DeleteCampaign', () => {
   });
 
   function deleteCampaign(dto: DeleteCampaignDto): Promise<void> {
-    return infrastructure.campaignService.deleteCampaign(dto);
+    return fake.campaignService.deleteCampaign(dto);
   }
 
   function wasDeleted(id: string | number): void {
-    expect(infrastructure.campaignRepository.wasDeleted(id)).toBeTruthy();
+    expect(fake.campaignRepository.wasDeleted(id)).toBeTruthy();
   }
 });

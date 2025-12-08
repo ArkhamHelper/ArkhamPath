@@ -6,13 +6,13 @@ import { UpdateCampaignFixture } from './updateCampaign.fixture';
 
 describe('UpdateCampaign', () => {
   let fixture: UpdateCampaignFixture;
-  let infrastructure: CampaignsInfrastructure;
+  let fake: CampaignsInfrastructure;
 
   beforeEach(async () => {
     fixture = new UpdateCampaignFixture();
-    infrastructure = new CampaignsInfrastructure();
+    fake = new CampaignsInfrastructure();
 
-    infrastructure.campaignRepository.set(fixture.campaigns);
+    fake.campaignRepository.set(fixture.campaigns);
   });
 
   it('should update userResults', async () => {
@@ -56,10 +56,10 @@ describe('UpdateCampaign', () => {
   function updateCampaign(
     campaign: UpdateCampaignDto,
   ): Promise<CampaignSchema> {
-    return infrastructure.campaignService.update(campaign);
+    return fake.campaignService.update(campaign);
   }
 
   function wasSaved(campaign: CampaignModel): void {
-    expect(infrastructure.campaignRepository.wasSaved(campaign)).toBeTruthy();
+    expect(fake.campaignRepository.wasSaved(campaign)).toBeTruthy();
   }
 });

@@ -6,14 +6,14 @@ import { CreateCampaignFixture } from './createCampaign.fixture';
 
 describe('GetOneCampaign', () => {
   let fixture: CreateCampaignFixture;
-  let infrastructure: CampaignsInfrastructure;
+  let fake: CampaignsInfrastructure;
 
   beforeEach(async () => {
     fixture = new CreateCampaignFixture();
-    infrastructure = new CampaignsInfrastructure();
+    fake = new CampaignsInfrastructure();
 
-    infrastructure.userRepository.set(fixture.users);
-    infrastructure.difficultyRepository.set(fixture.campaignDifficulties);
+    fake.userRepository.set(fixture.users);
+    fake.difficultyRepository.set(fixture.campaignDifficulties);
   });
 
   it('should create campaign', async () => {
@@ -36,12 +36,10 @@ describe('GetOneCampaign', () => {
   });
 
   function createCampaign(dto: CreateCampaignDto): Promise<CampaignSchema> {
-    return infrastructure.campaignService.create(dto);
+    return fake.campaignService.create(dto);
   }
 
   function wasSaved(expectedModel: CampaignModel): void {
-    expect(
-      infrastructure.campaignRepository.wasSaved(expectedModel),
-    ).toBeTruthy();
+    expect(fake.campaignRepository.wasSaved(expectedModel)).toBeTruthy();
   }
 });

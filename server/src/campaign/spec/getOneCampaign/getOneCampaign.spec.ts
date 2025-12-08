@@ -5,13 +5,13 @@ import { GetOneCampaignFixture } from './getOneCampaign.fixture';
 
 describe('GetOneCampaign', () => {
   let fixture: GetOneCampaignFixture;
-  let infrastructure: CampaignsInfrastructure;
+  let fake: CampaignsInfrastructure;
 
   beforeEach(async () => {
     fixture = new GetOneCampaignFixture();
-    infrastructure = new CampaignsInfrastructure();
+    fake = new CampaignsInfrastructure();
 
-    infrastructure.campaignRepository.set(fixture.campaigns);
+    fake.campaignRepository.set(fixture.campaigns);
   });
 
   it('should find by id', async () => {
@@ -27,6 +27,6 @@ describe('GetOneCampaign', () => {
   });
 
   function getCampaign(dto: GetOneCampaignDto): Promise<CampaignSchema> {
-    return infrastructure.campaignService.findOneById(dto);
+    return fake.campaignService.findOneById(dto);
   }
 });

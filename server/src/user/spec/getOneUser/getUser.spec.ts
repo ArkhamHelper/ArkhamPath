@@ -5,13 +5,13 @@ import { GetUserFixture } from './getOneUser.fixture';
 
 describe('GetUser', () => {
   let fixture: GetUserFixture;
-  let infrastructure: UserInfrastructure;
+  let fake: UserInfrastructure;
 
   beforeEach(() => {
     fixture = new GetUserFixture();
-    infrastructure = new UserInfrastructure();
+    fake = new UserInfrastructure();
 
-    infrastructure.userRepository.set(fixture.users);
+    fake.userRepository.set(fixture.users);
   });
 
   it('should find by id', async () => {
@@ -31,6 +31,6 @@ describe('GetUser', () => {
   });
 
   function get(dto: GetOneUserDto): Promise<UserSchema> {
-    return infrastructure.userService.getOne(dto);
+    return fake.userService.getOne(dto);
   }
 });

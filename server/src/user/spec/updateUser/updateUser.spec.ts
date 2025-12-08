@@ -6,13 +6,13 @@ import bcrypt from 'bcrypt';
 
 describe('UpdateUser', () => {
   let fixture: UpdateUserFixture;
-  let infrastructure: UserInfrastructure;
+  let fake: UserInfrastructure;
 
   beforeEach(() => {
     fixture = new UpdateUserFixture();
-    infrastructure = new UserInfrastructure();
+    fake = new UserInfrastructure();
 
-    infrastructure.userRepository.set(fixture.users);
+    fake.userRepository.set(fixture.users);
   });
 
   it('should update password', async () => {
@@ -27,8 +27,7 @@ describe('UpdateUser', () => {
     expect(
       await bcrypt.compare(
         'newPassword',
-        infrastructure.userRepository.getAllBy((model) => model.id === '1')[0]
-          .password,
+        fake.userRepository.getAllBy((model) => model.id === '1')[0].password,
       ),
     ).toBeTruthy();
   });
@@ -46,6 +45,6 @@ describe('UpdateUser', () => {
   });
 
   function update(dto: UpdateUserDto): Promise<UserSchema> {
-    return infrastructure.userService.update(dto);
+    return fake.userService.update(dto);
   }
 });

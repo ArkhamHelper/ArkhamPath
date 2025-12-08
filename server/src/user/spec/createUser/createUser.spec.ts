@@ -6,13 +6,13 @@ import bcrypt from 'bcrypt';
 
 describe('CreateUser', () => {
   let fixture: CreateUserFixture;
-  let infrastructure: UserInfrastructure;
+  let fake: UserInfrastructure;
 
   beforeEach(() => {
     fixture = new CreateUserFixture();
-    infrastructure = new UserInfrastructure();
+    fake = new UserInfrastructure();
 
-    infrastructure.userRepository.set(fixture.users);
+    fake.userRepository.set(fixture.users);
   });
 
   it('should create user', async () => {
@@ -30,9 +30,8 @@ describe('CreateUser', () => {
     expect(
       await bcrypt.compare(
         'password',
-        infrastructure.userRepository.getAllBy(
-          (model) => model.email === 'a@b.com',
-        )[0].password,
+        fake.userRepository.getAllBy((model) => model.email === 'a@b.com')[0]
+          .password,
       ),
     ).toBeTruthy();
   });
@@ -52,6 +51,6 @@ describe('CreateUser', () => {
   });
 
   function create(dto: CreateUserDto): Promise<UserSchema> {
-    return infrastructure.userService.create(dto);
+    return fake.userService.create(dto);
   }
 });
