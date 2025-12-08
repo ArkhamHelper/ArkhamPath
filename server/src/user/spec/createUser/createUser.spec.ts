@@ -1,31 +1,57 @@
-import type { UserModel } from '../../model/user.model';
+import type { CreateUserDto } from '../../dto/createUser.dto';
+import type { UserSchema } from '../../schema/user.schema';
 import { UserInfrastructure } from '../user.infrastructure';
 import { CreateUserFixture } from './createUser.fixture';
+import bcrypt from 'bcrypt';
 
 describe('CreateUser', () => {
-  const fixture = new CreateUserFixture();
-  const infrastructure = new UserInfrastructure();
+  let fixture: CreateUserFixture;
+  let infrastructure: UserInfrastructure;
+
+  beforeEach(() => {
+    fixture = new CreateUserFixture();
+    infrastructure = new UserInfrastructure();
+
+    infrastructure.userRepository.set(fixture.users);
+  });
 
   it('should create user', async () => {
     const expected = fixture.expectedUser();
 
-    const user = await create({});
+    const user = await create({
+      email: 'a@b.com',
+      password: 'password',
+    });
 
-    expect(user).toEqual(expected.schema);
-    wasSaved(expected.model);
+    expect({
+      ...user,
+      id: `${user.id}`,
+    }).toEqual(expected.schema);
+    expect(
+      await bcrypt.compare(
+        'password',
+        infrastructure.userRepository.getAllBy(
+          (model) => model.email === 'a@b.com',
+        )[0].password,
+      ),
+    ).toBeTruthy();
   });
 
-  it('should throw error on short password', async () => {
-    await expect(create({ id: '1', password: 'short' })).rejects.toThrow(
-      new Error('Password is too short'),
+  it('should throw error on duplicate email', async () => {
+    await expect(
+      create({ email: 'test@test.com', password: 'password' }),
+    ).rejects.toThrow(
+      new Error('User with email test@test.com already exists'),
     );
   });
 
-  function create(dto: CreateUserDto) {
-    return infrastructure.userService.create(dto);
-  }
+  it('should throw error on short password', async () => {
+    await expect(
+      create({ email: 'a@b.com', password: 'short' }),
+    ).rejects.toThrow(new Error('Password must be at least 6 characters long'));
+  });
 
-  function wasSaved(user: UserModel) {
-    expect(infrastructure.userRepository.wasSaved(user)).toBeTruthy();
+  function create(dto: CreateUserDto): Promise<UserSchema> {
+    return infrastructure.userService.create(dto);
   }
 });

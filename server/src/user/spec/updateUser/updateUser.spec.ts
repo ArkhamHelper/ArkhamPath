@@ -1,12 +1,17 @@
-import type { UserModel } from '../../model/user.model';
+import type { UpdateUserDto } from '../../dto/updateUser.dto';
+import type { UserSchema } from '../../schema/user.schema';
 import { UserInfrastructure } from '../user.infrastructure';
 import { UpdateUserFixture } from './updateUser.fixture';
+import bcrypt from 'bcrypt';
 
 describe('UpdateUser', () => {
-  const fixture = new UpdateUserFixture();
-  const infrastructure = new UserInfrastructure();
+  let fixture: UpdateUserFixture;
+  let infrastructure: UserInfrastructure;
 
   beforeEach(() => {
+    fixture = new UpdateUserFixture();
+    infrastructure = new UserInfrastructure();
+
     infrastructure.userRepository.set(fixture.users);
   });
 
@@ -15,9 +20,18 @@ describe('UpdateUser', () => {
 
     const user = await update({ id: '1', password: 'newPassword' });
 
-    expect(user).toEqual(expected.schema);
-    wasSaved(expected.model);
-  )};
+    expect({
+      ...user,
+      id: `${user.id}`,
+    }).toEqual(expected.schema);
+    expect(
+      await bcrypt.compare(
+        'newPassword',
+        infrastructure.userRepository.getAllBy((model) => model.id === '1')[0]
+          .password,
+      ),
+    ).toBeTruthy();
+  });
 
   it('should throw error when user not found', async () => {
     await expect(update({ id: '2', password: 'newPassword' })).rejects.toThrow(
@@ -26,16 +40,12 @@ describe('UpdateUser', () => {
   });
 
   it('should throw error on short password', async () => {
-    await expect(
-      update({ id: '1', password: 'short' }),
-    ).rejects.toThrow(new Error('Password is too short'));
+    await expect(update({ id: '1', password: 'short' })).rejects.toThrow(
+      new Error('Password must be at least 6 characters long'),
+    );
   });
 
-  function update(dto: UpdateUserDto): Promise<UpdateUserSchema> {
+  function update(dto: UpdateUserDto): Promise<UserSchema> {
     return infrastructure.userService.update(dto);
-  }
-
-  function wasSaved(user: UserModel) {
-    expect(infrastructure.userRepository.wasSaved(user)).toBeTruthy();
   }
 });

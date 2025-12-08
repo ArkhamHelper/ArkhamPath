@@ -5,10 +5,13 @@ import { CampaignsInfrastructure } from '../campaigns.infrastructure';
 import { CreateCampaignFixture } from './createCampaign.fixture';
 
 describe('GetOneCampaign', () => {
-  const fixture = new CreateCampaignFixture();
-  const infrastructure = new CampaignsInfrastructure();
+  let fixture: CreateCampaignFixture;
+  let infrastructure: CampaignsInfrastructure;
 
   beforeEach(async () => {
+    fixture = new CreateCampaignFixture();
+    infrastructure = new CampaignsInfrastructure();
+
     infrastructure.userRepository.set(fixture.users);
     infrastructure.difficultyRepository.set(fixture.campaignDifficulties);
   });

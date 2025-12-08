@@ -4,10 +4,13 @@ import { GetManyCampaignsFixture } from './getManyCampaigns.fixture';
 import { CampaignSchema } from '../../../campaign/schema/campaign.schema';
 
 describe('GetManyCampaigns', () => {
-  const fixture = new GetManyCampaignsFixture();
-  const infrastructure = new CampaignsInfrastructure();
+  let fixture: GetManyCampaignsFixture;
+  let infrastructure: CampaignsInfrastructure;
 
   beforeAll(async () => {
+    fixture = new GetManyCampaignsFixture();
+    infrastructure = new CampaignsInfrastructure();
+
     infrastructure.userRepository.set(fixture.users);
     infrastructure.campaignRepository.set(fixture.campaigns);
   });

@@ -1,7 +1,7 @@
 import type { UserModel } from '../../model/user.model';
 import type { UserSchema } from '../../schema/user.schema';
 
-export class UpdateUserFixture {
+export class GetUserFixture {
   users: UserModel[] = [
     {
       id: '1',
@@ -10,18 +10,12 @@ export class UpdateUserFixture {
     },
   ];
 
-  expectedUpdatedPassword = (): {
+  expectedUser = (): {
     schema: UserSchema;
-    model: UserModel;
   } => ({
     schema: {
       id: '1',
       email: 'a@b.com',
-    },
-    model: {
-      id: '1',
-      email: 'a@b.com',
-      password: '$2a$12$D/0BbqoEjXQFldkRW7bAYO1mAC7D3Y1jMJ1nW7aYa4ZQLtlkysPSy',
     },
   });
 }

@@ -5,10 +5,13 @@ import { CampaignsInfrastructure } from '../campaigns.infrastructure';
 import { UpdateCampaignFixture } from './updateCampaign.fixture';
 
 describe('UpdateCampaign', () => {
-  const fixture = new UpdateCampaignFixture();
-  const infrastructure = new CampaignsInfrastructure();
+  let fixture: UpdateCampaignFixture;
+  let infrastructure: CampaignsInfrastructure;
 
   beforeEach(async () => {
+    fixture = new UpdateCampaignFixture();
+    infrastructure = new CampaignsInfrastructure();
+
     infrastructure.campaignRepository.set(fixture.campaigns);
   });
 

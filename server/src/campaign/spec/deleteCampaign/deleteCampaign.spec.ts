@@ -3,10 +3,13 @@ import { CampaignsInfrastructure } from '../campaigns.infrastructure';
 import { DeleteCampaignFixture } from './deleteCampaign.fixture';
 
 describe('DeleteCampaign', () => {
-  const fixture = new DeleteCampaignFixture();
-  const infrastructure = new CampaignsInfrastructure();
+  let fixture: DeleteCampaignFixture;
+  let infrastructure: CampaignsInfrastructure;
 
   beforeEach(() => {
+    fixture = new DeleteCampaignFixture();
+    infrastructure = new CampaignsInfrastructure();
+
     infrastructure.campaignRepository.set(fixture.campaigns);
   });
 

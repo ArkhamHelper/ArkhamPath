@@ -4,4 +4,9 @@ import type { IUserRepository } from '../user.repository';
 
 export class UserFakeRepository
   extends BaseFakeRepository<UserModel>
-  implements IUserRepository {}
+  implements IUserRepository
+{
+  async findOneByEmail(email: string): Promise<UserModel | undefined> {
+    return this.getAllBy((model) => model.email === email)[0];
+  }
+}
