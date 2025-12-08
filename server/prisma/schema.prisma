@@ -54,6 +54,9 @@ model User {
   dateCreate DateTime @default(now())
   dateUpdate DateTime @updatedAt
 
+  email String @unique
+  password String
+
   campaigns Campaign[]
   cycleSchemas CycleSchema[]
 }
