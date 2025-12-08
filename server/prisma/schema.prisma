@@ -1,12 +1,7 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
+  moduleFormat = "cjs"
 }
 
 datasource db {
@@ -19,18 +14,19 @@ model Campaign {
   dateUpdate DateTime @updatedAt
 
   name String
-  userResults Json
+  cycleCode String
+  userResults Json @default("{}")
   journalNotes String[]
 
   userId String
-  difficultyId String
+  difficultyId Int
 
   user User @relation(references: [id], fields: [userId])
   difficulty CampaignDifficulty @relation(references: [id], fields: [difficultyId]) 
 }
 
 model CampaignDifficulty {
-  id String @default(uuid()) @id
+  id Int @default(autoincrement()) @id
   dateCreate DateTime @default(now())
   dateUpdate DateTime @updatedAt
 
@@ -44,8 +40,8 @@ model CycleSchema {
   dateUpdate DateTime @updatedAt
 
   data Json
-  userId String
   code String
+  userId String
   dateLastFetchArkhamCards DateTime
 
   user User @relation(references: [id], fields: [userId])
@@ -59,6 +55,5 @@ model User {
   dateUpdate DateTime @updatedAt
 
   campaigns Campaign[]
-
   cycleSchemas CycleSchema[]
 }
