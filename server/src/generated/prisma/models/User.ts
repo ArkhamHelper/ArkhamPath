@@ -28,18 +28,24 @@ export type UserMinAggregateOutputType = {
   id: string | null
   dateCreate: Date | null
   dateUpdate: Date | null
+  email: string | null
+  password: string | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: string | null
   dateCreate: Date | null
   dateUpdate: Date | null
+  email: string | null
+  password: string | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
   dateCreate: number
   dateUpdate: number
+  email: number
+  password: number
   _all: number
 }
 
@@ -48,18 +54,24 @@ export type UserMinAggregateInputType = {
   id?: true
   dateCreate?: true
   dateUpdate?: true
+  email?: true
+  password?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
   dateCreate?: true
   dateUpdate?: true
+  email?: true
+  password?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
   dateCreate?: true
   dateUpdate?: true
+  email?: true
+  password?: true
   _all?: true
 }
 
@@ -139,6 +151,8 @@ export type UserGroupByOutputType = {
   id: string
   dateCreate: Date
   dateUpdate: Date
+  email: string
+  password: string
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -166,6 +180,8 @@ export type UserWhereInput = {
   id?: Prisma.StringFilter<"User"> | string
   dateCreate?: Prisma.DateTimeFilter<"User"> | Date | string
   dateUpdate?: Prisma.DateTimeFilter<"User"> | Date | string
+  email?: Prisma.StringFilter<"User"> | string
+  password?: Prisma.StringFilter<"User"> | string
   campaigns?: Prisma.CampaignListRelationFilter
   cycleSchemas?: Prisma.CycleSchemaListRelationFilter
 }
@@ -174,25 +190,31 @@ export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   dateCreate?: Prisma.SortOrder
   dateUpdate?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   campaigns?: Prisma.CampaignOrderByRelationAggregateInput
   cycleSchemas?: Prisma.CycleSchemaOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  email?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   dateCreate?: Prisma.DateTimeFilter<"User"> | Date | string
   dateUpdate?: Prisma.DateTimeFilter<"User"> | Date | string
+  password?: Prisma.StringFilter<"User"> | string
   campaigns?: Prisma.CampaignListRelationFilter
   cycleSchemas?: Prisma.CycleSchemaListRelationFilter
-}, "id">
+}, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   dateCreate?: Prisma.SortOrder
   dateUpdate?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -205,12 +227,16 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   dateCreate?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   dateUpdate?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  email?: Prisma.StringWithAggregatesFilter<"User"> | string
+  password?: Prisma.StringWithAggregatesFilter<"User"> | string
 }
 
 export type UserCreateInput = {
   id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
+  email: string
+  password: string
   campaigns?: Prisma.CampaignCreateNestedManyWithoutUserInput
   cycleSchemas?: Prisma.CycleSchemaCreateNestedManyWithoutUserInput
 }
@@ -219,6 +245,8 @@ export type UserUncheckedCreateInput = {
   id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
+  email: string
+  password: string
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutUserInput
   cycleSchemas?: Prisma.CycleSchemaUncheckedCreateNestedManyWithoutUserInput
 }
@@ -227,6 +255,8 @@ export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   campaigns?: Prisma.CampaignUpdateManyWithoutUserNestedInput
   cycleSchemas?: Prisma.CycleSchemaUpdateManyWithoutUserNestedInput
 }
@@ -235,6 +265,8 @@ export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutUserNestedInput
   cycleSchemas?: Prisma.CycleSchemaUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -243,18 +275,24 @@ export type UserCreateManyInput = {
   id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
+  email: string
+  password: string
 }
 
 export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserScalarRelationFilter = {
@@ -266,18 +304,24 @@ export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   dateCreate?: Prisma.SortOrder
   dateUpdate?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   dateCreate?: Prisma.SortOrder
   dateUpdate?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   dateCreate?: Prisma.SortOrder
   dateUpdate?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  password?: Prisma.SortOrder
 }
 
 export type UserCreateNestedOneWithoutCampaignsInput = {
@@ -312,6 +356,8 @@ export type UserCreateWithoutCampaignsInput = {
   id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
+  email: string
+  password: string
   cycleSchemas?: Prisma.CycleSchemaCreateNestedManyWithoutUserInput
 }
 
@@ -319,6 +365,8 @@ export type UserUncheckedCreateWithoutCampaignsInput = {
   id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
+  email: string
+  password: string
   cycleSchemas?: Prisma.CycleSchemaUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -342,6 +390,8 @@ export type UserUpdateWithoutCampaignsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   cycleSchemas?: Prisma.CycleSchemaUpdateManyWithoutUserNestedInput
 }
 
@@ -349,6 +399,8 @@ export type UserUncheckedUpdateWithoutCampaignsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   cycleSchemas?: Prisma.CycleSchemaUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -356,6 +408,8 @@ export type UserCreateWithoutCycleSchemasInput = {
   id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
+  email: string
+  password: string
   campaigns?: Prisma.CampaignCreateNestedManyWithoutUserInput
 }
 
@@ -363,6 +417,8 @@ export type UserUncheckedCreateWithoutCycleSchemasInput = {
   id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
+  email: string
+  password: string
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -386,6 +442,8 @@ export type UserUpdateWithoutCycleSchemasInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   campaigns?: Prisma.CampaignUpdateManyWithoutUserNestedInput
 }
 
@@ -393,6 +451,8 @@ export type UserUncheckedUpdateWithoutCycleSchemasInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -440,6 +500,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   dateCreate?: boolean
   dateUpdate?: boolean
+  email?: boolean
+  password?: boolean
   campaigns?: boolean | Prisma.User$campaignsArgs<ExtArgs>
   cycleSchemas?: boolean | Prisma.User$cycleSchemasArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -449,21 +511,27 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   dateCreate?: boolean
   dateUpdate?: boolean
+  email?: boolean
+  password?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   dateCreate?: boolean
   dateUpdate?: boolean
+  email?: boolean
+  password?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   id?: boolean
   dateCreate?: boolean
   dateUpdate?: boolean
+  email?: boolean
+  password?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "dateCreate" | "dateUpdate", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "dateCreate" | "dateUpdate" | "email" | "password", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   campaigns?: boolean | Prisma.User$campaignsArgs<ExtArgs>
   cycleSchemas?: boolean | Prisma.User$cycleSchemasArgs<ExtArgs>
@@ -482,6 +550,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: string
     dateCreate: Date
     dateUpdate: Date
+    email: string
+    password: string
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -910,6 +980,8 @@ export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'String'>
   readonly dateCreate: Prisma.FieldRef<"User", 'DateTime'>
   readonly dateUpdate: Prisma.FieldRef<"User", 'DateTime'>
+  readonly email: Prisma.FieldRef<"User", 'String'>
+  readonly password: Prisma.FieldRef<"User", 'String'>
 }
     
 

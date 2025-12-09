@@ -313,7 +313,7 @@ export type CampaignCreateInput = {
   dateUpdate?: Date | string
   name: string
   cycleCode: string
-  userResults: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  userResults?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   journalNotes?: Prisma.CampaignCreatejournalNotesInput | string[]
   user: Prisma.UserCreateNestedOneWithoutCampaignsInput
   difficulty: Prisma.CampaignDifficultyCreateNestedOneWithoutCampaignsInput
@@ -325,7 +325,7 @@ export type CampaignUncheckedCreateInput = {
   dateUpdate?: Date | string
   name: string
   cycleCode: string
-  userResults: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  userResults?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   journalNotes?: Prisma.CampaignCreatejournalNotesInput | string[]
   userId: string
   difficultyId: number
@@ -361,7 +361,7 @@ export type CampaignCreateManyInput = {
   dateUpdate?: Date | string
   name: string
   cycleCode: string
-  userResults: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  userResults?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   journalNotes?: Prisma.CampaignCreatejournalNotesInput | string[]
   userId: string
   difficultyId: number
@@ -562,7 +562,7 @@ export type CampaignCreateWithoutDifficultyInput = {
   dateUpdate?: Date | string
   name: string
   cycleCode: string
-  userResults: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  userResults?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   journalNotes?: Prisma.CampaignCreatejournalNotesInput | string[]
   user: Prisma.UserCreateNestedOneWithoutCampaignsInput
 }
@@ -573,7 +573,7 @@ export type CampaignUncheckedCreateWithoutDifficultyInput = {
   dateUpdate?: Date | string
   name: string
   cycleCode: string
-  userResults: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  userResults?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   journalNotes?: Prisma.CampaignCreatejournalNotesInput | string[]
   userId: string
 }
@@ -625,7 +625,7 @@ export type CampaignCreateWithoutUserInput = {
   dateUpdate?: Date | string
   name: string
   cycleCode: string
-  userResults: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  userResults?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   journalNotes?: Prisma.CampaignCreatejournalNotesInput | string[]
   difficulty: Prisma.CampaignDifficultyCreateNestedOneWithoutCampaignsInput
 }
@@ -636,7 +636,7 @@ export type CampaignUncheckedCreateWithoutUserInput = {
   dateUpdate?: Date | string
   name: string
   cycleCode: string
-  userResults: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  userResults?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   journalNotes?: Prisma.CampaignCreatejournalNotesInput | string[]
   difficultyId: number
 }
@@ -673,7 +673,7 @@ export type CampaignCreateManyDifficultyInput = {
   dateUpdate?: Date | string
   name: string
   cycleCode: string
-  userResults: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  userResults?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   journalNotes?: Prisma.CampaignCreatejournalNotesInput | string[]
   userId: string
 }
@@ -717,7 +717,7 @@ export type CampaignCreateManyUserInput = {
   dateUpdate?: Date | string
   name: string
   cycleCode: string
-  userResults: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  userResults?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   journalNotes?: Prisma.CampaignCreatejournalNotesInput | string[]
   difficultyId: number
 }

@@ -72,6 +72,7 @@ export class BaseFakeRepository<
     if (mismatchedFields.length) {
       errors.push(
         `У объекта не совпадают значения полей: ${mismatchedFields.join(', ')}`,
+        `Текущие значения: ${mismatchedFields.map((key) => `${model[key]}`).join(', ')}`,
       );
     }
 

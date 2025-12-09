@@ -113,7 +113,9 @@ export type CycleSchemaScalarFieldEnum = (typeof CycleSchemaScalarFieldEnum)[key
 export const UserScalarFieldEnum = {
   id: 'id',
   dateCreate: 'dateCreate',
-  dateUpdate: 'dateUpdate'
+  dateUpdate: 'dateUpdate',
+  email: 'email',
+  password: 'password'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]

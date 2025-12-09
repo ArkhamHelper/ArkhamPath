@@ -4,12 +4,15 @@ import { GetManyCampaignsFixture } from './getManyCampaigns.fixture';
 import { CampaignSchema } from '../../../campaign/schema/campaign.schema';
 
 describe('GetManyCampaigns', () => {
-  const fixture = new GetManyCampaignsFixture();
-  const infrastructure = new CampaignsInfrastructure();
+  let fixture: GetManyCampaignsFixture;
+  let fake: CampaignsInfrastructure;
 
   beforeAll(async () => {
-    infrastructure.userRepository.set(fixture.users);
-    infrastructure.campaignRepository.set(fixture.campaigns);
+    fixture = new GetManyCampaignsFixture();
+    fake = new CampaignsInfrastructure();
+
+    fake.userRepository.set(fixture.users);
+    fake.campaignRepository.set(fixture.campaigns);
   });
 
   it('should find only by userId', async () => {
@@ -61,6 +64,6 @@ describe('GetManyCampaigns', () => {
   });
 
   function getCampaigns(dto: GetManyCampaignsDto): Promise<CampaignSchema[]> {
-    return infrastructure.campaignService.findManyByParams(dto);
+    return fake.campaignService.findManyByParams(dto);
   }
 });
