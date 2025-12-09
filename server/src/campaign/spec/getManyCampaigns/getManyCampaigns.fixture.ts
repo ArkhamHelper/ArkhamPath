@@ -44,10 +44,14 @@ export class GetManyCampaignsFixture {
   users: UserModel[] = [
     {
       id: '1',
+      email: 'a@b.com',
+      password: '$2a$12$OM2MnF85ofncqmftam9ZsOa/L8raGkIHM3ASPWpN4MHWHOZuQ0rUm',
       arkhamCardsId: 'b742775b-403a-487a-b529-edf37aad6525',
     },
     {
       id: '2',
+      email: 'c@d.com',
+      password: '$2a$12$OM2MnF85oancqmftam9ZsOa/L8raGkIHM3ASPWpN4MHWHOZuQ0rUm',
       arkhamCardsId: 'b742775b-403a-487b-b529-edf37aad6521',
     },
   ];
