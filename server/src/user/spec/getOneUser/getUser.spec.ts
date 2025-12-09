@@ -1,5 +1,5 @@
 import type { GetOneUserDto } from '../../dto/getOneUser.dto';
-import type { UserSchema } from '../../schema/user.schema';
+import type { UserModel } from '../../model/user.model';
 import { UserInfrastructure } from '../user.infrastructure';
 import { GetUserFixture } from './getOneUser.fixture';
 
@@ -15,13 +15,11 @@ describe('GetUser', () => {
   });
 
   it('should find by id', async () => {
-    const expected = fixture.expectedUser();
-
     const user = await get({
       id: '1',
     });
 
-    expect(user).toEqual(expected.schema);
+    expect(user).toEqual(fixture.expectedUser());
   });
 
   it('should throw error when user not found', async () => {
@@ -30,7 +28,7 @@ describe('GetUser', () => {
     );
   });
 
-  function get(dto: GetOneUserDto): Promise<UserSchema> {
+  function get(dto: GetOneUserDto): Promise<UserModel> {
     return fake.userService.getOne(dto);
   }
 });

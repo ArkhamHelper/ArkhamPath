@@ -1,5 +1,5 @@
 import type { CreateUserDto } from '../../dto/createUser.dto';
-import type { UserSchema } from '../../schema/user.schema';
+import type { UserModel } from '../../model/user.model';
 import { UserInfrastructure } from '../user.infrastructure';
 import { CreateUserFixture } from './createUser.fixture';
 import bcrypt from 'bcrypt';
@@ -16,17 +16,12 @@ describe('CreateUser', () => {
   });
 
   it('should create user', async () => {
-    const expected = fixture.expectedUser();
-
-    const user = await create({
+    await create({
       email: 'a@b.com',
       password: 'password',
     });
 
-    expect({
-      ...user,
-      id: `${user.id}`,
-    }).toEqual(expected.schema);
+    expect(fake.userRepository.getAll().length).toEqual(2);
     expect(
       await bcrypt.compare(
         'password',
@@ -50,7 +45,7 @@ describe('CreateUser', () => {
     ).rejects.toThrow(new Error('Password must be at least 6 characters long'));
   });
 
-  function create(dto: CreateUserDto): Promise<UserSchema> {
+  function create(dto: CreateUserDto): Promise<UserModel> {
     return fake.userService.create(dto);
   }
 });

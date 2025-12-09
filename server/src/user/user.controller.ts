@@ -12,17 +12,23 @@ export class UserController {
 
   @Post('auth')
   async auth(@Body() body: AuthUserBody): Promise<UserSchema> {
-    return this.userService.auth(body);
+    const user = await this.userService.auth(body);
+
+    return new UserSchema(user);
   }
 
   @Get(':id')
   async getOne(@Param() params: GetOneUserParams): Promise<UserSchema> {
-    return this.userService.getOne(params);
+    const user = await this.userService.getOne(params);
+
+    return new UserSchema(user);
   }
 
   @Post()
   async create(@Body() body: CreateUserBody): Promise<UserSchema> {
-    return this.userService.create(body);
+    const user = await this.userService.create(body);
+
+    return new UserSchema(user);
   }
 
   @Put(':id')
@@ -30,6 +36,8 @@ export class UserController {
     @Param() params: UpdateUserParams,
     @Body() body: UpdateUserBody,
   ): Promise<UserSchema> {
-    return this.userService.update({ ...body, ...params });
+    const user = await this.userService.update({ ...body, ...params });
+
+    return new UserSchema(user);
   }
 }

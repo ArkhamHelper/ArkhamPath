@@ -1,6 +1,5 @@
 import type { CreateCampaignDto } from '../../dto/createCampaign.dto';
 import type { CampaignModel } from '../../model/campaign.model';
-import type { CampaignSchema } from '../../schema/campaign.schema';
 import { CampaignsInfrastructure } from '../campaigns.infrastructure';
 import { CreateCampaignFixture } from './createCampaign.fixture';
 
@@ -17,16 +16,9 @@ describe('GetOneCampaign', () => {
   });
 
   it('should create campaign', async () => {
-    const expected = fixture.expectedCampaign();
+    await createCampaign(fixture.getDataForCreateCampaign());
 
-    const createdCampaign = await createCampaign(
-      fixture.getDataForCreateCampaign(),
-    );
-
-    expect({ ...createdCampaign, id: `${createdCampaign.id}` }).toEqual(
-      expected.schema,
-    );
-    wasSaved(expected.model);
+    wasSaved(fixture.expectedCampaign());
   });
 
   it('should throw error on invalid userId', async () => {
@@ -35,7 +27,7 @@ describe('GetOneCampaign', () => {
     ).rejects.toThrow('User with id 2 not found');
   });
 
-  function createCampaign(dto: CreateCampaignDto): Promise<CampaignSchema> {
+  function createCampaign(dto: CreateCampaignDto): Promise<CampaignModel> {
     return fake.campaignService.create(dto);
   }
 

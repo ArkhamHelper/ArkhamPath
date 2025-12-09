@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import type { IUserRepository } from './repository/user.repository';
 import type { GetOneUserDto } from './dto/getOneUser.dto';
-import { UserSchema } from './schema/user.schema';
 import type { CreateUserDto } from './dto/createUser.dto';
 import * as bcrypt from 'bcrypt';
 import { UserModel } from './model/user.model';
@@ -16,7 +15,7 @@ import type { AuthUserDto } from './dto/authUser.dto';
 export class UserService {
   constructor(private userRepository: IUserRepository) {}
 
-  async auth(dto: AuthUserDto): Promise<UserSchema> {
+  async auth(dto: AuthUserDto): Promise<UserModel> {
     const foundUser = await this.userRepository.findOneByEmail(dto.email);
 
     if (!foundUser) {
@@ -32,20 +31,20 @@ export class UserService {
       throw new BadRequestException(`Password is incorrect`);
     }
 
-    return new UserSchema(foundUser);
+    return foundUser;
   }
 
-  async getOne(dto: GetOneUserDto): Promise<UserSchema> {
+  async getOne(dto: GetOneUserDto): Promise<UserModel> {
     const foundUser = await this.userRepository.findOneById(dto.id);
 
     if (!foundUser) {
       throw new Error(`User with id ${dto.id} not found`);
     }
 
-    return new UserSchema(foundUser);
+    return foundUser;
   }
 
-  async create(dto: CreateUserDto): Promise<UserSchema> {
+  async create(dto: CreateUserDto): Promise<UserModel> {
     const foundUser = await this.userRepository.findOneByEmail(dto.email);
 
     if (foundUser) {
@@ -68,10 +67,10 @@ export class UserService {
       }),
     );
 
-    return new UserSchema(user);
+    return user;
   }
 
-  async update(dto: UpdateUserDto): Promise<UserSchema> {
+  async update(dto: UpdateUserDto): Promise<UserModel> {
     const foundUser = await this.userRepository.findOneById(dto.id);
 
     if (!foundUser) {
@@ -92,7 +91,7 @@ export class UserService {
       }),
     );
 
-    return new UserSchema(user);
+    return user;
   }
 
   private validatePassword(password: string): {

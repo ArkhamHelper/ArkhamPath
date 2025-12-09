@@ -2,7 +2,6 @@ import type { UserModel } from '../../../user/model/user.model';
 import type { CreateCampaignDto } from '../../dto/createCampaign.dto';
 import type { CampaignModel } from '../../model/campaign.model';
 import type { CampaignDifficultyModel } from '../../model/difficulty.model';
-import type { CampaignSchema } from '../../schema/campaign.schema';
 
 export class CreateCampaignFixture {
   campaignDifficulties: CampaignDifficultyModel[] = [
@@ -32,29 +31,16 @@ export class CreateCampaignFixture {
     userId: '2',
   });
 
-  expectedCampaign = (): {
-    schema: CampaignSchema;
-    model: CampaignModel;
-  } => ({
-    schema: {
-      id: '1',
-      userResults: {},
-      journalNotes: [],
-      name: 'My campaign',
-      difficulty: 'easy_difficulty',
-      cycleCode: 'the_dunwich_legacy',
-    },
-    model: {
-      id: '1',
-      userId: '1',
-      userResults: {},
-      journalNotes: [],
-      name: 'My campaign',
-      cycleCode: 'the_dunwich_legacy',
-      difficulty: {
-        id: 1,
-        name: 'easy_difficulty',
-      },
+  expectedCampaign = (): CampaignModel => ({
+    id: '1',
+    userId: '1',
+    userResults: {},
+    journalNotes: [],
+    name: 'My campaign',
+    cycleCode: 'the_dunwich_legacy',
+    difficulty: {
+      id: 1,
+      name: 'easy_difficulty',
     },
   });
 }

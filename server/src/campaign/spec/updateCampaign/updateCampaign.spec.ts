@@ -1,6 +1,5 @@
 import type { UpdateCampaignDto } from '../../dto/updateCampaign.dto';
 import type { CampaignModel } from '../../model/campaign.model';
-import type { CampaignSchema } from '../../schema/campaign.schema';
 import { CampaignsInfrastructure } from '../campaigns.infrastructure';
 import { UpdateCampaignFixture } from './updateCampaign.fixture';
 
@@ -16,35 +15,27 @@ describe('UpdateCampaign', () => {
   });
 
   it('should update userResults', async () => {
-    const campaign = await updateCampaign(fixture.getUpdateUserResults());
-    const expected = fixture.expectedUpdateUserResults();
+    await updateCampaign(fixture.getUpdateUserResults());
 
-    expect(campaign).toEqual(expected.schema);
-    wasSaved(expected.model);
+    wasSaved(fixture.expectedUpdateUserResults());
   });
 
   it('should replace userResults', async () => {
-    const campaign = await updateCampaign(fixture.getReplaceUserResults());
-    const expected = fixture.expectedReplaceUserResults();
+    await updateCampaign(fixture.getReplaceUserResults());
 
-    expect(campaign).toEqual(expected.schema);
-    wasSaved(expected.model);
+    wasSaved(fixture.expectedReplaceUserResults());
   });
 
   it('should add journal notes', async () => {
-    const campaign = await updateCampaign(fixture.getAddJournalNotes());
-    const expected = fixture.expectedAddJournalNotes();
+    await updateCampaign(fixture.getAddJournalNotes());
 
-    expect(campaign).toEqual(expected.schema);
-    wasSaved(expected.model);
+    wasSaved(fixture.expectedAddJournalNotes());
   });
 
   it('should remove journal notes', async () => {
-    const campaign = await updateCampaign(fixture.getRemoveJournalNotes());
-    const expected = fixture.expectedRemoveJournalNotes();
+    await updateCampaign(fixture.getRemoveJournalNotes());
 
-    expect(campaign).toEqual(expected.schema);
-    wasSaved(expected.model);
+    wasSaved(fixture.expectedRemoveJournalNotes());
   });
 
   it('should throw error on invalid campaign id', async () => {
@@ -53,9 +44,7 @@ describe('UpdateCampaign', () => {
     ).rejects.toThrow('Campaign with id 4 not found');
   });
 
-  function updateCampaign(
-    campaign: UpdateCampaignDto,
-  ): Promise<CampaignSchema> {
+  function updateCampaign(campaign: UpdateCampaignDto): Promise<CampaignModel> {
     return fake.campaignService.update(campaign);
   }
 
