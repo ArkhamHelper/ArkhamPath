@@ -1,5 +1,5 @@
 import type { GetOneCampaignDto } from '../../dto/getOneCampaign.dto';
-import type { CampaignSchema } from '../../schema/campaign.schema';
+import type { CampaignModel } from '../../model/campaign.model';
 import { CampaignsFakeInfrastructure } from '../campaigns.infrastructure';
 import { GetOneCampaignFixture } from './getOneCampaign.fixture';
 
@@ -26,7 +26,7 @@ describe('GetOneCampaign', () => {
     );
   });
 
-  function getCampaign(dto: GetOneCampaignDto): Promise<CampaignSchema> {
+  function getCampaign(dto: GetOneCampaignDto): Promise<CampaignModel> {
     return fake.campaignService.findOneById(dto);
   }
 });
