@@ -1,5 +1,4 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { CampaignSchema } from './schema/campaign.schema';
 import { CampaignModel } from './model/campaign.model';
 import { CreateCampaignDto } from './dto/createCampaign.dto';
 import type { ICampaignDifficultyRepository } from './repository/difficulty.repository';
@@ -23,17 +22,17 @@ export class CampaignService {
     private difficultyRepository: ICampaignDifficultyRepository,
   ) {}
 
-  async findOneById(dto: GetOneCampaignDto): Promise<CampaignSchema> {
+  async findOneById(dto: GetOneCampaignDto): Promise<CampaignModel> {
     const campaign = await this.campaignRepository.findOneById(dto.id);
 
     if (!campaign) {
       throw new NotFoundException(`Campaign with id ${dto.id} not found`);
     }
 
-    return new CampaignSchema(campaign);
+    return campaign;
   }
 
-  async findManyByParams(dto: GetManyCampaignsDto): Promise<CampaignSchema[]> {
+  async findManyByParams(dto: GetManyCampaignsDto): Promise<CampaignModel[]> {
     await this.findUserOrThrow(dto.userId);
 
     const campaigns = await this.campaignRepository.findManyByUserId(
@@ -48,12 +47,10 @@ export class CampaignService {
       (!dto.name ||
         campaign.name.toLowerCase().includes(dto.name.toLowerCase()));
 
-    return campaigns
-      .filter(checkParams)
-      .map((campaign) => new CampaignSchema(campaign));
+    return campaigns.filter(checkParams);
   }
 
-  async create(campaign: CreateCampaignDto): Promise<CampaignSchema> {
+  async create(campaign: CreateCampaignDto): Promise<CampaignModel> {
     await this.findUserOrThrow(campaign.userId);
 
     const foundDifficulty = await this.difficultyRepository.findOneById(
@@ -65,12 +62,10 @@ export class CampaignService {
       difficulty: foundDifficulty,
     });
 
-    const createdCampaign = await this.campaignRepository.save(campaignModel);
-
-    return new CampaignSchema(createdCampaign);
+    return await this.campaignRepository.save(campaignModel);
   }
 
-  async update(campaign: UpdateCampaignDto): Promise<CampaignSchema> {
+  async update(campaign: UpdateCampaignDto): Promise<CampaignModel> {
     const foundCampaign = await this.campaignRepository.findOneById(
       campaign.id,
     );
@@ -91,9 +86,7 @@ export class CampaignService {
         .concat(campaign.journalNotes?.add ?? []),
     };
 
-    const updatedCampaign = await this.campaignRepository.save(campaignModel);
-
-    return new CampaignSchema(updatedCampaign);
+    return await this.campaignRepository.save(campaignModel);
   }
 
   async deleteCampaign(dto: DeleteCampaignDto): Promise<void> {

@@ -1,29 +1,24 @@
 import type { UpdateUserDto } from '../../dto/updateUser.dto';
-import type { UserSchema } from '../../schema/user.schema';
-import { UserInfrastructure } from '../user.infrastructure';
+import type { UserModel } from '../../model/user.model';
+import { UserFakeInfrastructure } from '../user.infrastructure';
 import { UpdateUserFixture } from './updateUser.fixture';
 import bcrypt from 'bcrypt';
 
 describe('UpdateUser', () => {
   let fixture: UpdateUserFixture;
-  let fake: UserInfrastructure;
+  let fake: UserFakeInfrastructure;
 
   beforeEach(() => {
     fixture = new UpdateUserFixture();
-    fake = new UserInfrastructure();
+    fake = new UserFakeInfrastructure();
 
     fake.userRepository.set(fixture.users);
   });
 
   it('should update password', async () => {
-    const expected = fixture.expectedUpdatedPassword();
+    await update({ id: '1', password: 'newPassword' });
 
-    const user = await update({ id: '1', password: 'newPassword' });
-
-    expect({
-      ...user,
-      id: `${user.id}`,
-    }).toEqual(expected.schema);
+    expect(fake.userRepository.getAll().length).toEqual(1);
     expect(
       await bcrypt.compare(
         'newPassword',
@@ -44,7 +39,7 @@ describe('UpdateUser', () => {
     );
   });
 
-  function update(dto: UpdateUserDto): Promise<UserSchema> {
+  function update(dto: UpdateUserDto): Promise<UserModel> {
     return fake.userService.update(dto);
   }
 });

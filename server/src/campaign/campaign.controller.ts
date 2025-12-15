@@ -28,7 +28,7 @@ export class CampaignController {
   async getCampaigns(
     @Query() query: GetManyCampaignsQuery,
   ): Promise<CampaignSchema[]> {
-    return await this.campaignService.findManyByParams({
+    const campaigns = await this.campaignService.findManyByParams({
       name: query.name,
       limit: +query.limit,
       offset: query.offset ? +query.offset : 0,
@@ -36,6 +36,8 @@ export class CampaignController {
       cycleCode: query.cycleCode,
       difficultyId: query.difficultyId,
     });
+
+    return campaigns.map((campaign) => new CampaignSchema(campaign));
   }
 
   @Get(':id')
@@ -43,9 +45,11 @@ export class CampaignController {
   async getCampaign(
     @Param() params: GetOneCampaignParams,
   ): Promise<CampaignSchema> {
-    return this.campaignService.findOneById({
+    const campaign = await this.campaignService.findOneById({
       id: params.id,
     });
+
+    return new CampaignSchema(campaign);
   }
 
   @Post('')
@@ -54,7 +58,9 @@ export class CampaignController {
   async createCampaign(
     @Body() body: CreateCampaignBody,
   ): Promise<CampaignSchema> {
-    return this.campaignService.create(body);
+    const campaign = await this.campaignService.create(body);
+
+    return new CampaignSchema(campaign);
   }
 
   @Post(':id')
@@ -64,15 +70,17 @@ export class CampaignController {
     @Param() params: UpdateCampaignParams,
     @Body() body: UpdateCampaignBody,
   ): Promise<CampaignSchema> {
-    return this.campaignService.update({
+    const campaign = await this.campaignService.update({
       ...body,
       ...params,
     });
+
+    return new CampaignSchema(campaign);
   }
 
   @Delete(':id')
   @ApiParam({ name: 'id', type: 'string' })
   async deleteCampaign(@Param() params: DeleteCampaignParams): Promise<void> {
-    return this.campaignService.deleteCampaign(params);
+    await this.campaignService.deleteCampaign(params);
   }
 }

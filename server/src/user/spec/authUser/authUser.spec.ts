@@ -1,28 +1,26 @@
 import type { AuthUserDto } from '../../dto/authUser.dto';
-import type { UserSchema } from '../../schema/user.schema';
-import { UserInfrastructure } from '../user.infrastructure';
+import type { UserModel } from '../../model/user.model';
+import { UserFakeInfrastructure } from '../user.infrastructure';
 import { AuthUserFixture } from './authUser.fixture';
 
 describe('AuthUser', () => {
   let fixture: AuthUserFixture;
-  let fake: UserInfrastructure;
+  let fake: UserFakeInfrastructure;
 
   beforeEach(() => {
     fixture = new AuthUserFixture();
-    fake = new UserInfrastructure();
+    fake = new UserFakeInfrastructure();
 
     fake.userRepository.set(fixture.users);
   });
 
   it('should auth user', async () => {
-    const expected = fixture.expectedUser();
-
     const user = await auth({
       email: 'a@b.com',
       password: 'password',
     });
 
-    expect(user).toEqual(expected.schema);
+    expect(user).toEqual(fixture.expectedUser());
   });
 
   it('should throw error when user not found', async () => {
@@ -37,7 +35,7 @@ describe('AuthUser', () => {
     ).rejects.toThrow(new Error('Password is incorrect'));
   });
 
-  function auth(dto: AuthUserDto): Promise<UserSchema> {
+  function auth(dto: AuthUserDto): Promise<UserModel> {
     return fake.userService.auth(dto);
   }
 });
