@@ -1,15 +1,15 @@
 import type { GetOneUserDto } from '../../dto/getOneUser.dto';
 import type { UserModel } from '../../model/user.model';
-import { UserInfrastructure } from '../user.infrastructure';
+import { UserFakeInfrastructure } from '../user.infrastructure';
 import { GetUserFixture } from './getOneUser.fixture';
 
 describe('GetUser', () => {
   let fixture: GetUserFixture;
-  let fake: UserInfrastructure;
+  let fake: UserFakeInfrastructure;
 
   beforeEach(() => {
     fixture = new GetUserFixture();
-    fake = new UserInfrastructure();
+    fake = new UserFakeInfrastructure();
 
     fake.userRepository.set(fixture.users);
   });

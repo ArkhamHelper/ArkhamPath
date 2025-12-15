@@ -3,7 +3,7 @@ import { CampaignService } from '../campaign.service';
 import { CampaignFakeRepository } from '../repository/test/campaignFake.repository';
 import { CampaignDifficultyFakeRepository } from '../repository/test/difficultyFake.repository';
 
-export class CampaignsInfrastructure {
+export class CampaignsFakeInfrastructure {
   public campaignService: CampaignService;
   public userRepository: UserFakeRepository;
   public campaignRepository: CampaignFakeRepository;

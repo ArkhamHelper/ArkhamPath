@@ -1,16 +1,16 @@
 import type { UpdateUserDto } from '../../dto/updateUser.dto';
 import type { UserModel } from '../../model/user.model';
-import { UserInfrastructure } from '../user.infrastructure';
+import { UserFakeInfrastructure } from '../user.infrastructure';
 import { UpdateUserFixture } from './updateUser.fixture';
 import bcrypt from 'bcrypt';
 
 describe('UpdateUser', () => {
   let fixture: UpdateUserFixture;
-  let fake: UserInfrastructure;
+  let fake: UserFakeInfrastructure;
 
   beforeEach(() => {
     fixture = new UpdateUserFixture();
-    fake = new UserInfrastructure();
+    fake = new UserFakeInfrastructure();
 
     fake.userRepository.set(fixture.users);
   });

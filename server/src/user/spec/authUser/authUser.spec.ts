@@ -1,15 +1,15 @@
 import type { AuthUserDto } from '../../dto/authUser.dto';
 import type { UserModel } from '../../model/user.model';
-import { UserInfrastructure } from '../user.infrastructure';
+import { UserFakeInfrastructure } from '../user.infrastructure';
 import { AuthUserFixture } from './authUser.fixture';
 
 describe('AuthUser', () => {
   let fixture: AuthUserFixture;
-  let fake: UserInfrastructure;
+  let fake: UserFakeInfrastructure;
 
   beforeEach(() => {
     fixture = new AuthUserFixture();
-    fake = new UserInfrastructure();
+    fake = new UserFakeInfrastructure();
 
     fake.userRepository.set(fixture.users);
   });

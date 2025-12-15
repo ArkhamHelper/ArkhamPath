@@ -1,14 +1,14 @@
 import type { DeleteCampaignDto } from '../../dto/deleteCampaign.dto';
-import { CampaignsInfrastructure } from '../campaigns.infrastructure';
+import { CampaignsFakeInfrastructure } from '../campaigns.infrastructure';
 import { DeleteCampaignFixture } from './deleteCampaign.fixture';
 
 describe('DeleteCampaign', () => {
   let fixture: DeleteCampaignFixture;
-  let fake: CampaignsInfrastructure;
+  let fake: CampaignsFakeInfrastructure;
 
   beforeEach(() => {
     fixture = new DeleteCampaignFixture();
-    fake = new CampaignsInfrastructure();
+    fake = new CampaignsFakeInfrastructure();
 
     fake.campaignRepository.set(fixture.campaigns);
   });

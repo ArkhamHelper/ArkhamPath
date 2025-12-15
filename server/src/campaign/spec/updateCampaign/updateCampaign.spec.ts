@@ -1,15 +1,15 @@
 import type { UpdateCampaignDto } from '../../dto/updateCampaign.dto';
 import type { CampaignModel } from '../../model/campaign.model';
-import { CampaignsInfrastructure } from '../campaigns.infrastructure';
+import { CampaignsFakeInfrastructure } from '../campaigns.infrastructure';
 import { UpdateCampaignFixture } from './updateCampaign.fixture';
 
 describe('UpdateCampaign', () => {
   let fixture: UpdateCampaignFixture;
-  let fake: CampaignsInfrastructure;
+  let fake: CampaignsFakeInfrastructure;
 
   beforeEach(async () => {
     fixture = new UpdateCampaignFixture();
-    fake = new CampaignsInfrastructure();
+    fake = new CampaignsFakeInfrastructure();
 
     fake.campaignRepository.set(fixture.campaigns);
   });

@@ -1,7 +1,7 @@
 import { UserFakeRepository } from '../repository/test/userFake.repository';
 import { UserService } from '../user.service';
 
-export class UserInfrastructure {
+export class UserFakeInfrastructure {
   public userService: UserService;
   public userRepository: UserFakeRepository;
 
