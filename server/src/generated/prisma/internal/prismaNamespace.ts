@@ -386,7 +386,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   Campaign: 'Campaign',
   CampaignDifficulty: 'CampaignDifficulty',
-  CycleSchema: 'CycleSchema',
+  Path: 'Path',
   User: 'User'
 } as const
 
@@ -403,7 +403,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "campaign" | "campaignDifficulty" | "cycleSchema" | "user"
+    modelProps: "campaign" | "campaignDifficulty" | "path" | "user"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -555,77 +555,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    CycleSchema: {
-      payload: Prisma.$CycleSchemaPayload<ExtArgs>
-      fields: Prisma.CycleSchemaFieldRefs
+    Path: {
+      payload: Prisma.$PathPayload<ExtArgs>
+      fields: Prisma.PathFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.CycleSchemaFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleSchemaPayload> | null
+          args: Prisma.PathFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.CycleSchemaFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleSchemaPayload>
+          args: Prisma.PathFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathPayload>
         }
         findFirst: {
-          args: Prisma.CycleSchemaFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleSchemaPayload> | null
+          args: Prisma.PathFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.CycleSchemaFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleSchemaPayload>
+          args: Prisma.PathFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathPayload>
         }
         findMany: {
-          args: Prisma.CycleSchemaFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleSchemaPayload>[]
+          args: Prisma.PathFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathPayload>[]
         }
         create: {
-          args: Prisma.CycleSchemaCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleSchemaPayload>
+          args: Prisma.PathCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathPayload>
         }
         createMany: {
-          args: Prisma.CycleSchemaCreateManyArgs<ExtArgs>
+          args: Prisma.PathCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.CycleSchemaCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleSchemaPayload>[]
+          args: Prisma.PathCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathPayload>[]
         }
         delete: {
-          args: Prisma.CycleSchemaDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleSchemaPayload>
+          args: Prisma.PathDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathPayload>
         }
         update: {
-          args: Prisma.CycleSchemaUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleSchemaPayload>
+          args: Prisma.PathUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathPayload>
         }
         deleteMany: {
-          args: Prisma.CycleSchemaDeleteManyArgs<ExtArgs>
+          args: Prisma.PathDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.CycleSchemaUpdateManyArgs<ExtArgs>
+          args: Prisma.PathUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.CycleSchemaUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleSchemaPayload>[]
+          args: Prisma.PathUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathPayload>[]
         }
         upsert: {
-          args: Prisma.CycleSchemaUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CycleSchemaPayload>
+          args: Prisma.PathUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathPayload>
         }
         aggregate: {
-          args: Prisma.CycleSchemaAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateCycleSchema>
+          args: Prisma.PathAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePath>
         }
         groupBy: {
-          args: Prisma.CycleSchemaGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CycleSchemaGroupByOutputType>[]
+          args: Prisma.PathGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PathGroupByOutputType>[]
         }
         count: {
-          args: Prisma.CycleSchemaCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CycleSchemaCountAggregateOutputType> | number
+          args: Prisma.PathCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PathCountAggregateOutputType> | number
         }
       }
     }
@@ -748,8 +748,8 @@ export const CampaignScalarFieldEnum = {
   dateUpdate: 'dateUpdate',
   name: 'name',
   cycleCode: 'cycleCode',
-  userResults: 'userResults',
   journalNotes: 'journalNotes',
+  userResults: 'userResults',
   userId: 'userId',
   difficultyId: 'difficultyId'
 } as const
@@ -767,16 +767,16 @@ export const CampaignDifficultyScalarFieldEnum = {
 export type CampaignDifficultyScalarFieldEnum = (typeof CampaignDifficultyScalarFieldEnum)[keyof typeof CampaignDifficultyScalarFieldEnum]
 
 
-export const CycleSchemaScalarFieldEnum = {
+export const PathScalarFieldEnum = {
   dateCreate: 'dateCreate',
   dateUpdate: 'dateUpdate',
   data: 'data',
-  code: 'code',
   userId: 'userId',
+  cycleCode: 'cycleCode',
   dateLastFetchArkhamCards: 'dateLastFetchArkhamCards'
 } as const
 
-export type CycleSchemaScalarFieldEnum = (typeof CycleSchemaScalarFieldEnum)[keyof typeof CycleSchemaScalarFieldEnum]
+export type PathScalarFieldEnum = (typeof PathScalarFieldEnum)[keyof typeof PathScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -978,7 +978,7 @@ export type PrismaClientOptions = ({
 export type GlobalOmitConfig = {
   campaign?: Prisma.CampaignOmit
   campaignDifficulty?: Prisma.CampaignDifficultyOmit
-  cycleSchema?: Prisma.CycleSchemaOmit
+  path?: Prisma.PathOmit
   user?: Prisma.UserOmit
 }
 
