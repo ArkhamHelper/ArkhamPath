@@ -25,6 +25,7 @@ export type AggregatePath = {
 }
 
 export type PathMinAggregateOutputType = {
+  id: string | null
   dateCreate: Date | null
   dateUpdate: Date | null
   userId: string | null
@@ -33,6 +34,7 @@ export type PathMinAggregateOutputType = {
 }
 
 export type PathMaxAggregateOutputType = {
+  id: string | null
   dateCreate: Date | null
   dateUpdate: Date | null
   userId: string | null
@@ -41,6 +43,7 @@ export type PathMaxAggregateOutputType = {
 }
 
 export type PathCountAggregateOutputType = {
+  id: number
   dateCreate: number
   dateUpdate: number
   data: number
@@ -52,6 +55,7 @@ export type PathCountAggregateOutputType = {
 
 
 export type PathMinAggregateInputType = {
+  id?: true
   dateCreate?: true
   dateUpdate?: true
   userId?: true
@@ -60,6 +64,7 @@ export type PathMinAggregateInputType = {
 }
 
 export type PathMaxAggregateInputType = {
+  id?: true
   dateCreate?: true
   dateUpdate?: true
   userId?: true
@@ -68,6 +73,7 @@ export type PathMaxAggregateInputType = {
 }
 
 export type PathCountAggregateInputType = {
+  id?: true
   dateCreate?: true
   dateUpdate?: true
   data?: true
@@ -150,6 +156,7 @@ export type PathGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 }
 
 export type PathGroupByOutputType = {
+  id: string
   dateCreate: Date
   dateUpdate: Date
   data: runtime.JsonValue
@@ -180,6 +187,7 @@ export type PathWhereInput = {
   AND?: Prisma.PathWhereInput | Prisma.PathWhereInput[]
   OR?: Prisma.PathWhereInput[]
   NOT?: Prisma.PathWhereInput | Prisma.PathWhereInput[]
+  id?: Prisma.StringFilter<"Path"> | string
   dateCreate?: Prisma.DateTimeFilter<"Path"> | Date | string
   dateUpdate?: Prisma.DateTimeFilter<"Path"> | Date | string
   data?: Prisma.JsonFilter<"Path">
@@ -190,6 +198,7 @@ export type PathWhereInput = {
 }
 
 export type PathOrderByWithRelationInput = {
+  id?: Prisma.SortOrder
   dateCreate?: Prisma.SortOrder
   dateUpdate?: Prisma.SortOrder
   data?: Prisma.SortOrder
@@ -200,6 +209,7 @@ export type PathOrderByWithRelationInput = {
 }
 
 export type PathWhereUniqueInput = Prisma.AtLeast<{
+  id?: string
   userId_cycleCode?: Prisma.PathUserIdCycleCodeCompoundUniqueInput
   AND?: Prisma.PathWhereInput | Prisma.PathWhereInput[]
   OR?: Prisma.PathWhereInput[]
@@ -211,9 +221,10 @@ export type PathWhereUniqueInput = Prisma.AtLeast<{
   cycleCode?: Prisma.StringFilter<"Path"> | string
   dateLastFetchArkhamCards?: Prisma.DateTimeFilter<"Path"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "userId_cycleCode">
+}, "id" | "userId_cycleCode">
 
 export type PathOrderByWithAggregationInput = {
+  id?: Prisma.SortOrder
   dateCreate?: Prisma.SortOrder
   dateUpdate?: Prisma.SortOrder
   data?: Prisma.SortOrder
@@ -229,6 +240,7 @@ export type PathScalarWhereWithAggregatesInput = {
   AND?: Prisma.PathScalarWhereWithAggregatesInput | Prisma.PathScalarWhereWithAggregatesInput[]
   OR?: Prisma.PathScalarWhereWithAggregatesInput[]
   NOT?: Prisma.PathScalarWhereWithAggregatesInput | Prisma.PathScalarWhereWithAggregatesInput[]
+  id?: Prisma.StringWithAggregatesFilter<"Path"> | string
   dateCreate?: Prisma.DateTimeWithAggregatesFilter<"Path"> | Date | string
   dateUpdate?: Prisma.DateTimeWithAggregatesFilter<"Path"> | Date | string
   data?: Prisma.JsonWithAggregatesFilter<"Path">
@@ -238,6 +250,7 @@ export type PathScalarWhereWithAggregatesInput = {
 }
 
 export type PathCreateInput = {
+  id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -247,6 +260,7 @@ export type PathCreateInput = {
 }
 
 export type PathUncheckedCreateInput = {
+  id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -256,6 +270,7 @@ export type PathUncheckedCreateInput = {
 }
 
 export type PathUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -265,6 +280,7 @@ export type PathUpdateInput = {
 }
 
 export type PathUncheckedUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -274,6 +290,7 @@ export type PathUncheckedUpdateInput = {
 }
 
 export type PathCreateManyInput = {
+  id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -283,6 +300,7 @@ export type PathCreateManyInput = {
 }
 
 export type PathUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -291,6 +309,7 @@ export type PathUpdateManyMutationInput = {
 }
 
 export type PathUncheckedUpdateManyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -305,6 +324,7 @@ export type PathUserIdCycleCodeCompoundUniqueInput = {
 }
 
 export type PathCountOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   dateCreate?: Prisma.SortOrder
   dateUpdate?: Prisma.SortOrder
   data?: Prisma.SortOrder
@@ -314,6 +334,7 @@ export type PathCountOrderByAggregateInput = {
 }
 
 export type PathMaxOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   dateCreate?: Prisma.SortOrder
   dateUpdate?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -322,6 +343,7 @@ export type PathMaxOrderByAggregateInput = {
 }
 
 export type PathMinOrderByAggregateInput = {
+  id?: Prisma.SortOrder
   dateCreate?: Prisma.SortOrder
   dateUpdate?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -382,6 +404,7 @@ export type PathUncheckedUpdateManyWithoutUserNestedInput = {
 }
 
 export type PathCreateWithoutUserInput = {
+  id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -390,6 +413,7 @@ export type PathCreateWithoutUserInput = {
 }
 
 export type PathUncheckedCreateWithoutUserInput = {
+  id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -427,6 +451,7 @@ export type PathScalarWhereInput = {
   AND?: Prisma.PathScalarWhereInput | Prisma.PathScalarWhereInput[]
   OR?: Prisma.PathScalarWhereInput[]
   NOT?: Prisma.PathScalarWhereInput | Prisma.PathScalarWhereInput[]
+  id?: Prisma.StringFilter<"Path"> | string
   dateCreate?: Prisma.DateTimeFilter<"Path"> | Date | string
   dateUpdate?: Prisma.DateTimeFilter<"Path"> | Date | string
   data?: Prisma.JsonFilter<"Path">
@@ -436,6 +461,7 @@ export type PathScalarWhereInput = {
 }
 
 export type PathCreateManyUserInput = {
+  id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -444,6 +470,7 @@ export type PathCreateManyUserInput = {
 }
 
 export type PathUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -452,6 +479,7 @@ export type PathUpdateWithoutUserInput = {
 }
 
 export type PathUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -460,6 +488,7 @@ export type PathUncheckedUpdateWithoutUserInput = {
 }
 
 export type PathUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -470,6 +499,7 @@ export type PathUncheckedUpdateManyWithoutUserInput = {
 
 
 export type PathSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   dateCreate?: boolean
   dateUpdate?: boolean
   data?: boolean
@@ -480,6 +510,7 @@ export type PathSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
 }, ExtArgs["result"]["path"]>
 
 export type PathSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   dateCreate?: boolean
   dateUpdate?: boolean
   data?: boolean
@@ -490,6 +521,7 @@ export type PathSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 }, ExtArgs["result"]["path"]>
 
 export type PathSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+  id?: boolean
   dateCreate?: boolean
   dateUpdate?: boolean
   data?: boolean
@@ -500,6 +532,7 @@ export type PathSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
 }, ExtArgs["result"]["path"]>
 
 export type PathSelectScalar = {
+  id?: boolean
   dateCreate?: boolean
   dateUpdate?: boolean
   data?: boolean
@@ -508,7 +541,7 @@ export type PathSelectScalar = {
   dateLastFetchArkhamCards?: boolean
 }
 
-export type PathOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"dateCreate" | "dateUpdate" | "data" | "userId" | "cycleCode" | "dateLastFetchArkhamCards", ExtArgs["result"]["path"]>
+export type PathOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "dateCreate" | "dateUpdate" | "data" | "userId" | "cycleCode" | "dateLastFetchArkhamCards", ExtArgs["result"]["path"]>
 export type PathInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -525,6 +558,7 @@ export type $PathPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
+    id: string
     dateCreate: Date
     dateUpdate: Date
     data: runtime.JsonValue
@@ -614,8 +648,8 @@ export interface PathDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    * // Get first 10 Paths
    * const paths = await prisma.path.findMany({ take: 10 })
    * 
-   * // Only select the `dateCreate`
-   * const pathWithDateCreateOnly = await prisma.path.findMany({ select: { dateCreate: true } })
+   * // Only select the `id`
+   * const pathWithIdOnly = await prisma.path.findMany({ select: { id: true } })
    * 
    */
   findMany<T extends PathFindManyArgs>(args?: Prisma.SelectSubset<T, PathFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -659,9 +693,9 @@ export interface PathDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    *   ]
    * })
    * 
-   * // Create many Paths and only return the `dateCreate`
-   * const pathWithDateCreateOnly = await prisma.path.createManyAndReturn({
-   *   select: { dateCreate: true },
+   * // Create many Paths and only return the `id`
+   * const pathWithIdOnly = await prisma.path.createManyAndReturn({
+   *   select: { id: true },
    *   data: [
    *     // ... provide data here
    *   ]
@@ -750,9 +784,9 @@ export interface PathDelegate<ExtArgs extends runtime.Types.Extensions.InternalA
    *   ]
    * })
    * 
-   * // Update zero or more Paths and only return the `dateCreate`
-   * const pathWithDateCreateOnly = await prisma.path.updateManyAndReturn({
-   *   select: { dateCreate: true },
+   * // Update zero or more Paths and only return the `id`
+   * const pathWithIdOnly = await prisma.path.updateManyAndReturn({
+   *   select: { id: true },
    *   where: {
    *     // ... provide filter here
    *   },
@@ -955,6 +989,7 @@ export interface Prisma__PathClient<T, Null = never, ExtArgs extends runtime.Typ
  * Fields of the Path model
  */
 export interface PathFieldRefs {
+  readonly id: Prisma.FieldRef<"Path", 'String'>
   readonly dateCreate: Prisma.FieldRef<"Path", 'DateTime'>
   readonly dateUpdate: Prisma.FieldRef<"Path", 'DateTime'>
   readonly data: Prisma.FieldRef<"Path", 'Json'>

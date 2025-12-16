@@ -35,7 +35,8 @@ model CampaignDifficulty {
   campaigns Campaign[]
 }
 
-model Path {  
+model Path {
+  id String @default(uuid()) @id
   dateCreate DateTime @default(now())
   dateUpdate DateTime @updatedAt
 
@@ -46,7 +47,7 @@ model Path {
 
   user User @relation(references: [id], fields: [userId])
 
-  @@id([userId, cycleCode])
+  @@unique([userId, cycleCode])
 }
 
 model User {

@@ -99,6 +99,7 @@ export type CampaignDifficultyScalarFieldEnum = (typeof CampaignDifficultyScalar
 
 
 export const PathScalarFieldEnum = {
+  id: 'id',
   dateCreate: 'dateCreate',
   dateUpdate: 'dateUpdate',
   data: 'data',
