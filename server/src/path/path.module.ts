@@ -1,10 +1,10 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { PrismaModule } from '../tools/prisma/prisma.module';
 import { UserModule } from '../user/user.module';
 import { PathRepository } from './repository/path.repository';
 
 @Module({
-  imports: [PrismaModule, UserModule],
+  imports: [PrismaModule, forwardRef(() => UserModule)],
   exports: ['IPathRepository'],
 
   providers: [

@@ -1,5 +1,7 @@
 import {
   BadRequestException,
+  forwardRef,
+  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -10,10 +12,18 @@ import * as bcrypt from 'bcrypt';
 import { UserModel } from './model/user.model';
 import type { UpdateUserDto } from './dto/updateUser.dto';
 import type { AuthUserDto } from './dto/authUser.dto';
+import type { IPathRepository } from '../path/repository/path.repository';
+import { cyclesCodes } from '../../assets/cyclesCodes';
+import { PathModel } from '../path/model/path.model';
 
 @Injectable()
 export class UserService {
-  constructor(private userRepository: IUserRepository) {}
+  constructor(
+    private userRepository: IUserRepository,
+
+    @Inject(forwardRef(() => 'IPathRepository'))
+    private pathRepository: IPathRepository,
+  ) {}
 
   async auth(dto: AuthUserDto): Promise<UserModel> {
     const foundUser = await this.userRepository.findOneByEmail(dto.email);
@@ -65,6 +75,12 @@ export class UserService {
         email: dto.email,
         password: hashedPassword,
       }),
+    );
+
+    await Promise.all(
+      cyclesCodes.map((cycleCode) =>
+        this.pathRepository.save(new PathModel({ cycleCode, userId: user.id })),
+      ),
     );
 
     return user;
