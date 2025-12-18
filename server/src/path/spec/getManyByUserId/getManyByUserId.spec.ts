@@ -1,3 +1,4 @@
+import type { GetManyPathsDto } from '../../dto/getManyPaths.dto';
 import type { PathModel } from '../../model/path.model';
 import { PathsFakeInfrastructure } from '../paths.infrastructure';
 import { GetManyByUserIdFixture } from './getManyByUserId.fixture';
