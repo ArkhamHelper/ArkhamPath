@@ -19,6 +19,7 @@ import { PathModel } from '../path/model/path.model';
 @Injectable()
 export class UserService {
   constructor(
+    @Inject('IUserRepository')
     private userRepository: IUserRepository,
 
     @Inject(forwardRef(() => 'IPathRepository'))

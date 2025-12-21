@@ -7,7 +7,7 @@ import { PathModule } from '../path/path.module';
 
 @Module({
   imports: [PrismaModule, forwardRef(() => PathModule)],
-  exports: ['IUserRepository'],
+  exports: ['IUserRepository', UserService],
 
   controllers: [UserController],
   providers: [

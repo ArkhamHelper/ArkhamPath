@@ -1,5 +1,5 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import type { PathService } from './path.service';
+import { PathService } from './path.service';
 import type { GetManyPathsQuery } from './dto/getManyPaths.dto';
 import { PathSchema } from './schema/path.schema';
 

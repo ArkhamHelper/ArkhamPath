@@ -1,13 +1,16 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { UserService } from '../user/user.service';
 import type { IPathRepository } from './repository/path.repository';
-import type { UserService } from '../user/user.service';
 import type { PathModel } from './model/path.model';
 import type { GetManyPathsDto } from './dto/getManyPaths.dto';
 
 @Injectable()
 export class PathService {
   constructor(
+    @Inject('IPathRepository')
     private pathRepository: IPathRepository,
+
+    @Inject(forwardRef(() => UserService))
     private userService: UserService,
   ) {}
 

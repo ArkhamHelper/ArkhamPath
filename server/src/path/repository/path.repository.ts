@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import type { Path } from '../../generated/prisma/client';
+import { Path } from '../../generated/prisma/client';
 import type { IBaseRepository } from '../../tools/interface/base.repository';
-import type { PrismaService } from '../../tools/prisma/prisma.service';
+import { PrismaService } from '../../tools/prisma/prisma.service';
 import { PathModel } from '../model/path.model';
 
 export interface IPathRepository extends IBaseRepository<PathModel> {
