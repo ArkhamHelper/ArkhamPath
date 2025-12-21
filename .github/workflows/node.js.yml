@@ -38,6 +38,10 @@ jobs:
 
     - name: Build
       run: npm run build --if-present
-    - name: Test
-    
+
+    - name: Start app
+      run: |
+        npm run start:prod
+
+    - name: Test    
       run: npm test
