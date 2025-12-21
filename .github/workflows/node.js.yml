@@ -36,12 +36,9 @@ jobs:
     - name: Install dependencies
       run: npm ci
 
-    - name: Build
+    - name: Build and run
       run: npm run build --if-present
-
-    - name: Start app
-      run: |
-        npm run start:prod
+      run: npm run start:prod
 
     - name: Test    
       run: npm test
