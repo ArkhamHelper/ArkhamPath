@@ -1,3 +1,4 @@
+import { cyclesCodes } from '../../../../assets/cyclesCodes';
 import type { CreateUserDto } from '../../dto/createUser.dto';
 import type { UserModel } from '../../model/user.model';
 import { UserFakeInfrastructure } from '../user.infrastructure';
@@ -29,6 +30,17 @@ describe('CreateUser', () => {
           .password,
       ),
     ).toBeTruthy();
+  });
+
+  it('should create path', async () => {
+    const expectedPathsCount = cyclesCodes.length;
+
+    await create({
+      email: 'a@b.com',
+      password: 'password',
+    });
+
+    expect(fake.pathRepository.getAll().length).toEqual(expectedPathsCount);
   });
 
   it('should throw error on duplicate email', async () => {

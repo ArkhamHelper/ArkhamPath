@@ -7,6 +7,13 @@ import { INestApplication } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  const isGitHunActionsMode = process.env.IS_GITHUB_ACTIONS === 'true';
+  if (isGitHunActionsMode) {
+    await app.init();
+    await app.close();
+    return;
+  }
+
   addSwagger(app);
 
   await app.listen(process.env.PORT ?? 3000);
