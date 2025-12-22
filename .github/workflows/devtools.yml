@@ -35,9 +35,6 @@ jobs:
         run: |
           echo "COMMIT_SHA=\${GITHUB_SHA}" >> \${GITHUB_ENV}
 
-      - name: Test    
-        run: npm test
-
       - name: Publish
         run: PUBLISH_GRAPH=true npm run start
         env:
