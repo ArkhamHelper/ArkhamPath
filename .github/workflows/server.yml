@@ -11,7 +11,7 @@ on:
 jobs:
   run:
     if: github.actor!= 'dependabot[bot]'
-    name: Build
+    name: Run
     runs-on: ubuntu-latest
     defaults:
       run:
