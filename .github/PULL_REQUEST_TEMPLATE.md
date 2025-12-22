@@ -1,1 +1,1 @@
-Closes #{{issueNumber}}
+Closes #ISSUE_NUMBER
