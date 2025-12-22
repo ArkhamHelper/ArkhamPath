@@ -5,3 +5,30 @@
 .vscode/
 .arkhamCardsExamples/
 **/coverage
+
+# Expo
+app/.expo/
+app/web-build/
+app/expo-env.d.ts
+
+# Native
+app/*.kotlin/
+app/**/*.orig.*
+app/**/*.jks
+app/**/*.p8
+app/**/*.p12
+app/**/*.key
+app/**/*.mobileprovision
+
+# generated native folders
+app/ios
+app/android
+
+# typescript
+**/*.tsbuildinfo
+
+# debug
+**/npm-debug.*
+
+# Metro
+app/.metro-health-check*
