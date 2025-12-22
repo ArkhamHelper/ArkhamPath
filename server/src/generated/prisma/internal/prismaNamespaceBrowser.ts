@@ -53,7 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   Campaign: 'Campaign',
   CampaignDifficulty: 'CampaignDifficulty',
-  CycleSchema: 'CycleSchema',
+  Path: 'Path',
   User: 'User'
 } as const
 
@@ -79,8 +79,8 @@ export const CampaignScalarFieldEnum = {
   dateUpdate: 'dateUpdate',
   name: 'name',
   cycleCode: 'cycleCode',
-  userResults: 'userResults',
   journalNotes: 'journalNotes',
+  userResults: 'userResults',
   userId: 'userId',
   difficultyId: 'difficultyId'
 } as const
@@ -98,16 +98,17 @@ export const CampaignDifficultyScalarFieldEnum = {
 export type CampaignDifficultyScalarFieldEnum = (typeof CampaignDifficultyScalarFieldEnum)[keyof typeof CampaignDifficultyScalarFieldEnum]
 
 
-export const CycleSchemaScalarFieldEnum = {
+export const PathScalarFieldEnum = {
+  id: 'id',
   dateCreate: 'dateCreate',
   dateUpdate: 'dateUpdate',
   data: 'data',
-  code: 'code',
   userId: 'userId',
+  cycleCode: 'cycleCode',
   dateLastFetchArkhamCards: 'dateLastFetchArkhamCards'
 } as const
 
-export type CycleSchemaScalarFieldEnum = (typeof CycleSchemaScalarFieldEnum)[keyof typeof CycleSchemaScalarFieldEnum]
+export type PathScalarFieldEnum = (typeof PathScalarFieldEnum)[keyof typeof PathScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

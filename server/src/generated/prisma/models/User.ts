@@ -182,8 +182,8 @@ export type UserWhereInput = {
   dateUpdate?: Prisma.DateTimeFilter<"User"> | Date | string
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
+  paths?: Prisma.PathListRelationFilter
   campaigns?: Prisma.CampaignListRelationFilter
-  cycleSchemas?: Prisma.CycleSchemaListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -192,8 +192,8 @@ export type UserOrderByWithRelationInput = {
   dateUpdate?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  paths?: Prisma.PathOrderByRelationAggregateInput
   campaigns?: Prisma.CampaignOrderByRelationAggregateInput
-  cycleSchemas?: Prisma.CycleSchemaOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -205,8 +205,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   dateCreate?: Prisma.DateTimeFilter<"User"> | Date | string
   dateUpdate?: Prisma.DateTimeFilter<"User"> | Date | string
   password?: Prisma.StringFilter<"User"> | string
+  paths?: Prisma.PathListRelationFilter
   campaigns?: Prisma.CampaignListRelationFilter
-  cycleSchemas?: Prisma.CycleSchemaListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -237,8 +237,8 @@ export type UserCreateInput = {
   dateUpdate?: Date | string
   email: string
   password: string
+  paths?: Prisma.PathCreateNestedManyWithoutUserInput
   campaigns?: Prisma.CampaignCreateNestedManyWithoutUserInput
-  cycleSchemas?: Prisma.CycleSchemaCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -247,8 +247,8 @@ export type UserUncheckedCreateInput = {
   dateUpdate?: Date | string
   email: string
   password: string
+  paths?: Prisma.PathUncheckedCreateNestedManyWithoutUserInput
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutUserInput
-  cycleSchemas?: Prisma.CycleSchemaUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -257,8 +257,8 @@ export type UserUpdateInput = {
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  paths?: Prisma.PathUpdateManyWithoutUserNestedInput
   campaigns?: Prisma.CampaignUpdateManyWithoutUserNestedInput
-  cycleSchemas?: Prisma.CycleSchemaUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -267,8 +267,8 @@ export type UserUncheckedUpdateInput = {
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  paths?: Prisma.PathUncheckedUpdateManyWithoutUserNestedInput
   campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutUserNestedInput
-  cycleSchemas?: Prisma.CycleSchemaUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -338,18 +338,18 @@ export type UserUpdateOneRequiredWithoutCampaignsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCampaignsInput, Prisma.UserUpdateWithoutCampaignsInput>, Prisma.UserUncheckedUpdateWithoutCampaignsInput>
 }
 
-export type UserCreateNestedOneWithoutCycleSchemasInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCycleSchemasInput, Prisma.UserUncheckedCreateWithoutCycleSchemasInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCycleSchemasInput
+export type UserCreateNestedOneWithoutPathsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPathsInput, Prisma.UserUncheckedCreateWithoutPathsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPathsInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutCycleSchemasNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutCycleSchemasInput, Prisma.UserUncheckedCreateWithoutCycleSchemasInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCycleSchemasInput
-  upsert?: Prisma.UserUpsertWithoutCycleSchemasInput
+export type UserUpdateOneRequiredWithoutPathsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutPathsInput, Prisma.UserUncheckedCreateWithoutPathsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPathsInput
+  upsert?: Prisma.UserUpsertWithoutPathsInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCycleSchemasInput, Prisma.UserUpdateWithoutCycleSchemasInput>, Prisma.UserUncheckedUpdateWithoutCycleSchemasInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPathsInput, Prisma.UserUpdateWithoutPathsInput>, Prisma.UserUncheckedUpdateWithoutPathsInput>
 }
 
 export type UserCreateWithoutCampaignsInput = {
@@ -358,7 +358,7 @@ export type UserCreateWithoutCampaignsInput = {
   dateUpdate?: Date | string
   email: string
   password: string
-  cycleSchemas?: Prisma.CycleSchemaCreateNestedManyWithoutUserInput
+  paths?: Prisma.PathCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCampaignsInput = {
@@ -367,7 +367,7 @@ export type UserUncheckedCreateWithoutCampaignsInput = {
   dateUpdate?: Date | string
   email: string
   password: string
-  cycleSchemas?: Prisma.CycleSchemaUncheckedCreateNestedManyWithoutUserInput
+  paths?: Prisma.PathUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCampaignsInput = {
@@ -392,7 +392,7 @@ export type UserUpdateWithoutCampaignsInput = {
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  cycleSchemas?: Prisma.CycleSchemaUpdateManyWithoutUserNestedInput
+  paths?: Prisma.PathUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCampaignsInput = {
@@ -401,10 +401,10 @@ export type UserUncheckedUpdateWithoutCampaignsInput = {
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  cycleSchemas?: Prisma.CycleSchemaUncheckedUpdateManyWithoutUserNestedInput
+  paths?: Prisma.PathUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserCreateWithoutCycleSchemasInput = {
+export type UserCreateWithoutPathsInput = {
   id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
@@ -413,7 +413,7 @@ export type UserCreateWithoutCycleSchemasInput = {
   campaigns?: Prisma.CampaignCreateNestedManyWithoutUserInput
 }
 
-export type UserUncheckedCreateWithoutCycleSchemasInput = {
+export type UserUncheckedCreateWithoutPathsInput = {
   id?: string
   dateCreate?: Date | string
   dateUpdate?: Date | string
@@ -422,23 +422,23 @@ export type UserUncheckedCreateWithoutCycleSchemasInput = {
   campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutUserInput
 }
 
-export type UserCreateOrConnectWithoutCycleSchemasInput = {
+export type UserCreateOrConnectWithoutPathsInput = {
   where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutCycleSchemasInput, Prisma.UserUncheckedCreateWithoutCycleSchemasInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPathsInput, Prisma.UserUncheckedCreateWithoutPathsInput>
 }
 
-export type UserUpsertWithoutCycleSchemasInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutCycleSchemasInput, Prisma.UserUncheckedUpdateWithoutCycleSchemasInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutCycleSchemasInput, Prisma.UserUncheckedCreateWithoutCycleSchemasInput>
+export type UserUpsertWithoutPathsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutPathsInput, Prisma.UserUncheckedUpdateWithoutPathsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutPathsInput, Prisma.UserUncheckedCreateWithoutPathsInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutCycleSchemasInput = {
+export type UserUpdateToOneWithWhereWithoutPathsInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutCycleSchemasInput, Prisma.UserUncheckedUpdateWithoutCycleSchemasInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutPathsInput, Prisma.UserUncheckedUpdateWithoutPathsInput>
 }
 
-export type UserUpdateWithoutCycleSchemasInput = {
+export type UserUpdateWithoutPathsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -447,7 +447,7 @@ export type UserUpdateWithoutCycleSchemasInput = {
   campaigns?: Prisma.CampaignUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutCycleSchemasInput = {
+export type UserUncheckedUpdateWithoutPathsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   dateCreate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -462,13 +462,13 @@ export type UserUncheckedUpdateWithoutCycleSchemasInput = {
  */
 
 export type UserCountOutputType = {
+  paths: number
   campaigns: number
-  cycleSchemas: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  paths?: boolean | UserCountOutputTypeCountPathsArgs
   campaigns?: boolean | UserCountOutputTypeCountCampaignsArgs
-  cycleSchemas?: boolean | UserCountOutputTypeCountCycleSchemasArgs
 }
 
 /**
@@ -484,15 +484,15 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountCampaignsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CampaignWhereInput
+export type UserCountOutputTypeCountPathsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PathWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountCycleSchemasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.CycleSchemaWhereInput
+export type UserCountOutputTypeCountCampaignsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CampaignWhereInput
 }
 
 
@@ -502,8 +502,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   dateUpdate?: boolean
   email?: boolean
   password?: boolean
+  paths?: boolean | Prisma.User$pathsArgs<ExtArgs>
   campaigns?: boolean | Prisma.User$campaignsArgs<ExtArgs>
-  cycleSchemas?: boolean | Prisma.User$cycleSchemasArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -533,8 +533,8 @@ export type UserSelectScalar = {
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "dateCreate" | "dateUpdate" | "email" | "password", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  paths?: boolean | Prisma.User$pathsArgs<ExtArgs>
   campaigns?: boolean | Prisma.User$campaignsArgs<ExtArgs>
-  cycleSchemas?: boolean | Prisma.User$cycleSchemasArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -543,8 +543,8 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    paths: Prisma.$PathPayload<ExtArgs>[]
     campaigns: Prisma.$CampaignPayload<ExtArgs>[]
-    cycleSchemas: Prisma.$CycleSchemaPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -946,8 +946,8 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  paths<T extends Prisma.User$pathsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pathsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PathPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   campaigns<T extends Prisma.User$campaignsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$campaignsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  cycleSchemas<T extends Prisma.User$cycleSchemasArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cycleSchemasArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CycleSchemaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1370,6 +1370,30 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * User.paths
+ */
+export type User$pathsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Path
+   */
+  select?: Prisma.PathSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Path
+   */
+  omit?: Prisma.PathOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PathInclude<ExtArgs> | null
+  where?: Prisma.PathWhereInput
+  orderBy?: Prisma.PathOrderByWithRelationInput | Prisma.PathOrderByWithRelationInput[]
+  cursor?: Prisma.PathWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PathScalarFieldEnum | Prisma.PathScalarFieldEnum[]
+}
+
+/**
  * User.campaigns
  */
 export type User$campaignsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1391,30 +1415,6 @@ export type User$campaignsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.CampaignScalarFieldEnum | Prisma.CampaignScalarFieldEnum[]
-}
-
-/**
- * User.cycleSchemas
- */
-export type User$cycleSchemasArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the CycleSchema
-   */
-  select?: Prisma.CycleSchemaSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the CycleSchema
-   */
-  omit?: Prisma.CycleSchemaOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.CycleSchemaInclude<ExtArgs> | null
-  where?: Prisma.CycleSchemaWhereInput
-  orderBy?: Prisma.CycleSchemaOrderByWithRelationInput | Prisma.CycleSchemaOrderByWithRelationInput[]
-  cursor?: Prisma.CycleSchemaWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.CycleSchemaScalarFieldEnum | Prisma.CycleSchemaScalarFieldEnum[]
 }
 
 /**

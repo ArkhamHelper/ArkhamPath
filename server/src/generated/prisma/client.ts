@@ -48,10 +48,10 @@ export type Campaign = Prisma.CampaignModel
  */
 export type CampaignDifficulty = Prisma.CampaignDifficultyModel
 /**
- * Model CycleSchema
+ * Model Path
  * 
  */
-export type CycleSchema = Prisma.CycleSchemaModel
+export type Path = Prisma.PathModel
 /**
  * Model User
  * 
