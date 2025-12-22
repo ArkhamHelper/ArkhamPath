@@ -9,7 +9,7 @@ on:
       - '*'
 
 jobs:
-  build:
+  run:
     if: github.actor!= 'dependabot[bot]'
     name: Build
     runs-on: ubuntu-latest
@@ -29,6 +29,11 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Run
+        run: npm run start:prod
+        env:
+          IS_GITHUB_ACTIONS: true
 
   test: 
     if: github.actor!= 'dependabot[bot]'
@@ -50,32 +55,4 @@ jobs:
 
       - name: Test
         run: npm run test
-      
-  publish:
-    if: github.actor!= 'dependabot[bot]'
-    name: Publish graph
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: server
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Publish
-        run: PUBLISH_GRAPH=true npm start
-        env:
-          DEVTOOLS_API_KEY: ${{ secrets.DEVTOOLS_API_KEY }}
-          REPOSITORY_NAME: ${{ github.event.repository.name }}
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
-          TARGET_SHA: ${{ github.event.pull_request.base.sha }}
-          COMMIT_SHA: ${{ github.event.pull_request.head.sha }}
-
       
