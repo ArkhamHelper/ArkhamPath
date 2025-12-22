@@ -11,6 +11,7 @@ async function bootstrap() {
   if (isGitHunActionsMode) {
     await app.init();
     await app.close();
+    return;
   }
 
   addSwagger(app);
