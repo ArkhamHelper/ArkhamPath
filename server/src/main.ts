@@ -14,11 +14,16 @@ async function bootstrap() {
     return;
   }
 
+  addCors(app);
   addSwagger(app);
 
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
+
+function addCors(app: INestApplication) {
+  app.enableCors();
+}
 
 function addSwagger(app: INestApplication) {
   const config = new DocumentBuilder()
