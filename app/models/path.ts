@@ -3,5 +3,9 @@ export interface Path {
   userId: string;
   cycleCode: string;
   dateLastFetchArkhamCards: Date;
-  data: { [key: string]: string };
+  data: { [key: string]: PathScenario };
+}
+
+interface PathScenario {
+  resolutions: string[];
 }
