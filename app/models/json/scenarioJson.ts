@@ -1,4 +1,4 @@
-export interface Scenario {
+export interface ScenarioJson {
   code: string;
   id_AC: string; //ID из ArkhamCards
   coordinates: {
@@ -13,23 +13,18 @@ export interface Scenario {
   notRequiredUniqueEnemies?: ScenarioEnemy[];
 }
 
-/**
- * @todo Заменить number на code, так как бывают разные исходы при проигрыше.
- * Например "Все сыщики побеждены или побег" и "Все сыщики побеждены или побег + есть кто побег"
- */
-export interface ScenarioResolution {
+interface ScenarioResolution {
   code: string;
   title: string;
   width: number;
   pathCoordinates: PathCoordinates;
-  effects?: ScenarioEffect[];
-  conditions?: ScenarioEvent[];
+  effects?: string[];
+  conditions?: string[];
 }
 
-export interface ScenarioEvent {
+interface ScenarioEvent {
   code: string;
   text: string;
-  width: number;
   type: ScenarioEventType;
   pathCoordinates: PathCoordinates;
   isSpoiler?: boolean; //Возможно перенести в настройки пользователя
@@ -45,12 +40,12 @@ export interface ScenarioEvent {
 
 type ScenarioEventType = 'have_journal_note' | 'on_win_score' | '...';
 
-export interface ScenarioEffect {
+export interface ScenarioEffectJson {
   code: string;
   text: string;
   type: ScenarioEffectType;
   count?: number;
-  conditions?: ScenarioEvent[];
+  conditions?: string[];
   pathCoordinates?: PathCoordinates;
 }
 

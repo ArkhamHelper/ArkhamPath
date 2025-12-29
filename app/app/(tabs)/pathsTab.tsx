@@ -4,17 +4,12 @@ import { Text, View } from '@/components/Themed';
 import { useGetPaths } from '../../hooks/api/paths/usePaths';
 import { PathSchema } from '../../components/path/PathSchema';
 import { useCycle } from '../../hooks/useCycle';
-import { useEffect } from 'react';
 
 export default function PathsTabScreen() {
   const { paths, error, isLoading } = useGetPaths(
     '086f4eb7-5d90-4ef2-9240-4c44e0348149',
   );
-  const { scenarios, changeCycle } = useCycle();
-
-  useEffect(() => {
-    changeCycle('night_of_zealot');
-  }, []);
+  const { changeCycle } = useCycle();
 
   if (error)
     return (
@@ -31,9 +26,7 @@ export default function PathsTabScreen() {
 
   return (
     <View style={styles.container}>
-      {paths?.length && (
-        <PathSchema userPath={paths[0]} scenarios={scenarios} />
-      )}
+      {paths?.length && <PathSchema userPath={paths[0]} />}
     </View>
   );
 }
@@ -43,5 +36,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#000',
   },
 });

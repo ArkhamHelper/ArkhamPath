@@ -1,0 +1,117 @@
+[
+  {
+    "code": "night_of_zealot",
+    "scenariosList": [
+      "the_gathering",
+      "the_midnight_masks"
+    ],
+    "scenarios": [
+      {
+        "code": "the_gathering",
+        "id_AC": "torch",
+        "coordinates": {
+          "start": {"x": 0.5, "y": 0},
+          "end": {"x": 0.5, "y": 1.5}
+        },
+        "resolutions": [
+          {
+            "code": "investigators_defeated",
+            "title": "Исход не достигнут",
+            "width": 0.5,
+            "pathCoordinates": {"x": 0.4, "y": 0.8},
+            "effects": [
+              "house_standing",
+              "ghoul_priest_alive",
+              "earn_lita"
+            ]
+          },
+          {
+            "code": "burn_down_house",
+            "title": "Исход 1",
+            "width": 0.5,
+            "pathCoordinates": {"x": 0, "y": 0},
+            "effects": [
+              "house_burned",
+              "earn_lita",
+              "mental_trauma",
+              "earn_xp"
+            ]
+          },
+          {
+            "code": "not_burn_down_house",
+            "title": "Исход 2",
+            "width": 0.5,
+            "pathCoordinates": {"x": 0.15, "y": 0.25},
+            "effects": [
+              "house_standing",
+              "lead_investigator_xp",
+              "earn_xp"
+            ]
+          },
+          {
+            "code": "death_in_house",
+            "title": "Исход 3",
+            "width": 0.5,
+            "pathCoordinates": {"x": 0.2, "y": 0.5},
+            "effects": [
+              "lita_finds_others",
+              "house_standing",
+              "ghoul_priest_alive",
+              "killed"
+            ]
+          }
+        ]
+      }
+    ],
+    "effects": [
+      {
+        "code": "house_standing",
+        "type": "add_journal_note",
+        "text": "Дом ещё стоит"
+      },
+      {
+        "code": "house_burned",
+        "type": "add_journal_note",
+        "text": "Дом сгорел дотла"
+      },
+      {
+        "code": "ghoul_priest_alive",
+        "type": "add_journal_note",
+        "text": "Упырь-жрец еще жив"
+      },
+      {
+        "code": "lita_finds_others",
+        "type": "add_journal_note",
+        "text": "Лита вынуждена искать других помощников"
+      },
+      {
+        "code": "earn_lita",
+        "type": "add_card",
+        "text":"«Лита Чентлер» в колоду ведущему сыщику."
+      },
+      {
+        "code": "lead_investigator_xp",
+        "type": "add_xp",
+        "count": 1,
+        "text": "опыт ведущему сыщику"
+      },
+      {
+        "code": "earn_xp",
+        "type": "add_xp",
+        "count": 2,
+        "text": "опыта каждому сыщику"
+      },
+      {
+        "code": "mental_trauma",
+        "type": "add_trauma",
+        "count": 1,
+        "text": "травма ведущему сыщику"
+      },
+      {
+        "code": "killed",
+        "type": "kill",
+        "text":"Все сыщики, не совершившие побег, убиты"
+      }
+    ]
+  }
+]

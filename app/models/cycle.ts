@@ -1,3 +1,7 @@
+import type { Scenario } from './scenario';
+
 export interface Cycle {
-  scenarios: string[];
+  code: string;
+  scenarios: Scenario[];
+  scenariosList: string[];
 }

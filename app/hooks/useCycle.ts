@@ -1,19 +1,61 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import campaigns from '../assets/campaigns.json';
+import type {
+  Scenario,
+  ScenarioEffect,
+  ScenarioEvent,
+} from '../models/scenario';
+import type { CycleJson } from '../models/json/cycleJson';
 import type { Cycle } from '../models/cycle';
-import campaigns from '../assets/campaigns/campaigns.json';
 
 export const useCycle = () => {
-  const [scenarios, setScenarios] = useState<string[]>([]);
+  const [cycleCode, setCycleCode] = useState<string>();
+  const [scenarios, setScenarios] = useState<Scenario[]>();
 
-  const changeCycle = async (cycleCode: string) => {
-    const cycle: Cycle | undefined = campaigns.find(
-      (c) => c.code === cycleCode,
-    );
+  useEffect(() => {
+    changeCycle('night_of_zealot');
+  }, []);
 
-    if (!cycle) return;
+  const changeCycle = (cycleCode: string) => {
+    const cycleJson = campaigns.find((c) => c.code === cycleCode) as CycleJson;
 
+    if (!cycleJson) return;
+
+    const cycle: Cycle = {
+      code: cycleJson.code,
+      scenarios: cycleJson.scenarios.map((scenario) => ({
+        ...scenario,
+        resolutions: scenario.resolutions.map((resolution) => ({
+          ...resolution,
+          effects: resolution.effects
+            ?.map((effectName) => {
+              const effect = cycleJson.effects.find(
+                (effect) => effect.code === effectName,
+              );
+
+              return {
+                ...effect,
+                conditions: effect?.conditions?.map((conditionName) =>
+                  cycleJson.effects.find(
+                    (effect) => effect.code === conditionName,
+                  ),
+                ),
+              };
+            })
+            .filter(Boolean) as ScenarioEffect[],
+          conditions: resolution.conditions
+            ?.map((conditionName) =>
+              cycleJson.effects.find((effect) => effect.code === conditionName),
+            )
+            .filter(Boolean) as ScenarioEvent[],
+        })),
+      })),
+      scenariosList: cycleJson.scenariosList,
+    };
+
+    setCycleCode(cycleCode);
     setScenarios(cycle.scenarios);
   };
 
-  return { scenarios, changeCycle };
+  return { cycleCode, scenarios, changeCycle };
 };
