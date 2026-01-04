@@ -15,6 +15,7 @@ export const ResolutionBlock: React.FC<ResolutionBlockProps> = ({
       </View>
       {resolution.effects?.map((effect) => (
         <View
+          key={`resolution-effect-${effect.code}`}
           style={{
             flex: 1,
             flexDirection: 'row',
