@@ -1,9 +1,9 @@
 import Svg, { Rect, Text } from 'react-native-svg';
 import type { PathElementProps } from './props';
 
-interface BeginEllipseProps extends PathElementProps {}
+interface BeginBlockProps extends PathElementProps {}
 
-export const BeginEllipse: React.FC<BeginEllipseProps> = ({
+export const BeginBlock: React.FC<BeginBlockProps> = ({
   width: svgWidth,
   height: svgHeight,
 }) => {
