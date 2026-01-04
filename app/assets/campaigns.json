@@ -9,6 +9,13 @@
       {
         "code": "the_gathering",
         "id_AC": "torch",
+        "lines": [
+          ["begin", "burn_down_house"],
+          ["begin", "not_burn_down_house"],
+          ["begin", "investigators_defeated"],
+          ["begin", "death_in_house"],
+          ["death_in_house", "investigators_defeated"]
+        ],
         "coordinates": {
           "start": {"x": 0.5, "y": 0},
           "end": {"x": 0.5, "y": 1.5}
@@ -18,7 +25,7 @@
             "code": "investigators_defeated",
             "title": "Исход не достигнут",
             "width": 0.5,
-            "pathCoordinates": {"x": 0.4, "y": 0.8},
+            "pathCoordinates": {"x": 0.4, "y": 1},
             "effects": [
               "house_standing",
               "ghoul_priest_alive",
@@ -29,7 +36,7 @@
             "code": "burn_down_house",
             "title": "Исход 1",
             "width": 0.5,
-            "pathCoordinates": {"x": 0, "y": 0},
+            "pathCoordinates": {"x": 0, "y": 0.1},
             "effects": [
               "house_burned",
               "earn_lita",
@@ -41,7 +48,7 @@
             "code": "not_burn_down_house",
             "title": "Исход 2",
             "width": 0.5,
-            "pathCoordinates": {"x": 0.15, "y": 0.25},
+            "pathCoordinates": {"x": 0.15, "y": 0.45},
             "effects": [
               "house_standing",
               "lead_investigator_xp",
@@ -52,7 +59,7 @@
             "code": "death_in_house",
             "title": "Исход 3",
             "width": 0.5,
-            "pathCoordinates": {"x": 0.2, "y": 0.5},
+            "pathCoordinates": {"x": 0.2, "y": 0.7},
             "effects": [
               "lita_finds_others",
               "house_standing",

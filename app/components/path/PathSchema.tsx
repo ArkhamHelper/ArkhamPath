@@ -2,6 +2,7 @@ import type { Path } from '../../models/path';
 import { Text, View } from '../Themed';
 import { useCycle } from '../../hooks/useCycle';
 import { PathScenario } from './Scenario';
+import { ScrollView } from 'react-native';
 
 interface PathSchemaProps {
   userPath: Path;
@@ -19,11 +20,13 @@ export const PathSchema = ({ userPath }: PathSchemaProps) => {
   }
 
   return (
-    <View
-      style={{
+    <ScrollView
+      style={{ flex: 1, width: '100%' }}
+      contentContainerStyle={{
         position: 'relative',
+        minHeight: '200%',
         width: '100%',
-        height: '100%',
+        backgroundColor: 'white',
       }}
     >
       {scenarios?.map((scenario) => (
@@ -31,6 +34,6 @@ export const PathSchema = ({ userPath }: PathSchemaProps) => {
           <PathScenario scenario={scenario} />
         </View>
       ))}
-    </View>
+    </ScrollView>
   );
 };

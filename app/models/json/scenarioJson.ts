@@ -1,6 +1,7 @@
 export interface ScenarioJson {
   code: string;
   id_AC: string; //ID из ArkhamCards
+  lines: string[][];
   coordinates: {
     end: PathCoordinates;
     start: PathCoordinates;
@@ -16,7 +17,7 @@ export interface ScenarioJson {
 interface ScenarioResolution {
   code: string;
   title: string;
-  width: number;
+  width: number; //Процент занимаемой ширины экрана
   pathCoordinates: PathCoordinates;
   effects?: string[];
   conditions?: string[];
@@ -25,6 +26,7 @@ interface ScenarioResolution {
 interface ScenarioEvent {
   code: string;
   text: string;
+  width: number; //Процент занимаемой ширины экрана
   type: ScenarioEventType;
   pathCoordinates: PathCoordinates;
   isSpoiler?: boolean; //Возможно перенести в настройки пользователя
@@ -67,6 +69,7 @@ interface ScenarioLocation {
 }
 
 interface PathCoordinates {
+  //Отступ от левого верхнего угла экрана в процентах
   x: number;
   y: number;
 }

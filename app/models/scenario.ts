@@ -1,6 +1,7 @@
 export interface Scenario {
   code: string;
   id_AC: string; //ID из ArkhamCards
+  lines: string[][];
   coordinates: {
     end: PathCoordinates;
     start: PathCoordinates;

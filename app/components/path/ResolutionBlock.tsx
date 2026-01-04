@@ -1,15 +1,18 @@
 import type { ScenarioResolution } from '../../models/scenario';
 import { Text, View } from '../Themed';
+import type { PathElementProps } from './props';
 
-interface ResolutionBlockProps {
+interface ResolutionBlockProps extends PathElementProps {
   resolution: ScenarioResolution;
 }
 
 export const ResolutionBlock: React.FC<ResolutionBlockProps> = ({
   resolution,
+  style,
+  ...addStyle
 }) => {
   return (
-    <View>
+    <View style={{ ...style, ...addStyle }}>
       <View style={{ flex: 1, width: '100%', alignItems: 'center' }}>
         <Text style={{ fontSize: 24 }}>{resolution.title}</Text>
       </View>
