@@ -31,7 +31,7 @@ export const ResolutionBlock: React.FC<ResolutionBlockProps> = ({
               {effect.count}
             </Text>
           )}
-          {effect.type === 'add_journal_note' ? (
+          {effect.effectType === 'add_journal_note' ? (
             <Text style={{ fontSize: 18 }}>{effect.text}</Text>
           ) : (
             <Text style={{ fontSize: 18 }}>{effect.text}</Text>

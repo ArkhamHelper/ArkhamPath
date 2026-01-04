@@ -1,12 +1,11 @@
 import { useWindowDimensions } from 'react-native';
-import type { Scenario } from '../../models/scenario';
+import type { Scenario, ScenarioResolution } from '../../models/scenario';
 import { View } from '../Themed';
 import { CommonNode } from './CommonNode';
 import { ResolutionBlock } from './ResolutionBlock';
 import Svg, { Path, Rect } from 'react-native-svg';
 import { useState } from 'react';
 
-const NODE_WIDTH_COEFFICIENT = 0.35;
 const NODE_HEIGHT_COEFFICIENT = 0.05;
 
 interface PathScenarioProps {
@@ -19,24 +18,16 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
   }>({});
   // const userResults = userPath.data[scenario.code];
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
-  const [standardNodeWidth, standardNodeHeight] = [
-    screenWidth * NODE_WIDTH_COEFFICIENT,
-    screenHeight * NODE_HEIGHT_COEFFICIENT,
-  ];
+  const commonNodeHeight = screenHeight * NODE_HEIGHT_COEFFICIENT;
 
   const getAdditionalHeight = (sourceBlockCode: string): number => {
-    const sourceBlock = scenario.resolutions.find(
-      (r) => r.code === sourceBlockCode,
-    );
+    const sourceBlock = scenario.blocks.find((r) => r.code === sourceBlockCode);
 
     if (!sourceBlock) return 0;
 
-    const prevBlocksCodes = scenario.resolutions
-      .filter(
-        (resolution) =>
-          resolution.pathCoordinates.y <= sourceBlock.pathCoordinates.y,
-      )
-      .map((resolution) => resolution.code);
+    const prevBlocksCodes = scenario.blocks
+      .filter((block) => block.coordinates.y <= sourceBlock.coordinates.y)
+      .map((block) => block.code);
 
     return prevBlocksCodes.reduce(
       (acc, curr) => acc + (additionalHeightByBlocks[curr] ?? 0),
@@ -49,33 +40,40 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
       style={{
         position: 'absolute',
         width: screenWidth,
-        height: scenario.coordinates.end.y * screenHeight,
+        height:
+          scenario.blocks.find((b) => b.code === 'end')!.coordinates.y *
+            screenHeight +
+          commonNodeHeight,
       }}
     >
-      <CommonNode
-        text="Начало"
-        style={{
-          width: standardNodeWidth,
-          height: standardNodeHeight,
-          left: scenario.coordinates.start.x * screenWidth,
-          top: scenario.coordinates.start.y * screenHeight,
-        }}
-      />
-      {scenario.resolutions.map((resolution) => (
-        <ResolutionBlock
-          key={`resolution-${resolution.code}`}
-          resolution={resolution}
-          style={{
-            width: `${resolution.width * 100}%`,
-            top: resolution.pathCoordinates.y * screenHeight,
-            left: resolution.pathCoordinates.x * screenWidth,
+      {scenario.blocks.map((block) =>
+        block.blockType === 'resolution' ? (
+          <ResolutionBlock
+            key={`resolution-${block.code}`}
+            resolution={block as ScenarioResolution}
+            style={{
+              width: `${block.width * 100}%`,
+              top: block.coordinates.y * screenHeight,
+              left: block.coordinates.x * screenWidth,
 
-            position: 'absolute',
-            borderWidth: 1,
-            zIndex: 1,
-          }}
-        />
-      ))}
+              position: 'absolute',
+              borderWidth: 1,
+              zIndex: 1,
+            }}
+          />
+        ) : (
+          <CommonNode
+            text={block.code}
+            key={`${scenario.code}-${block.code}`}
+            style={{
+              width: block.width * screenWidth,
+              height: commonNodeHeight,
+              left: block.coordinates.x * screenWidth,
+              top: block.coordinates.y * screenHeight,
+            }}
+          />
+        ),
+      )}
       <Svg
         width="100%"
         height="100%"
@@ -93,41 +91,28 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
           strokeLinecap="round"
         />
         {scenario.lines.map((line) => {
-          const [startBlockCode, endBlockCode] = line;
-          const startBlock = scenario.resolutions.find(
-            (r) => r.code === startBlockCode,
-          );
-          const endBlock = scenario.resolutions.find(
-            (r) => r.code === endBlockCode,
-          );
-
-          if (!startBlock && startBlockCode !== 'begin') return null;
-          if (!endBlock) return null;
-
+          const { startBlock, endBlock } = line;
           const startPoint = {
             x:
-              (startBlock?.pathCoordinates.x ?? scenario.coordinates.start.x) *
-              screenWidth,
+              startBlock.coordinates.x * screenWidth +
+              startBlock.width * line.startBlockPadding * screenWidth,
             y:
-              (startBlock?.pathCoordinates.y ?? scenario.coordinates.start.y) *
-                screenHeight +
-              getAdditionalHeight(startBlockCode),
+              startBlock?.coordinates.y * screenHeight +
+              +commonNodeHeight +
+              getAdditionalHeight(startBlock.code),
           };
           const endPoint = {
-            x: endBlock.pathCoordinates.x * screenWidth,
+            x:
+              endBlock.coordinates.x * screenWidth +
+              startBlock.width * line.endBlockPadding * screenWidth,
             y:
-              endBlock.pathCoordinates.y * screenHeight +
-              getAdditionalHeight(endBlockCode),
+              endBlock.coordinates.y * screenHeight +
+              getAdditionalHeight(endBlock.code),
           };
-
-          console.log(`
-            ${startBlockCode} -> ${endBlockCode}
-            ${startPoint.x} ${startPoint.y} -> ${endPoint.x} ${endPoint.y}
-          `);
 
           return (
             <Path
-              key={`line-${startBlockCode}-${endBlockCode}`}
+              key={`line-${startBlock.code}-${endBlock.code}`}
               stroke="black"
               strokeWidth={4}
               d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}

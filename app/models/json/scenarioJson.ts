@@ -1,54 +1,37 @@
 export interface ScenarioJson {
   code: string;
   id_AC: string; //ID из ArkhamCards
-  lines: string[][];
-  coordinates: {
-    end: PathCoordinates;
-    start: PathCoordinates;
-    setup?: PathCoordinates;
-  };
-  resolutions: ScenarioResolution[]; //Все возможные исходы сценария
+  lines: ScenarioLineJson[];
+  blocks: (ScenarioResolutionJson | ScenarioEventJson)[];
   isInterlude?: boolean;
-  setup?: ScenarioEvent[];
-  notRequiredLocations?: ScenarioLocation[];
-  notRequiredUniqueEnemies?: ScenarioEnemy[];
 }
 
-interface ScenarioResolution {
-  code: string;
+export interface ScenarioLineJson {
+  startBlockCode: string;
+  startBlockPadding: number; //Процент отступа от левого края блока
+  endBlockCode: string;
+  endBlockPadding: number; //Процент отступа от левого края блока
+}
+
+export interface ScenarioResolutionJson extends Block {
   title: string;
-  width: number; //Процент занимаемой ширины экрана
-  pathCoordinates: PathCoordinates;
   effects?: string[];
   conditions?: string[];
 }
 
-interface ScenarioEvent {
-  code: string;
+interface ScenarioEventJson extends Block {
   text: string;
-  width: number; //Процент занимаемой ширины экрана
-  type: ScenarioEventType;
-  pathCoordinates: PathCoordinates;
+  eventType: ScenarioEventType;
   isSpoiler?: boolean; //Возможно перенести в настройки пользователя
-
-  /*
-        Возможно убрать, так как нет таких событий
-
-        + странно делать проверку, чтобы сделать проверку
-        везде используется массив conditions, где легче проверить все условия 
-    */
-  condition?: ScenarioEvent;
 }
 
 type ScenarioEventType = 'have_journal_note' | 'on_win_score' | '...';
 
-export interface ScenarioEffectJson {
-  code: string;
+export interface ScenarioEffectJson extends Block {
   text: string;
-  type: ScenarioEffectType;
+  effectType: ScenarioEffectType;
   count?: number;
   conditions?: string[];
-  pathCoordinates?: PathCoordinates;
 }
 
 type ScenarioEffectType =
@@ -60,13 +43,21 @@ type ScenarioEffectType =
   | 'kill'
   | '...';
 
-interface ScenarioEnemy {
-  name: string;
+interface Block {
+  code: string;
+  width: number;
+  coordinates: PathCoordinates;
+  blockType: BlockType;
 }
 
-interface ScenarioLocation {
-  name: string;
-}
+type BlockType =
+  | 'start'
+  | 'setup'
+  | 'end'
+  | 'resolution'
+  | 'event'
+  | 'effect'
+  | 'playerChoice';
 
 interface PathCoordinates {
   //Отступ от левого верхнего угла экрана в процентах

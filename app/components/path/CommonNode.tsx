@@ -8,7 +8,6 @@ interface CommonNodeProps extends PathElementProps {
 export const CommonNode: React.FC<CommonNodeProps> = ({ text, style }) => {
   return (
     <View
-      // style={style}
       style={{
         ...style,
         display: 'flex',

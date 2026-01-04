@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import campaigns from '../assets/campaigns.json';
-import type {
-  Scenario,
-  ScenarioEffect,
-  ScenarioEvent,
-} from '../models/scenario';
+import type { Scenario } from '../models/scenario';
 import type { CycleJson } from '../models/json/cycleJson';
 import type { Cycle } from '../models/cycle';
+import type {
+  ScenarioJson,
+  ScenarioLineJson,
+  ScenarioResolutionJson,
+} from '../models/json/scenarioJson';
 
 export const useCycle = () => {
   const [cycleCode, setCycleCode] = useState<string>();
@@ -25,30 +26,17 @@ export const useCycle = () => {
       code: cycleJson.code,
       scenarios: cycleJson.scenarios.map((scenario) => ({
         ...scenario,
-        resolutions: scenario.resolutions.map((resolution) => ({
-          ...resolution,
-          effects: resolution.effects
-            ?.map((effectName) => {
-              const effect = cycleJson.effects.find(
-                (effect) => effect.code === effectName,
-              );
-
-              return {
-                ...effect,
-                conditions: effect?.conditions?.map((conditionName) =>
-                  cycleJson.effects.find(
-                    (effect) => effect.code === conditionName,
-                  ),
-                ),
-              };
-            })
-            .filter(Boolean) as ScenarioEffect[],
-          conditions: resolution.conditions
-            ?.map((conditionName) =>
-              cycleJson.effects.find((effect) => effect.code === conditionName),
-            )
-            .filter(Boolean) as ScenarioEvent[],
-        })),
+        lines: scenario.lines.map((line) => transformLine(line, scenario)),
+        blocks: scenario.blocks.map((block) => {
+          if (block.blockType === 'resolution') {
+            return transformResolution(
+              block as ScenarioResolutionJson,
+              cycleJson,
+              scenario,
+            );
+          }
+          return block;
+        }),
       })),
       scenariosList: cycleJson.scenariosList,
     };
@@ -59,3 +47,27 @@ export const useCycle = () => {
 
   return { cycleCode, scenarios, changeCycle };
 };
+
+function transformLine(line: ScenarioLineJson, scenario: ScenarioJson) {
+  return {
+    startBlock: scenario.blocks.find((b) => b.code === line.startBlockCode)!,
+    endBlock: scenario.blocks.find((b) => b.code === line.endBlockCode)!,
+    ...line,
+  };
+}
+
+function transformResolution(
+  resolution: ScenarioResolutionJson,
+  cycle: CycleJson,
+  scenario: ScenarioJson,
+) {
+  return {
+    ...resolution,
+    conditions: resolution.conditions?.map(
+      (c) => scenario.blocks.find((b) => b.code === c)!,
+    ),
+    effects: resolution.effects?.map(
+      (e) => cycle.effects.find((b) => b.code === e)!,
+    ),
+  };
+}

@@ -1,58 +1,37 @@
 export interface Scenario {
   code: string;
   id_AC: string; //ID из ArkhamCards
-  lines: string[][];
-  coordinates: {
-    end: PathCoordinates;
-    start: PathCoordinates;
-    setup?: PathCoordinates;
-  };
-  resolutions: ScenarioResolution[]; //Все возможные исходы сценария
+  blocks: Block[];
+  lines: ScenarioLine[];
   isInterlude?: boolean;
   setup?: ScenarioEvent[];
-  notRequiredLocations?: ScenarioLocation[];
-  notRequiredUniqueEnemies?: ScenarioEnemy[];
+}
+export interface ScenarioLine {
+  startBlock: Block;
+  startBlockPadding: number; //Процент отступа от левого края блока
+  endBlock: Block;
+  endBlockPadding: number; //Процент отступа от левого края блока
 }
 
-/**
- * @todo Заменить number на code, так как бывают разные исходы при проигрыше.
- * Например "Все сыщики побеждены или побег" и "Все сыщики побеждены или побег + есть кто побег"
- */
-export interface ScenarioResolution {
-  code: string;
+export interface ScenarioResolution extends Block {
   title: string;
-  width: number;
-  pathCoordinates: PathCoordinates;
   effects?: ScenarioEffect[];
   conditions?: ScenarioEvent[];
 }
 
-export interface ScenarioEvent {
-  code: string;
+export interface ScenarioEvent extends Block {
   text: string;
-  width: number;
-  type: ScenarioEventType;
-  pathCoordinates: PathCoordinates;
+  eventType: ScenarioEventType;
   isSpoiler?: boolean; //Возможно перенести в настройки пользователя
-
-  /*
-        Возможно убрать, так как нет таких событий
-
-        + странно делать проверку, чтобы сделать проверку
-        везде используется массив conditions, где легче проверить все условия 
-    */
-  condition?: ScenarioEvent;
 }
 
 type ScenarioEventType = 'have_journal_note' | 'on_win_score' | '...';
 
-export interface ScenarioEffect {
-  code: string;
+export interface ScenarioEffect extends Block {
   text: string;
-  type: ScenarioEffectType;
+  effectType: ScenarioEffectType;
   count?: number;
   conditions?: ScenarioEvent[];
-  pathCoordinates?: PathCoordinates;
 }
 
 type ScenarioEffectType =
@@ -64,13 +43,21 @@ type ScenarioEffectType =
   | 'kill'
   | '...';
 
-interface ScenarioEnemy {
-  name: string;
+interface Block {
+  code: string;
+  width: number;
+  coordinates: PathCoordinates;
+  blockType: BlockType;
 }
 
-interface ScenarioLocation {
-  name: string;
-}
+type BlockType =
+  | 'start'
+  | 'setup'
+  | 'end'
+  | 'resolution'
+  | 'event'
+  | 'effect'
+  | 'playerChoice';
 
 interface PathCoordinates {
   x: number;
