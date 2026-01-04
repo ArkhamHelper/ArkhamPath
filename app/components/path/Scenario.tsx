@@ -1,7 +1,7 @@
 import { useWindowDimensions } from 'react-native';
 import type { Scenario } from '../../models/scenario';
-import { Text, View } from '../Themed';
-import { BeginBlock } from './BeginBlock';
+import { View } from '../Themed';
+import { CommonNode } from './CommonNode';
 import { ResolutionBlock } from './ResolutionBlock';
 import Svg, { Path, Rect } from 'react-native-svg';
 import { useState } from 'react';
@@ -17,8 +17,8 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
   const [additionalHeightByBlocks, setAdditionalHeightByBlocks] = useState<{
     [key: string]: number;
   }>({});
-  const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   // const userResults = userPath.data[scenario.code];
+  const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const [standardNodeWidth, standardNodeHeight] = [
     screenWidth * NODE_WIDTH_COEFFICIENT,
     screenHeight * NODE_HEIGHT_COEFFICIENT,
@@ -52,26 +52,28 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
         height: scenario.coordinates.end.y * screenHeight,
       }}
     >
-      <BeginBlock
-        width={standardNodeWidth}
-        height={standardNodeHeight}
-        top={scenario.coordinates.start.y * screenHeight}
-        left={
-          scenario.coordinates.start.x * screenWidth - standardNodeWidth / 2
-        }
+      <CommonNode
+        text="Начало"
+        style={{
+          width: standardNodeWidth,
+          height: standardNodeHeight,
+          left: scenario.coordinates.start.x * screenWidth,
+          top: scenario.coordinates.start.y * screenHeight,
+        }}
       />
       {scenario.resolutions.map((resolution) => (
         <ResolutionBlock
+          key={`resolution-${resolution.code}`}
+          resolution={resolution}
           style={{
+            width: `${resolution.width * 100}%`,
+            top: resolution.pathCoordinates.y * screenHeight,
+            left: resolution.pathCoordinates.x * screenWidth,
+
             position: 'absolute',
             borderWidth: 1,
             zIndex: 1,
           }}
-          key={`resolution-${resolution.code}`}
-          resolution={resolution}
-          width={`${resolution.width * 100}%`}
-          top={resolution.pathCoordinates.y * screenHeight}
-          left={resolution.pathCoordinates.x * screenWidth}
         />
       ))}
       <Svg

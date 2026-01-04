@@ -17,8 +17,8 @@
           ["death_in_house", "investigators_defeated"]
         ],
         "coordinates": {
-          "start": {"x": 0.5, "y": 0},
-          "end": {"x": 0.5, "y": 1.5}
+          "start": {"x": 0.325, "y": 0},
+          "end": {"x": 0.325, "y": 1.5}
         },
         "resolutions": [
           {
