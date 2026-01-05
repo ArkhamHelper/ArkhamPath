@@ -1,12 +1,10 @@
-import { useWindowDimensions } from 'react-native';
+import { useWindowDimensions, type LayoutChangeEvent } from 'react-native';
 import type { Scenario, ScenarioResolution } from '../../models/scenario';
 import { View } from '../Themed';
-import { CommonNode } from './CommonNode';
+import { COMMON_NODE_HEIGHT_COEFFICIENT, CommonNode } from './CommonNode';
 import { ResolutionBlock } from './ResolutionBlock';
 import Svg, { Path, Rect } from 'react-native-svg';
 import { useState } from 'react';
-
-const NODE_HEIGHT_COEFFICIENT = 0.05;
 
 interface PathScenarioProps {
   scenario: Scenario;
@@ -18,15 +16,35 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
   }>({});
   // const userResults = userPath.data[scenario.code];
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
-  const commonNodeHeight = screenHeight * NODE_HEIGHT_COEFFICIENT;
+  const commonNodeHeight = screenHeight * COMMON_NODE_HEIGHT_COEFFICIENT;
 
-  const getAdditionalHeight = (sourceBlockCode: string): number => {
+  const calculateAdditionalHeightByLayout = (
+    event: LayoutChangeEvent,
+    elementCode: string,
+  ) => {
+    const { height } = event.nativeEvent.layout;
+    const elementAdditionalHeight = height - commonNodeHeight;
+
+    setAdditionalHeightByBlocks((prevAdditionalHeight) => ({
+      ...prevAdditionalHeight,
+      [elementCode]: elementAdditionalHeight,
+    }));
+  };
+
+  const getAdditionalHeight = (
+    sourceBlockCode: string,
+    isUseSourceHeight: boolean,
+  ): number => {
     const sourceBlock = scenario.blocks.find((r) => r.code === sourceBlockCode);
 
     if (!sourceBlock) return 0;
 
     const prevBlocksCodes = scenario.blocks
-      .filter((block) => block.coordinates.y <= sourceBlock.coordinates.y)
+      .filter((block) =>
+        isUseSourceHeight
+          ? block.coordinates.y <= sourceBlock.coordinates.y
+          : block.coordinates.y < sourceBlock.coordinates.y,
+      )
       .map((block) => block.code);
 
     return prevBlocksCodes.reduce(
@@ -43,7 +61,8 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
         height:
           scenario.blocks.find((b) => b.code === 'end')!.coordinates.y *
             screenHeight +
-          commonNodeHeight,
+          commonNodeHeight +
+          getAdditionalHeight('end', false),
       }}
     >
       {scenario.blocks.map((block) =>
@@ -53,13 +72,18 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
             resolution={block as ScenarioResolution}
             style={{
               width: `${block.width * 100}%`,
-              top: block.coordinates.y * screenHeight,
+              top:
+                block.coordinates.y * screenHeight +
+                getAdditionalHeight(block.code, false),
               left: block.coordinates.x * screenWidth,
 
               position: 'absolute',
               borderWidth: 1,
               zIndex: 1,
             }}
+            onLayout={(event) =>
+              calculateAdditionalHeightByLayout(event, block.code)
+            }
           />
         ) : (
           <CommonNode
@@ -69,7 +93,9 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
               width: block.width * screenWidth,
               height: commonNodeHeight,
               left: block.coordinates.x * screenWidth,
-              top: block.coordinates.y * screenHeight,
+              top:
+                block.coordinates.y * screenHeight +
+                getAdditionalHeight(block.code, false),
             }}
           />
         ),
@@ -97,9 +123,9 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
               startBlock.coordinates.x * screenWidth +
               startBlock.width * line.startBlockPadding * screenWidth,
             y:
-              startBlock?.coordinates.y * screenHeight +
+              startBlock.coordinates.y * screenHeight +
               +commonNodeHeight +
-              getAdditionalHeight(startBlock.code),
+              getAdditionalHeight(startBlock.code, true),
           };
           const endPoint = {
             x:
@@ -107,7 +133,7 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
               startBlock.width * line.endBlockPadding * screenWidth,
             y:
               endBlock.coordinates.y * screenHeight +
-              getAdditionalHeight(endBlock.code),
+              getAdditionalHeight(endBlock.code, false),
           };
 
           return (
