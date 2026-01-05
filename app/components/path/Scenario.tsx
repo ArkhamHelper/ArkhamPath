@@ -105,17 +105,6 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
         height="100%"
         style={{ position: 'absolute', zIndex: 2 }}
       >
-        <Rect
-          x="0"
-          y="0"
-          width="100%"
-          height="100%"
-          fill="none"
-          stroke="red"
-          strokeWidth="4"
-          strokeDasharray="10,5" // пунктир
-          strokeLinecap="round"
-        />
         {scenario.lines.map((line) => {
           const { startBlock, endBlock } = line;
           const startPoint = {
@@ -140,8 +129,9 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
             <Path
               key={`line-${startBlock.code}-${endBlock.code}`}
               stroke="black"
+              fill={'none'}
               strokeWidth={4}
-              d={`M ${startPoint.x} ${startPoint.y} L ${endPoint.x} ${endPoint.y}`}
+              d={`M ${startPoint.x} ${startPoint.y} Q ${line.controlPointX * screenWidth} ${line.controlPointY * screenHeight} ${endPoint.x} ${endPoint.y}`}
             />
           );
         })}

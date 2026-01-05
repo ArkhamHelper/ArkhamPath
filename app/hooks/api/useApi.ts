@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
 
-const SERVER_URL = 'http://172.21.224.1:3000';
+const SERVER_URL = 'http://192.168.1.11:3000';
 
 export const useApi = <T>() => {
   const get = (path: string) => {

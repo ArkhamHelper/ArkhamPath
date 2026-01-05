@@ -11,6 +11,8 @@ export interface ScenarioLine {
   startBlockPadding: number; //Процент отступа от левого края блока
   endBlock: Block;
   endBlockPadding: number; //Процент отступа от левого края блока
+  controlPointX: number;
+  controlPointY: number;
 }
 
 export interface ScenarioResolution extends Block {

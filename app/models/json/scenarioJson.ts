@@ -11,6 +11,8 @@ export interface ScenarioLineJson {
   startBlockPadding: number; //Процент отступа от левого края блока
   endBlockCode: string;
   endBlockPadding: number; //Процент отступа от левого края блока
+  controlPointX: number;
+  controlPointY: number;
 }
 
 export interface ScenarioResolutionJson extends Block {
