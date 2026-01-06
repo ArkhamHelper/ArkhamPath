@@ -18,12 +18,12 @@
           { 
             "startBlockCode": "start", "endBlockCode": "not_burn_down_house",
             "startBlockPadding": 0.5, "endBlockPadding": 0.9,
-            "controlPointX": 0.7, "controlPointY": 0.2
+            "controlPointX": 0.7, "controlPointY": 0.15
           },
           { 
             "startBlockCode": "start", "endBlockCode": "death_in_house",
             "startBlockPadding": 0.7, "endBlockPadding": 0.9,
-            "controlPointX": 0.8, "controlPointY": 0.5
+            "controlPointX": 0.8, "controlPointY": 0.2
           },
           { 
             "startBlockCode": "start", "endBlockCode": "investigators_defeated",
@@ -33,22 +33,22 @@
           { 
             "startBlockCode": "death_in_house", "endBlockCode": "investigators_defeated",
             "startBlockPadding": 0.4, "endBlockPadding": 0.1,
-            "controlPointX": 0.4, "controlPointY": 0.9
+            "controlPointX": 0.4, "controlPointY": 0.3
           },
           { 
             "startBlockCode": "burn_down_house", "endBlockCode": "end",
-            "startBlockPadding": 0.1, "endBlockPadding": 0.1,
-            "controlPointX": 0.05, "controlPointY": 1
+            "startBlockPadding": 0.1, "endBlockPadding": 0.05,
+            "controlPointX": 0.05, "controlPointY": 0.5
           },
           { 
             "startBlockCode": "not_burn_down_house", "endBlockCode": "end",
-            "startBlockPadding": 0.05, "endBlockPadding": 0.2,
-            "controlPointX": 0.1, "controlPointY": 1
+            "startBlockPadding": 0.05, "endBlockPadding": 0.15,
+            "controlPointX": 0.1, "controlPointY": 0.4
           },
           { 
             "startBlockCode": "investigators_defeated", "endBlockCode": "end",
             "startBlockPadding": 0.5, "endBlockPadding": 0.6,
-            "controlPointX": 0.65, "controlPointY": 1.15
+            "controlPointX": 0.65, "controlPointY": 0.5
           }
         ],
         "blocks": [

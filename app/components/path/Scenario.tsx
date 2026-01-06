@@ -3,7 +3,7 @@ import type { Scenario, ScenarioResolution } from '../../models/scenario';
 import { View } from '../Themed';
 import { COMMON_NODE_HEIGHT_COEFFICIENT, CommonNode } from './CommonNode';
 import { ResolutionBlock } from './ResolutionBlock';
-import Svg, { Path, Rect } from 'react-native-svg';
+import Svg, { Path } from 'react-native-svg';
 import { useState } from 'react';
 
 interface PathScenarioProps {
@@ -11,6 +11,9 @@ interface PathScenarioProps {
 }
 
 export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
+  const [toggledBlock, setToggledBlock] = useState<{ [key: string]: boolean }>(
+    {},
+  );
   const [additionalHeightByBlocks, setAdditionalHeightByBlocks] = useState<{
     [key: string]: number;
   }>({});
@@ -70,6 +73,7 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
           <ResolutionBlock
             key={`resolution-${block.code}`}
             resolution={block as ScenarioResolution}
+            isToggle={toggledBlock[block.code] ?? true}
             style={{
               width: `${block.width * 100}%`,
               top:
@@ -79,8 +83,14 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
 
               position: 'absolute',
               borderWidth: 1,
-              zIndex: 1,
+              zIndex: 1, //Костыль для нажатия на блок и отработки onPress
             }}
+            onPress={() =>
+              setToggledBlock((prev) => ({
+                ...prev,
+                [block.code]: prev[block.code] === true ? false : true,
+              }))
+            }
             onLayout={(event) =>
               calculateAdditionalHeightByLayout(event, block.code)
             }
@@ -100,11 +110,7 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
           />
         ),
       )}
-      <Svg
-        width="100%"
-        height="100%"
-        style={{ position: 'absolute', zIndex: 2 }}
-      >
+      <Svg width="100%" height="100%" style={{ position: 'absolute' }}>
         {scenario.lines.map((line) => {
           const { startBlock, endBlock } = line;
           const startPoint = {
@@ -131,7 +137,10 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
               stroke="black"
               fill={'none'}
               strokeWidth={4}
-              d={`M ${startPoint.x} ${startPoint.y} Q ${line.controlPointX * screenWidth} ${line.controlPointY * screenHeight} ${endPoint.x} ${endPoint.y}`}
+              d={`M ${startPoint.x} ${startPoint.y}
+                Q ${line.controlPointX * screenWidth}
+                  ${line.controlPointY * screenHeight + getAdditionalHeight(startBlock.code, true)}
+                  ${endPoint.x} ${endPoint.y}`}
             />
           );
         })}
