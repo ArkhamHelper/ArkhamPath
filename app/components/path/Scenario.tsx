@@ -1,6 +1,6 @@
 import { useWindowDimensions, type LayoutChangeEvent } from 'react-native';
 import type { Scenario, ScenarioResolution } from '../../models/scenario';
-import { View } from '../Themed';
+import { Text, View } from '../Themed';
 import { COMMON_NODE_HEIGHT_COEFFICIENT, CommonNode } from './CommonNode';
 import { ResolutionBlock } from './ResolutionBlock';
 import Svg, { Path } from 'react-native-svg';
@@ -68,48 +68,77 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
           getAdditionalHeight('end', false),
       }}
     >
-      {scenario.blocks.map((block) =>
-        block.blockType === 'resolution' ? (
-          <ResolutionBlock
-            key={`resolution-${block.code}`}
-            resolution={block as ScenarioResolution}
-            isToggle={toggledBlock[block.code] ?? true}
-            style={{
-              width: `${block.width * 100}%`,
-              top:
-                block.coordinates.y * screenHeight +
-                getAdditionalHeight(block.code, false),
-              left: block.coordinates.x * screenWidth,
+      {scenario.blocks.map((block) => {
+        if (block.blockType === 'resolution')
+          return (
+            <ResolutionBlock
+              key={`resolution-${block.code}`}
+              resolution={block as ScenarioResolution}
+              isToggle={toggledBlock[block.code] ?? true}
+              style={{
+                width: `${block.width * 100}%`,
+                top:
+                  block.coordinates.y * screenHeight +
+                  getAdditionalHeight(block.code, false),
+                left: block.coordinates.x * screenWidth,
 
-              position: 'absolute',
-              borderWidth: 1,
-              zIndex: 1, //Костыль для нажатия на блок и отработки onPress
-            }}
-            onPress={() =>
-              setToggledBlock((prev) => ({
-                ...prev,
-                [block.code]: prev[block.code] === true ? false : true,
-              }))
-            }
-            onLayout={(event) =>
-              calculateAdditionalHeightByLayout(event, block.code)
-            }
-          />
-        ) : (
-          <CommonNode
-            text={block.code}
-            key={`${scenario.code}-${block.code}`}
-            style={{
-              width: block.width * screenWidth,
-              height: commonNodeHeight,
-              left: block.coordinates.x * screenWidth,
-              top:
-                block.coordinates.y * screenHeight +
-                getAdditionalHeight(block.code, false),
-            }}
-          />
-        ),
-      )}
+                position: 'absolute',
+                borderWidth: 1,
+                zIndex: 1, //Костыль для нажатия на блок и отработки onPress
+              }}
+              onPress={() =>
+                setToggledBlock((prev) => ({
+                  ...prev,
+                  [block.code]: prev[block.code] === true ? false : true,
+                }))
+              }
+              onLayout={(event) =>
+                calculateAdditionalHeightByLayout(event, block.code)
+              }
+            />
+          );
+
+        if (block.blockType === 'playerChoice')
+          return (
+            <View
+              key={`playerChoice-${block.code}`}
+              style={{
+                position: 'absolute',
+                left: block.coordinates.x * screenWidth,
+                top:
+                  block.coordinates.y * screenHeight +
+                  getAdditionalHeight(block.code, false),
+                width: block.width * screenWidth,
+                height: block.width * screenWidth,
+                backgroundColor: 'gray',
+                transform: [{ rotate: '45deg' }], // Поворот на 45°
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderWidth: 2,
+              }}
+            >
+              <Text style={{ transform: [{ rotate: '-45deg' }], fontSize: 24 }}>
+                ?
+              </Text>
+            </View>
+          );
+
+        if (['start', 'setup', 'end'].includes(block.blockType))
+          return (
+            <CommonNode
+              text={block.code}
+              key={`${scenario.code}-${block.code}`}
+              style={{
+                position: 'absolute',
+                width: block.width * screenWidth,
+                left: block.coordinates.x * screenWidth,
+                top:
+                  block.coordinates.y * screenHeight +
+                  getAdditionalHeight(block.code, false),
+              }}
+            />
+          );
+      })}
       <Svg width="100%" height="100%" style={{ position: 'absolute' }}>
         {scenario.lines.map((line) => {
           const { startBlock, endBlock } = line;
@@ -125,11 +154,30 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
           const endPoint = {
             x:
               endBlock.coordinates.x * screenWidth +
-              startBlock.width * line.endBlockPadding * screenWidth,
+              endBlock.width * line.endBlockPadding * screenWidth,
             y:
               endBlock.coordinates.y * screenHeight +
               getAdditionalHeight(endBlock.code, false),
           };
+
+          //Костыль расчетов, вообще не могу понять как высчитывать))
+          if (startBlock.blockType === 'playerChoice') {
+            const squareSide = startBlock.width * screenWidth;
+            const squareDiagonal = Math.sqrt(squareSide ** 2 * 2);
+            const diagonalDifferent = squareDiagonal / 2.25;
+
+            startPoint.y -= diagonalDifferent;
+            startPoint.x +=
+              (squareDiagonal - squareSide * 1.25) *
+              (line.startBlockPadding === 0 ? -1 : 1);
+          }
+
+          if (endBlock.blockType === 'playerChoice') {
+            const squareSide = startBlock.width * screenWidth;
+            const squareDiagonal = Math.sqrt(squareSide ** 2 * 2);
+
+            endPoint.y -= squareDiagonal - squareSide * 1.38;
+          }
 
           return (
             <Path

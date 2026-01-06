@@ -11,14 +11,19 @@
         "id_AC": "torch",
         "lines": [
           {
-            "startBlockCode": "start", "endBlockCode": "burn_down_house",
-            "startBlockPadding": 0.2, "endBlockPadding": 0.1,
+            "startBlockCode": "start", "endBlockCode": "choice_to_burn_house",
+            "startBlockPadding": 0.2, "endBlockPadding": 0.5,
             "controlPointX": 0.3, "controlPointY": 0.05
+          },          
+          {
+            "startBlockCode": "choice_to_burn_house", "endBlockCode": "burn_down_house",
+            "startBlockPadding": 0, "endBlockPadding": 0.1,
+            "controlPointX": 0.05, "controlPointY": 0.25
           },
-          { 
-            "startBlockCode": "start", "endBlockCode": "not_burn_down_house",
-            "startBlockPadding": 0.5, "endBlockPadding": 0.9,
-            "controlPointX": 0.7, "controlPointY": 0.15
+          {
+            "startBlockCode": "choice_to_burn_house", "endBlockCode": "not_burn_down_house",
+            "startBlockPadding": 1, "endBlockPadding": 0.9,
+            "controlPointX": 0.6, "controlPointY": 0.21
           },
           { 
             "startBlockCode": "start", "endBlockCode": "death_in_house",
@@ -33,7 +38,7 @@
           { 
             "startBlockCode": "death_in_house", "endBlockCode": "investigators_defeated",
             "startBlockPadding": 0.4, "endBlockPadding": 0.1,
-            "controlPointX": 0.4, "controlPointY": 0.3
+            "controlPointX": 0.4, "controlPointY": 0.58
           },
           { 
             "startBlockCode": "burn_down_house", "endBlockCode": "end",
@@ -48,7 +53,7 @@
           { 
             "startBlockCode": "investigators_defeated", "endBlockCode": "end",
             "startBlockPadding": 0.5, "endBlockPadding": 0.6,
-            "controlPointX": 0.65, "controlPointY": 0.5
+            "controlPointX": 0.65, "controlPointY": 0.68
           }
         ],
         "blocks": [
@@ -56,14 +61,20 @@
             "blockType": "start",
             "code": "start",
             "width": 0.5,
-            "coordinates": {"x": 0.325, "y": 0}
+            "coordinates": {"x": 0.25, "y": 0}
+          },
+          {
+            "blockType": "playerChoice",
+            "code": "choice_to_burn_house",
+            "width": 0.1,
+            "coordinates": {"x": 0.2, "y": 0.2}
           },
           {
             "blockType": "resolution",
             "code": "burn_down_house",
             "title": "Исход 1",
             "width": 0.5,
-            "coordinates": {"x": 0, "y": 0.1},
+            "coordinates": {"x": 0, "y": 0.3},
             "effects": [
               "house_burned",
               "earn_lita",
@@ -76,7 +87,7 @@
             "code": "not_burn_down_house",
             "title": "Исход 2",
             "width": 0.5,
-            "coordinates": {"x": 0.15, "y": 0.2},
+            "coordinates": {"x": 0.15, "y": 0.4},
             "effects": [
               "house_standing",
               "lead_investigator_xp",
@@ -88,7 +99,7 @@
             "code": "death_in_house",
             "title": "Исход 3",
             "width": 0.5,
-            "coordinates": {"x": 0.2, "y": 0.3},
+            "coordinates": {"x": 0.2, "y": 0.5},
             "effects": [
               "lita_finds_others",
               "house_standing",
@@ -101,7 +112,7 @@
             "code": "investigators_defeated",
             "title": "Исход не достигнут",
             "width": 0.5,
-            "coordinates": {"x": 0.4, "y": 0.4},
+            "coordinates": {"x": 0.4, "y": 0.6},
             "effects": [
               "house_standing",
               "ghoul_priest_alive",
@@ -112,7 +123,7 @@
             "blockType": "end",
             "code": "end",
             "width": 0.5,
-            "coordinates": {"x": 0.325, "y": 0.5}
+            "coordinates": {"x": 0.25, "y": 0.7}
           }
         ]
       }
