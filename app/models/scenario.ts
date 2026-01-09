@@ -1,35 +1,56 @@
 export interface Scenario {
   code: string;
   id_AC: string; //ID из ArkhamCards
-  blocks: Block[];
+  blocks: ScenarioBlock[];
   lines: ScenarioLine[];
   isInterlude?: boolean;
   setup?: ScenarioEvent[];
 }
+
+export interface ScenarioBlock {
+  code: string;
+  width: number;
+  blockType: BlockType;
+  coordinates: PathCoordinates;
+}
+
+type BlockType =
+  | 'start'
+  | 'setup'
+  | 'end'
+  | 'resolution'
+  | 'event'
+  | 'effect'
+  | 'playerChoice'
+  | 'connection';
 export interface ScenarioLine {
-  startBlock: Block;
+  startBlock: ScenarioBlock;
   startBlockPadding: number; //Процент отступа от левого края блока
-  endBlock: Block;
+  endBlock: ScenarioBlock;
   endBlockPadding: number; //Процент отступа от левого края блока
   controlPointX: number;
   controlPointY: number;
 }
 
-export interface ScenarioResolution extends Block {
+export interface ScenarioResolution extends ScenarioBlock {
   title: string;
   effects?: ScenarioEffect[];
   conditions?: ScenarioEvent[];
 }
 
-export interface ScenarioEvent extends Block {
+export interface ScenarioEvent extends ScenarioBlock {
   text: string;
   eventType: ScenarioEventType;
   isSpoiler?: boolean; //Возможно перенести в настройки пользователя
 }
 
-type ScenarioEventType = 'have_journal_note' | 'on_win_score' | '...';
+type ScenarioEventType =
+  | 'have_journal_note'
+  | 'on_win_score'
+  | 'player_choice'
+  | '...';
 
-export interface ScenarioEffect extends Block {
+export interface ScenarioEffect extends ScenarioBlock {
   text: string;
   effectType: ScenarioEffectType;
   count?: number;
@@ -44,23 +65,6 @@ type ScenarioEffectType =
   | 'add_trauma'
   | 'kill'
   | '...';
-
-interface Block {
-  code: string;
-  width: number;
-  coordinates: PathCoordinates;
-  blockType: BlockType;
-}
-
-type BlockType =
-  | 'start'
-  | 'setup'
-  | 'end'
-  | 'resolution'
-  | 'event'
-  | 'effect'
-  | 'playerChoice'
-  | 'connection';
 
 interface PathCoordinates {
   x: number;

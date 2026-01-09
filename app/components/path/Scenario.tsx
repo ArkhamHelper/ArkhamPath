@@ -1,10 +1,21 @@
-import { useWindowDimensions, type LayoutChangeEvent } from 'react-native';
-import type { Scenario, ScenarioResolution } from '../../models/scenario';
+import {
+  useWindowDimensions,
+  type LayoutChangeEvent,
+  type ViewStyle,
+} from 'react-native';
+import type {
+  Scenario,
+  ScenarioBlock,
+  ScenarioResolution,
+} from '../../models/scenario';
 import { Text, View } from '../Themed';
 import { COMMON_NODE_HEIGHT_COEFFICIENT, CommonNode } from './CommonNode';
 import { ResolutionBlock } from './ResolutionBlock';
-import Svg, { Path } from 'react-native-svg';
+import Svg from 'react-native-svg';
 import { useState } from 'react';
+import { PathLine } from './Line';
+import { PathConnection } from './Connection';
+import { PathPlayerChoice } from './PlayerChoice';
 
 interface PathScenarioProps {
   scenario: Scenario;
@@ -20,6 +31,15 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
   // const userResults = userPath.data[scenario.code];
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const commonNodeHeight = screenHeight * COMMON_NODE_HEIGHT_COEFFICIENT;
+
+  const getDefaultNodeStyle = (block: ScenarioBlock): ViewStyle => ({
+    position: 'absolute',
+    left: block.coordinates.x * screenWidth,
+    top:
+      block.coordinates.y * screenHeight +
+      getAdditionalHeight(block.code, false),
+    width: block.width * screenWidth,
+  });
 
   const calculateAdditionalHeightByLayout = (
     event: LayoutChangeEvent,
@@ -76,13 +96,7 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
               resolution={block as ScenarioResolution}
               isToggle={toggledBlock[block.code] ?? true}
               style={{
-                width: `${block.width * 100}%`,
-                top:
-                  block.coordinates.y * screenHeight +
-                  getAdditionalHeight(block.code, false),
-                left: block.coordinates.x * screenWidth,
-
-                position: 'absolute',
+                ...getDefaultNodeStyle(block),
                 borderWidth: 1,
                 zIndex: 1, //Костыль для нажатия на блок и отработки onPress
               }}
@@ -100,42 +114,22 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
 
         if (block.blockType === 'playerChoice')
           return (
-            <View
-              key={`playerChoice-${block.code}`}
+            <PathPlayerChoice
+              block={block}
               style={{
-                position: 'absolute',
-                left: block.coordinates.x * screenWidth,
-                top:
-                  block.coordinates.y * screenHeight +
-                  getAdditionalHeight(block.code, false),
-                width: block.width * screenWidth,
+                ...getDefaultNodeStyle(block),
                 height: block.width * screenWidth,
                 backgroundColor: 'gray',
-                transform: [{ rotate: '45deg' }], // Поворот на 45°
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderWidth: 2,
               }}
-            >
-              <Text style={{ transform: [{ rotate: '-45deg' }], fontSize: 24 }}>
-                ?
-              </Text>
-            </View>
+            />
           );
         if (block.blockType === 'connection')
           return (
-            <View
-              key={`connection-${block.code}`}
+            <PathConnection
+              block={block}
               style={{
-                width: block.width * screenWidth,
+                ...getDefaultNodeStyle(block),
                 height: block.width * screenWidth,
-                position: 'absolute',
-                left: block.coordinates.x * screenWidth,
-                top:
-                  block.coordinates.y * screenHeight +
-                  getAdditionalHeight(block.code, false),
-                borderRadius: '50%',
-                backgroundColor: 'black',
               }}
             />
           );
@@ -145,98 +139,15 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
               text={block.code}
               key={`${scenario.code}-${block.code}`}
               style={{
-                position: 'absolute',
-                width: block.width * screenWidth,
-                left: block.coordinates.x * screenWidth,
-                top:
-                  block.coordinates.y * screenHeight +
-                  getAdditionalHeight(block.code, false),
+                ...getDefaultNodeStyle(block),
               }}
             />
           );
       })}
       <Svg width="100%" height="100%" style={{ position: 'absolute' }}>
-        {scenario.lines.map((line) => {
-          const { startBlock, endBlock } = line;
-          const startPoint = {
-            x:
-              startBlock.coordinates.x * screenWidth +
-              startBlock.width * line.startBlockPadding * screenWidth,
-            y:
-              startBlock.coordinates.y * screenHeight +
-              +commonNodeHeight +
-              getAdditionalHeight(startBlock.code, true),
-          };
-          const endPoint = {
-            x:
-              endBlock.coordinates.x * screenWidth +
-              endBlock.width * line.endBlockPadding * screenWidth,
-            y:
-              endBlock.coordinates.y * screenHeight +
-              getAdditionalHeight(endBlock.code, false),
-          };
-
-          //Костыли расчетов, вообще не могу понять как высчитывать))
-          if (startBlock.blockType === 'playerChoice') {
-            const squareSide = startBlock.width * screenWidth;
-            const squareDiagonal = Math.sqrt(squareSide ** 2 * 2);
-            const diagonalDifferent = squareDiagonal / 2.25;
-
-            startPoint.y -= diagonalDifferent;
-            startPoint.x +=
-              (squareDiagonal - squareSide * 1.25) *
-              (line.startBlockPadding === 0 ? -1 : 1);
-          }
-
-          if (endBlock.blockType === 'playerChoice') {
-            const squareSide = startBlock.width * screenWidth;
-            const squareDiagonal = Math.sqrt(squareSide ** 2 * 2);
-
-            endPoint.y -= squareDiagonal - squareSide * 1.38;
-          }
-
-          if (startBlock.blockType === 'connection') {
-            const squareSide = startBlock.width * screenWidth;
-            const squareDiagonal = Math.sqrt(squareSide ** 2 * 2);
-            const diagonalDifferent = squareDiagonal / 2.25;
-
-            startPoint.y -= diagonalDifferent;
-            startPoint.x +=
-              (squareDiagonal - squareSide) *
-              (line.startBlockPadding === 0 ? -1 : 1);
-          }
-
-          if (endBlock.blockType === 'connection') {
-            const squareSide = startBlock.width * screenWidth;
-            const squareDiagonal = Math.sqrt(squareSide ** 2 * 2);
-
-            endPoint.y -= squareDiagonal - squareSide * 1.48;
-            endPoint.x -=
-              (squareDiagonal - squareSide * 1.41) *
-              (line.endBlockPadding === 0 ? -1 : 1);
-          }
-
-          return (
-            <Path
-              key={`line-${startBlock.code}-${endBlock.code}`}
-              stroke="black"
-              fill={'none'}
-              strokeWidth={4}
-              d={`M ${startPoint.x} ${startPoint.y}
-                Q ${line.controlPointX * screenWidth}
-                  ${
-                    line.controlPointY * screenHeight +
-                    getAdditionalHeight(
-                      line.controlPointY > startBlock.coordinates.y
-                        ? endBlock.code
-                        : startBlock.code,
-                      false,
-                    )
-                  }
-                  ${endPoint.x} ${endPoint.y}`}
-            />
-          );
-        })}
+        {scenario.lines.map((line) => (
+          <PathLine line={line} getAdditionalHeight={getAdditionalHeight} />
+        ))}
       </Svg>
     </View>
   );
