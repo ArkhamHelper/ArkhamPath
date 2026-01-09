@@ -59,7 +59,8 @@ type BlockType =
   | 'resolution'
   | 'event'
   | 'effect'
-  | 'playerChoice';
+  | 'playerChoice'
+  | 'connection';
 
 interface PathCoordinates {
   x: number;

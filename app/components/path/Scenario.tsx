@@ -122,7 +122,23 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
               </Text>
             </View>
           );
-
+        if (block.blockType === 'connection')
+          return (
+            <View
+              key={`connection-${block.code}`}
+              style={{
+                width: block.width * screenWidth,
+                height: block.width * screenWidth,
+                position: 'absolute',
+                left: block.coordinates.x * screenWidth,
+                top:
+                  block.coordinates.y * screenHeight +
+                  getAdditionalHeight(block.code, false),
+                borderRadius: '50%',
+                backgroundColor: 'black',
+              }}
+            />
+          );
         if (['start', 'setup', 'end'].includes(block.blockType))
           return (
             <CommonNode
@@ -160,7 +176,7 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
               getAdditionalHeight(endBlock.code, false),
           };
 
-          //Костыль расчетов, вообще не могу понять как высчитывать))
+          //Костыли расчетов, вообще не могу понять как высчитывать))
           if (startBlock.blockType === 'playerChoice') {
             const squareSide = startBlock.width * screenWidth;
             const squareDiagonal = Math.sqrt(squareSide ** 2 * 2);
@@ -179,6 +195,27 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
             endPoint.y -= squareDiagonal - squareSide * 1.38;
           }
 
+          if (startBlock.blockType === 'connection') {
+            const squareSide = startBlock.width * screenWidth;
+            const squareDiagonal = Math.sqrt(squareSide ** 2 * 2);
+            const diagonalDifferent = squareDiagonal / 2.25;
+
+            startPoint.y -= diagonalDifferent;
+            startPoint.x +=
+              (squareDiagonal - squareSide) *
+              (line.startBlockPadding === 0 ? -1 : 1);
+          }
+
+          if (endBlock.blockType === 'connection') {
+            const squareSide = startBlock.width * screenWidth;
+            const squareDiagonal = Math.sqrt(squareSide ** 2 * 2);
+
+            endPoint.y -= squareDiagonal - squareSide * 1.48;
+            endPoint.x -=
+              (squareDiagonal - squareSide * 1.41) *
+              (line.endBlockPadding === 0 ? -1 : 1);
+          }
+
           return (
             <Path
               key={`line-${startBlock.code}-${endBlock.code}`}
@@ -187,7 +224,15 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
               strokeWidth={4}
               d={`M ${startPoint.x} ${startPoint.y}
                 Q ${line.controlPointX * screenWidth}
-                  ${line.controlPointY * screenHeight + getAdditionalHeight(startBlock.code, true)}
+                  ${
+                    line.controlPointY * screenHeight +
+                    getAdditionalHeight(
+                      line.controlPointY > startBlock.coordinates.y
+                        ? endBlock.code
+                        : startBlock.code,
+                      false,
+                    )
+                  }
                   ${endPoint.x} ${endPoint.y}`}
             />
           );

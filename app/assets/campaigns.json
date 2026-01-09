@@ -23,7 +23,17 @@
           {
             "startBlockCode": "choice_to_burn_house", "endBlockCode": "not_burn_down_house",
             "startBlockPadding": 1, "endBlockPadding": 0.9,
-            "controlPointX": 0.6, "controlPointY": 0.21
+            "controlPointX": 0.65, "controlPointY": 0.2
+          },
+          {
+            "startBlockCode": "burn_down_house", "endBlockCode": "connection_of_burn_and_not_to_end",
+            "startBlockPadding": 0.1, "endBlockPadding": 0,
+            "controlPointX": 0.01, "controlPointY": 0.48
+          },
+          {
+            "startBlockCode": "not_burn_down_house", "endBlockCode": "connection_of_burn_and_not_to_end",
+            "startBlockPadding": 0.1, "endBlockPadding": 1,
+            "controlPointX": 0.2, "controlPointY": 0.48 
           },
           { 
             "startBlockCode": "start", "endBlockCode": "death_in_house",
@@ -39,16 +49,11 @@
             "startBlockCode": "death_in_house", "endBlockCode": "investigators_defeated",
             "startBlockPadding": 0.4, "endBlockPadding": 0.1,
             "controlPointX": 0.4, "controlPointY": 0.58
-          },
-          { 
-            "startBlockCode": "burn_down_house", "endBlockCode": "end",
-            "startBlockPadding": 0.1, "endBlockPadding": 0.05,
-            "controlPointX": 0.05, "controlPointY": 0.5
-          },
-          { 
-            "startBlockCode": "not_burn_down_house", "endBlockCode": "end",
-            "startBlockPadding": 0.05, "endBlockPadding": 0.15,
-            "controlPointX": 0.1, "controlPointY": 0.4
+          },          
+          {
+            "startBlockCode": "connection_of_burn_and_not_to_end", "endBlockCode": "end",
+            "startBlockPadding": 0.1, "endBlockPadding": 0.1,
+            "controlPointX": 0.08, "controlPointY": 0.6 
           },
           { 
             "startBlockCode": "investigators_defeated", "endBlockCode": "end",
@@ -93,6 +98,12 @@
               "lead_investigator_xp",
               "earn_xp"
             ]
+          },
+          {
+            "blockType": "connection",
+            "code": "connection_of_burn_and_not_to_end",
+            "width": 0.07,
+            "coordinates": {"x": 0.07, "y": 0.47}
           },
           {
             "blockType": "resolution",
