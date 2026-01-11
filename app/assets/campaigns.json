@@ -69,10 +69,32 @@
             "coordinates": {"x": 0.25, "y": 0}
           },
           {
+            "blockType": "condition",
+            "code": "ghoul_priest_is_dead",
+            "width": 0.4,
+            "coordinates": {"x": 0.1, "y": 0.1},
+            "text": "ghoul_priest_is_dead",
+            "isSpoiler": true
+          },
+          {
             "blockType": "playerChoice",
             "code": "choice_to_burn_house",
             "width": 0.1,
-            "coordinates": {"x": 0.2, "y": 0.2}
+            "coordinates": {"x": 0.25, "y": 0.2}
+          },
+          {
+            "blockType": "condition",
+            "code": "player_burn_house",
+            "width": 0.2,
+            "coordinates": {"x": 0.02, "y": 0.21},
+            "text": "burn_house"
+          },
+          {
+            "blockType": "condition",
+            "code": "player_not_burn_house",
+            "width": 0.2,
+            "coordinates": {"x": 0.4, "y": 0.21},
+            "text": "not_burn_house"
           },
           {
             "blockType": "resolution",
@@ -187,6 +209,24 @@
         "code": "killed",
         "effectType": "kill",
         "text":"Все сыщики, не совершившие побег, убиты"
+      }
+    ],
+    "conditions": [
+      {
+        "code": "ghoul_priest_alive",
+        "text":"ghoul_priest_alive",
+        "conditionType": "have_journal_note",
+        "value": "ghoul_priest_alive"
+      },
+      {
+        "code": "the_gathering_is_act_one_or_two",
+        "text":"the_gathering_is_act_one_or_two",
+        "conditionType": "game_state"
+      },
+      {
+        "code": "the_gathering_is_act_three",
+        "text":"the_gathering_is_act_three",
+        "conditionType": "game_state"
       }
     ]
   }

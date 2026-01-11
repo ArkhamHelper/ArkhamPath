@@ -32,7 +32,6 @@ export const useCycle = () => {
             return transformResolution(
               block as ScenarioResolutionJson,
               cycleJson,
-              scenario,
             );
           }
           return block;
@@ -59,15 +58,20 @@ function transformLine(line: ScenarioLineJson, scenario: ScenarioJson) {
 function transformResolution(
   resolution: ScenarioResolutionJson,
   cycle: CycleJson,
-  scenario: ScenarioJson,
 ) {
   return {
     ...resolution,
-    conditions: resolution.conditions?.map(
-      (c) => scenario.blocks.find((b) => b.code === c)!,
-    ),
-    effects: resolution.effects?.map(
-      (e) => cycle.effects.find((b) => b.code === e)!,
-    ),
+    conditions: resolution.conditions?.map((c) => ({
+      blockType: 'effect',
+      width: resolution.width,
+      coordinates: resolution.coordinates,
+      ...cycle.conditions.find((b) => b.code === c)!,
+    })),
+    effects: resolution.effects?.map((e) => ({
+      blockType: 'effect',
+      width: resolution.width,
+      coordinates: resolution.coordinates,
+      ...cycle.effects.find((b) => b.code === e)!,
+    })),
   };
 }

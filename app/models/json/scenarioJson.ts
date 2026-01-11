@@ -2,7 +2,7 @@ export interface ScenarioJson {
   code: string;
   id_AC: string; //ID из ArkhamCards
   lines: ScenarioLineJson[];
-  blocks: (ScenarioResolutionJson | ScenarioEventJson)[];
+  blocks: (ScenarioResolutionJson | ScenarioConditionBlockJson)[];
   isInterlude?: boolean;
 }
 
@@ -21,15 +21,31 @@ export interface ScenarioResolutionJson extends Block {
   conditions?: string[];
 }
 
-interface ScenarioEventJson extends Block {
+export interface ScenarioConditionBlockJson extends Block {
   text: string;
-  eventType: ScenarioEventType;
+  eventType: ScenarioConditionType;
+  count?: number;
+  value?: string;
   isSpoiler?: boolean; //Возможно перенести в настройки пользователя
 }
 
-type ScenarioEventType = 'have_journal_note' | 'on_win_score' | '...';
+export interface ScenarioConditionJson {
+  code: string;
+  text: string;
+  conditionType: ScenarioConditionType;
+  count?: number;
+  value?: string;
+}
 
-export interface ScenarioEffectJson extends Block {
+type ScenarioConditionType =
+  | 'have_journal_note'
+  | 'on_win_score'
+  | 'player_choice'
+  | 'game_state'
+  | '...';
+
+export interface ScenarioEffectJson {
+  code: string;
   text: string;
   effectType: ScenarioEffectType;
   count?: number;
@@ -48,8 +64,8 @@ type ScenarioEffectType =
 interface Block {
   code: string;
   width: number;
-  coordinates: PathCoordinates;
   blockType: BlockType;
+  coordinates: PathCoordinates;
 }
 
 type BlockType =
@@ -57,7 +73,7 @@ type BlockType =
   | 'setup'
   | 'end'
   | 'resolution'
-  | 'event'
+  | 'condition'
   | 'effect'
   | 'playerChoice';
 

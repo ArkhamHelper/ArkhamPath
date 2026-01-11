@@ -6,6 +6,7 @@ import {
 import type {
   Scenario,
   ScenarioBlock,
+  ScenarioCondition,
   ScenarioResolution,
 } from '../../models/scenario';
 import { Text, View } from '../Themed';
@@ -16,6 +17,7 @@ import { useState } from 'react';
 import { PathLine } from './Line';
 import { PathConnection } from './Connection';
 import { PathPlayerChoice } from './PlayerChoice';
+import { PathCondition } from './Condition';
 
 interface PathScenarioProps {
   scenario: Scenario;
@@ -123,9 +125,11 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
               }}
             />
           );
+
         if (block.blockType === 'connection')
           return (
             <PathConnection
+              key={`connection-${block.code}`}
               block={block}
               style={{
                 ...getDefaultNodeStyle(block),
@@ -133,6 +137,18 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
               }}
             />
           );
+
+        if (block.blockType === 'condition')
+          return (
+            <PathCondition
+              key={`condition-${block.code}`}
+              condition={block as ScenarioCondition}
+              style={{
+                ...getDefaultNodeStyle(block),
+              }}
+            />
+          );
+
         if (['start', 'setup', 'end'].includes(block.blockType))
           return (
             <CommonNode

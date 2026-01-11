@@ -4,7 +4,7 @@ export interface Scenario {
   blocks: ScenarioBlock[];
   lines: ScenarioLine[];
   isInterlude?: boolean;
-  setup?: ScenarioEvent[];
+  setup?: ScenarioEffect[];
 }
 
 export interface ScenarioBlock {
@@ -19,10 +19,11 @@ type BlockType =
   | 'setup'
   | 'end'
   | 'resolution'
-  | 'event'
+  | 'condition'
   | 'effect'
   | 'playerChoice'
   | 'connection';
+
 export interface ScenarioLine {
   startBlock: ScenarioBlock;
   startBlockPadding: number; //Процент отступа от левого края блока
@@ -35,16 +36,18 @@ export interface ScenarioLine {
 export interface ScenarioResolution extends ScenarioBlock {
   title: string;
   effects?: ScenarioEffect[];
-  conditions?: ScenarioEvent[];
+  conditions?: ScenarioCondition[];
 }
 
-export interface ScenarioEvent extends ScenarioBlock {
+export interface ScenarioCondition extends ScenarioBlock {
   text: string;
-  eventType: ScenarioEventType;
+  conditionType: ScenarioConditionType;
+  count?: number;
+  value?: string;
   isSpoiler?: boolean; //Возможно перенести в настройки пользователя
 }
 
-type ScenarioEventType =
+type ScenarioConditionType =
   | 'have_journal_note'
   | 'on_win_score'
   | 'player_choice'
@@ -54,7 +57,7 @@ export interface ScenarioEffect extends ScenarioBlock {
   text: string;
   effectType: ScenarioEffectType;
   count?: number;
-  conditions?: ScenarioEvent[];
+  conditions?: ScenarioCondition[];
 }
 
 type ScenarioEffectType =
