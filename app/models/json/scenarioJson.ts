@@ -16,13 +16,11 @@ export interface ScenarioLineJson {
 }
 
 export interface ScenarioResolutionJson extends Block {
-  title: string;
   effects?: string[];
   conditions?: string[];
 }
 
 export interface ScenarioConditionBlockJson extends Block {
-  text: string;
   eventType: ScenarioConditionType;
   count?: number;
   value?: string;
@@ -31,7 +29,6 @@ export interface ScenarioConditionBlockJson extends Block {
 
 export interface ScenarioConditionJson {
   code: string;
-  text: string;
   conditionType: ScenarioConditionType;
   count?: number;
   value?: string;
@@ -46,7 +43,6 @@ type ScenarioConditionType =
 
 export interface ScenarioEffectJson {
   code: string;
-  text: string;
   effectType: ScenarioEffectType;
   count?: number;
   conditions?: string[];

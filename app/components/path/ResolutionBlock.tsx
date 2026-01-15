@@ -3,6 +3,7 @@ import type { ScenarioResolution } from '../../models/scenario';
 import { Text, View } from '../Themed';
 import type { PathElementProps } from './props';
 import { CommonNode } from './CommonNode';
+import { useTranslate } from '../../hooks/useTranslate';
 
 interface ResolutionBlockProps extends PathElementProps {
   isToggle: boolean;
@@ -19,10 +20,12 @@ export const ResolutionBlock: React.FC<ResolutionBlockProps> = ({
   onPress,
   ...addStyle
 }) => {
+  const { translate } = useTranslate();
+
   return (
     <View style={{ ...style, ...addStyle }} onLayout={onLayout}>
       <Pressable onPress={onPress}>
-        <CommonNode text={resolution.title} />
+        <CommonNode text={translate(resolution.code)} />
       </Pressable>
 
       {!isToggle &&
@@ -42,9 +45,9 @@ export const ResolutionBlock: React.FC<ResolutionBlockProps> = ({
               </Text>
             )}
             {effect.effectType === 'add_journal_note' ? (
-              <Text style={{ fontSize: 18 }}>{effect.text}</Text>
+              <Text style={{ fontSize: 18 }}>{translate(effect.code)}</Text>
             ) : (
-              <Text style={{ fontSize: 18 }}>{effect.text}</Text>
+              <Text style={{ fontSize: 18 }}>{translate(effect.code)}</Text>
             )}
           </View>
         ))}

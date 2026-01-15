@@ -1,0 +1,25 @@
+{
+  "investigators_defeated": "Исход не достигнут",
+  "start": "Начало",
+  "setup": "Подготовка",
+  "end": "Конец",
+  "earn_xp": "опыта каждому",
+
+  "night_of_zealot": "Ночь фанатички",
+  "ghoul_priest_is_dead": "Упырь-жрец мертв",
+  "player_burn_house": "Сжечь дом",
+  "player_not_burn_house": "Не сжигать дом",
+  "burn_down_house": "И1",
+  "not_burn_down_house": "И2",
+  "death_in_house": "И3",
+  "house_standing": "Дом ещё стоит",
+  "house_burned": "Дом сгорел дотла",
+  "lita_finds_others": "Лита вынуждена искать других помощников",
+  "earn_lita": "«Лита Чентлер» в колоду ведущему сыщику",
+  "lead_investigator_xp": "опыт ведущему сыщику",
+  "mental_trauma": "травма ведущему сыщику",
+  "killed": "Все сыщики, не совершившие побег, убиты",
+  "ghoul_priest_alive": "Упырь-жрец еще жив",
+  "the_gathering_is_act_one_or_two": "Сцена 1 или 2",
+  "the_gathering_is_act_three": "Сцена 3"
+}

@@ -18,6 +18,7 @@ import { PathLine } from './Line';
 import { PathConnection } from './Connection';
 import { PathPlayerChoice } from './PlayerChoice';
 import { PathCondition } from './Condition';
+import { useTranslate } from '../../hooks/useTranslate';
 
 interface PathScenarioProps {
   scenario: Scenario;
@@ -32,6 +33,7 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
   }>({});
   // const userResults = userPath.data[scenario.code];
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
+  const { translate } = useTranslate();
   const commonNodeHeight = screenHeight * COMMON_NODE_HEIGHT_COEFFICIENT;
 
   const getDefaultNodeStyle = (block: ScenarioBlock): ViewStyle => ({
@@ -144,6 +146,7 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
               key={`condition-${block.code}`}
               condition={block as ScenarioCondition}
               style={{
+                zIndex: 1,
                 ...getDefaultNodeStyle(block),
               }}
             />
@@ -152,7 +155,7 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
         if (['start', 'setup', 'end'].includes(block.blockType))
           return (
             <CommonNode
-              text={block.code}
+              text={translate(block.code)}
               key={`${scenario.code}-${block.code}`}
               style={{
                 ...getDefaultNodeStyle(block),
@@ -162,7 +165,11 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
       })}
       <Svg width="100%" height="100%" style={{ position: 'absolute' }}>
         {scenario.lines.map((line) => (
-          <PathLine line={line} getAdditionalHeight={getAdditionalHeight} />
+          <PathLine
+            key={`line-${line.startBlock.code}-${line.endBlock.code}`}
+            line={line}
+            getAdditionalHeight={getAdditionalHeight}
+          />
         ))}
       </Svg>
     </View>

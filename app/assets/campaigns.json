@@ -73,7 +73,6 @@
             "code": "ghoul_priest_is_dead",
             "width": 0.4,
             "coordinates": {"x": 0.1, "y": 0.1},
-            "text": "ghoul_priest_is_dead",
             "isSpoiler": true
           },
           {
@@ -86,20 +85,17 @@
             "blockType": "condition",
             "code": "player_burn_house",
             "width": 0.2,
-            "coordinates": {"x": 0.02, "y": 0.21},
-            "text": "burn_house"
+            "coordinates": {"x": 0.02, "y": 0.21}
           },
           {
             "blockType": "condition",
             "code": "player_not_burn_house",
             "width": 0.2,
-            "coordinates": {"x": 0.4, "y": 0.21},
-            "text": "not_burn_house"
+            "coordinates": {"x": 0.4, "y": 0.21}
           },
           {
             "blockType": "resolution",
             "code": "burn_down_house",
-            "title": "Исход 1",
             "width": 0.5,
             "coordinates": {"x": 0, "y": 0.3},
             "effects": [
@@ -112,7 +108,6 @@
           {
             "blockType": "resolution",
             "code": "not_burn_down_house",
-            "title": "Исход 2",
             "width": 0.5,
             "coordinates": {"x": 0.15, "y": 0.4},
             "effects": [
@@ -130,7 +125,6 @@
           {
             "blockType": "resolution",
             "code": "death_in_house",
-            "title": "Исход 3",
             "width": 0.5,
             "coordinates": {"x": 0.2, "y": 0.5},
             "effects": [
@@ -143,7 +137,6 @@
           {
             "blockType": "resolution",
             "code": "investigators_defeated",
-            "title": "Исход не достигнут",
             "width": 0.5,
             "coordinates": {"x": 0.4, "y": 0.6},
             "effects": [
@@ -164,68 +157,56 @@
     "effects": [
       {
         "code": "house_standing",
-        "effectType": "add_journal_note",
-        "text": "Дом ещё стоит"
+        "effectType": "add_journal_note"
       },
       {
         "code": "house_burned",
-        "effectType": "add_journal_note",
-        "text": "Дом сгорел дотла"
+        "effectType": "add_journal_note"
       },
       {
         "code": "ghoul_priest_alive",
-        "effectType": "add_journal_note",
-        "text": "Упырь-жрец еще жив"
+        "effectType": "add_journal_note"
       },
       {
         "code": "lita_finds_others",
-        "effectType": "add_journal_note",
-        "text": "Лита вынуждена искать других помощников"
+        "effectType": "add_journal_note"
       },
       {
         "code": "earn_lita",
-        "effectType": "add_card",
-        "text":"«Лита Чентлер» в колоду ведущему сыщику."
+        "effectType": "add_card"
       },
       {
         "code": "lead_investigator_xp",
         "effectType": "add_xp",
-        "count": 1,
-        "text": "опыт ведущему сыщику"
+        "count": 1
       },
       {
         "code": "earn_xp",
         "effectType": "add_xp",
-        "count": 2,
-        "text": "опыта каждому сыщику"
+        "count": 2
       },
       {
         "code": "mental_trauma",
         "effectType": "add_trauma",
-        "count": 1,
-        "text": "травма ведущему сыщику"
+        "count": 1
       },
       {
         "code": "killed",
-        "effectType": "kill",
-        "text":"Все сыщики, не совершившие побег, убиты"
+        "effectType": "kill"
       }
     ],
     "conditions": [
       {
         "code": "ghoul_priest_alive",
-        "text":"ghoul_priest_alive",
         "conditionType": "have_journal_note",
         "value": "ghoul_priest_alive"
       },
       {
         "code": "the_gathering_is_act_one_or_two",
-        "text":"the_gathering_is_act_one_or_two",
         "conditionType": "game_state"
       },
       {
         "code": "the_gathering_is_act_three",
-        "text":"the_gathering_is_act_three",
         "conditionType": "game_state"
       }
     ]

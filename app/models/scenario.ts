@@ -34,13 +34,11 @@ export interface ScenarioLine {
 }
 
 export interface ScenarioResolution extends ScenarioBlock {
-  title: string;
   effects?: ScenarioEffect[];
   conditions?: ScenarioCondition[];
 }
 
 export interface ScenarioCondition extends ScenarioBlock {
-  text: string;
   conditionType: ScenarioConditionType;
   count?: number;
   value?: string;
@@ -54,7 +52,6 @@ type ScenarioConditionType =
   | '...';
 
 export interface ScenarioEffect extends ScenarioBlock {
-  text: string;
   effectType: ScenarioEffectType;
   count?: number;
   conditions?: ScenarioCondition[];

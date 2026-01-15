@@ -1,3 +1,4 @@
+import { useTranslate } from '../../hooks/useTranslate';
 import type { ScenarioCondition } from '../../models/scenario';
 import { Text, View } from '../Themed';
 import type { PathElementProps } from './props';
@@ -10,6 +11,8 @@ export const PathCondition: React.FC<PathConditionProps> = ({
   style,
   condition,
 }) => {
+  const { translate } = useTranslate();
+
   return (
     <View
       style={{
@@ -34,7 +37,7 @@ export const PathCondition: React.FC<PathConditionProps> = ({
       )}
 
       <View style={{ backgroundColor: 'gray' }}>
-        <Text>{condition.text}</Text>
+        <Text>{translate(condition.code)}</Text>
       </View>
     </View>
   );
