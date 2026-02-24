@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import campaigns from '../assets/campaigns.json';
+import nightOfZealot from '../assets/campaigns/night_of_zealot.json';
 import type { Scenario } from '../models/scenario';
 import type { CycleJson } from '../models/json/cycleJson';
 import type { Cycle } from '../models/cycle';
@@ -8,6 +8,10 @@ import type {
   ScenarioLineJson,
   ScenarioResolutionJson,
 } from '../models/json/scenarioJson';
+
+const CAMPAIGNS: Record<string, CycleJson> = {
+  night_of_zealot: nightOfZealot as CycleJson,
+};
 
 export const useCycle = () => {
   const [cycleCode, setCycleCode] = useState<string>();
@@ -18,7 +22,7 @@ export const useCycle = () => {
   }, []);
 
   const changeCycle = (cycleCode: string) => {
-    const cycleJson = campaigns.find((c) => c.code === cycleCode) as CycleJson;
+    const cycleJson = CAMPAIGNS[cycleCode];
 
     if (!cycleJson) return;
 
@@ -37,6 +41,9 @@ export const useCycle = () => {
           return block;
         }),
       })),
+      /**
+       * @TODO Delete scenariosList
+       */
       scenariosList: cycleJson.scenariosList,
     };
 
