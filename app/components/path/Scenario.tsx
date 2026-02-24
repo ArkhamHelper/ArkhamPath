@@ -107,7 +107,7 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
               onPress={() =>
                 setToggledBlock((prev) => ({
                   ...prev,
-                  [block.code]: prev[block.code] === true ? false : true,
+                  [block.code]: prev[block.code] === false ? true : false,
                 }))
               }
               onLayout={(event) =>
