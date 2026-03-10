@@ -43,7 +43,8 @@ model Path {
   data Json
   userId String
   cycleCode String
-  dateLastFetchArkhamCards DateTime
+  
+  dateLastFetchArkhamCards DateTime?
 
   user User @relation(references: [id], fields: [userId])
 

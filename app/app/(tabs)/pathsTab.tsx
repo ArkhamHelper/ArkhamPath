@@ -1,10 +1,32 @@
 import { StyleSheet } from 'react-native';
 
-import { View } from '@/components/Themed';
+import { Text, View } from '@/components/Themed';
+import { useGetPaths } from '../../hooks/api/paths/usePaths';
+import { PathSchema } from '../../components/path/PathSchema';
+import { useCycle } from '../../hooks/useCycle';
 
-export default function TabOneScreen() {
+export default function PathsTabScreen() {
+  const { paths, error, isLoading } = useGetPaths(
+    '3f222822-916e-47da-9897-95bce4965302',
+  );
+  const { changeCycle } = useCycle();
+
+  if (error)
+    return (
+      <View style={styles.container}>
+        <Text>Error: {error.message}</Text>
+      </View>
+    );
+  if (isLoading)
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+
   return (
     <View style={styles.container}>
+      {paths?.length && <PathSchema userPath={paths[0]} />}
     </View>
   );
 }
@@ -14,5 +36,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 });

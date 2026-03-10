@@ -162,7 +162,7 @@ export type PathGroupByOutputType = {
   data: runtime.JsonValue
   userId: string
   cycleCode: string
-  dateLastFetchArkhamCards: Date
+  dateLastFetchArkhamCards: Date | null
   _count: PathCountAggregateOutputType | null
   _min: PathMinAggregateOutputType | null
   _max: PathMaxAggregateOutputType | null
@@ -193,7 +193,7 @@ export type PathWhereInput = {
   data?: Prisma.JsonFilter<"Path">
   userId?: Prisma.StringFilter<"Path"> | string
   cycleCode?: Prisma.StringFilter<"Path"> | string
-  dateLastFetchArkhamCards?: Prisma.DateTimeFilter<"Path"> | Date | string
+  dateLastFetchArkhamCards?: Prisma.DateTimeNullableFilter<"Path"> | Date | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -204,7 +204,7 @@ export type PathOrderByWithRelationInput = {
   data?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   cycleCode?: Prisma.SortOrder
-  dateLastFetchArkhamCards?: Prisma.SortOrder
+  dateLastFetchArkhamCards?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -219,7 +219,7 @@ export type PathWhereUniqueInput = Prisma.AtLeast<{
   data?: Prisma.JsonFilter<"Path">
   userId?: Prisma.StringFilter<"Path"> | string
   cycleCode?: Prisma.StringFilter<"Path"> | string
-  dateLastFetchArkhamCards?: Prisma.DateTimeFilter<"Path"> | Date | string
+  dateLastFetchArkhamCards?: Prisma.DateTimeNullableFilter<"Path"> | Date | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "userId_cycleCode">
 
@@ -230,7 +230,7 @@ export type PathOrderByWithAggregationInput = {
   data?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   cycleCode?: Prisma.SortOrder
-  dateLastFetchArkhamCards?: Prisma.SortOrder
+  dateLastFetchArkhamCards?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.PathCountOrderByAggregateInput
   _max?: Prisma.PathMaxOrderByAggregateInput
   _min?: Prisma.PathMinOrderByAggregateInput
@@ -246,7 +246,7 @@ export type PathScalarWhereWithAggregatesInput = {
   data?: Prisma.JsonWithAggregatesFilter<"Path">
   userId?: Prisma.StringWithAggregatesFilter<"Path"> | string
   cycleCode?: Prisma.StringWithAggregatesFilter<"Path"> | string
-  dateLastFetchArkhamCards?: Prisma.DateTimeWithAggregatesFilter<"Path"> | Date | string
+  dateLastFetchArkhamCards?: Prisma.DateTimeNullableWithAggregatesFilter<"Path"> | Date | string | null
 }
 
 export type PathCreateInput = {
@@ -255,7 +255,7 @@ export type PathCreateInput = {
   dateUpdate?: Date | string
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
   cycleCode: string
-  dateLastFetchArkhamCards: Date | string
+  dateLastFetchArkhamCards?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutPathsInput
 }
 
@@ -266,7 +266,7 @@ export type PathUncheckedCreateInput = {
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
   userId: string
   cycleCode: string
-  dateLastFetchArkhamCards: Date | string
+  dateLastFetchArkhamCards?: Date | string | null
 }
 
 export type PathUpdateInput = {
@@ -275,7 +275,7 @@ export type PathUpdateInput = {
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   cycleCode?: Prisma.StringFieldUpdateOperationsInput | string
-  dateLastFetchArkhamCards?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateLastFetchArkhamCards?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutPathsNestedInput
 }
 
@@ -286,7 +286,7 @@ export type PathUncheckedUpdateInput = {
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   cycleCode?: Prisma.StringFieldUpdateOperationsInput | string
-  dateLastFetchArkhamCards?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateLastFetchArkhamCards?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type PathCreateManyInput = {
@@ -296,7 +296,7 @@ export type PathCreateManyInput = {
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
   userId: string
   cycleCode: string
-  dateLastFetchArkhamCards: Date | string
+  dateLastFetchArkhamCards?: Date | string | null
 }
 
 export type PathUpdateManyMutationInput = {
@@ -305,7 +305,7 @@ export type PathUpdateManyMutationInput = {
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   cycleCode?: Prisma.StringFieldUpdateOperationsInput | string
-  dateLastFetchArkhamCards?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateLastFetchArkhamCards?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type PathUncheckedUpdateManyInput = {
@@ -315,7 +315,7 @@ export type PathUncheckedUpdateManyInput = {
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   cycleCode?: Prisma.StringFieldUpdateOperationsInput | string
-  dateLastFetchArkhamCards?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateLastFetchArkhamCards?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type PathUserIdCycleCodeCompoundUniqueInput = {
@@ -359,6 +359,10 @@ export type PathListRelationFilter = {
 
 export type PathOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
 }
 
 export type PathCreateNestedManyWithoutUserInput = {
@@ -409,7 +413,7 @@ export type PathCreateWithoutUserInput = {
   dateUpdate?: Date | string
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
   cycleCode: string
-  dateLastFetchArkhamCards: Date | string
+  dateLastFetchArkhamCards?: Date | string | null
 }
 
 export type PathUncheckedCreateWithoutUserInput = {
@@ -418,7 +422,7 @@ export type PathUncheckedCreateWithoutUserInput = {
   dateUpdate?: Date | string
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
   cycleCode: string
-  dateLastFetchArkhamCards: Date | string
+  dateLastFetchArkhamCards?: Date | string | null
 }
 
 export type PathCreateOrConnectWithoutUserInput = {
@@ -457,7 +461,7 @@ export type PathScalarWhereInput = {
   data?: Prisma.JsonFilter<"Path">
   userId?: Prisma.StringFilter<"Path"> | string
   cycleCode?: Prisma.StringFilter<"Path"> | string
-  dateLastFetchArkhamCards?: Prisma.DateTimeFilter<"Path"> | Date | string
+  dateLastFetchArkhamCards?: Prisma.DateTimeNullableFilter<"Path"> | Date | string | null
 }
 
 export type PathCreateManyUserInput = {
@@ -466,7 +470,7 @@ export type PathCreateManyUserInput = {
   dateUpdate?: Date | string
   data: Prisma.JsonNullValueInput | runtime.InputJsonValue
   cycleCode: string
-  dateLastFetchArkhamCards: Date | string
+  dateLastFetchArkhamCards?: Date | string | null
 }
 
 export type PathUpdateWithoutUserInput = {
@@ -475,7 +479,7 @@ export type PathUpdateWithoutUserInput = {
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   cycleCode?: Prisma.StringFieldUpdateOperationsInput | string
-  dateLastFetchArkhamCards?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateLastFetchArkhamCards?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type PathUncheckedUpdateWithoutUserInput = {
@@ -484,7 +488,7 @@ export type PathUncheckedUpdateWithoutUserInput = {
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   cycleCode?: Prisma.StringFieldUpdateOperationsInput | string
-  dateLastFetchArkhamCards?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateLastFetchArkhamCards?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type PathUncheckedUpdateManyWithoutUserInput = {
@@ -493,7 +497,7 @@ export type PathUncheckedUpdateManyWithoutUserInput = {
   dateUpdate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   data?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   cycleCode?: Prisma.StringFieldUpdateOperationsInput | string
-  dateLastFetchArkhamCards?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateLastFetchArkhamCards?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -564,7 +568,7 @@ export type $PathPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     data: runtime.JsonValue
     userId: string
     cycleCode: string
-    dateLastFetchArkhamCards: Date
+    dateLastFetchArkhamCards: Date | null
   }, ExtArgs["result"]["path"]>
   composites: {}
 }
