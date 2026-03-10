@@ -31,7 +31,6 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
   const [additionalHeightByBlocks, setAdditionalHeightByBlocks] = useState<{
     [key: string]: number;
   }>({});
-  // const userResults = userPath.data[scenario.code];
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const { translate } = useTranslate();
   const commonNodeHeight = screenHeight * COMMON_NODE_HEIGHT_COEFFICIENT;
@@ -164,13 +163,15 @@ export const PathScenario: React.FC<PathScenarioProps> = ({ scenario }) => {
           );
       })}
       <Svg width="100%" height="100%" style={{ position: 'absolute' }}>
-        {scenario.lines.map((line) => (
-          <PathLine
-            key={`line-${line.startBlock.code}-${line.endBlock.code}`}
-            line={line}
-            getAdditionalHeight={getAdditionalHeight}
-          />
-        ))}
+        {scenario.lines.map((line) => {
+          return (
+            <PathLine
+              key={`line-${line.startBlock.code}-${line.endBlock.code}`}
+              line={line}
+              getAdditionalHeight={getAdditionalHeight}
+            />
+          );
+        })}
       </Svg>
     </View>
   );

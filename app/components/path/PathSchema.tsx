@@ -3,6 +3,8 @@ import { Text, View } from '../Themed';
 import { useCycle } from '../../hooks/useCycle';
 import { PathScenario } from './Scenario';
 import { ScrollView } from 'react-native';
+import { useTranslate } from '../../hooks/useTranslate';
+import type { Scenario } from '../../models/scenario';
 
 interface PathSchemaProps {
   userPath: Path;
@@ -10,14 +12,34 @@ interface PathSchemaProps {
 
 export const PathSchema = ({ userPath }: PathSchemaProps) => {
   const { scenarios } = useCycle();
+  const { translate } = useTranslate();
 
-  if (!scenarios?.length) {
+  if (!scenarios?.length || !userPath?.data?.length) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Loading scenarios...</Text>
       </View>
     );
   }
+
+  const renderScenario = (scenarioCode: string) => {
+    const userScenario = userPath.data.find(
+      (scenario: Scenario) => scenario.code === scenarioCode,
+    );
+
+    if (!userScenario)
+      return (
+        <View>
+          <Text>Error. Scenario {translate(scenarioCode)} not found</Text>
+        </View>
+      );
+
+    return (
+      <View key={scenarioCode}>
+        <PathScenario scenario={userScenario} />
+      </View>
+    );
+  };
 
   return (
     <ScrollView
@@ -29,11 +51,7 @@ export const PathSchema = ({ userPath }: PathSchemaProps) => {
         backgroundColor: 'white',
       }}
     >
-      {scenarios?.map((scenario) => (
-        <View key={scenario.code}>
-          <PathScenario scenario={scenario} />
-        </View>
-      ))}
+      {scenarios?.map((scenario) => renderScenario(scenario.code))}
     </ScrollView>
   );
 };
