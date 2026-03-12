@@ -2,9 +2,11 @@ import React from 'react';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
 
-import Colors from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
 import { useClientOnlyValue } from '@/hooks/useClientOnlyValue';
+import { Text, View } from '../../components/Themed';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { StyleSheet } from 'react-native';
+import { TranslatedText } from '../../components/TranslatedText';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -15,14 +17,30 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const header = () => {
+    return (
+      <SafeAreaView edges={['top']} style={styles.headerContainer}>
+        <View style={styles.topRow}>
+          <TranslatedText style={styles.headerTitle} text="campaigns_tab" />
+
+          {/**
+           * @TODO Filter icon
+           * @TODO Create icon
+           * <View style={styles.headerButtons}>
+           * </View>
+           */}
+        </View>
+
+        {/**
+         * @TODO Search bar
+         */}
+      </SafeAreaView>
+    );
+  };
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
       }}
     >
@@ -38,7 +56,7 @@ export default function TabLayout() {
         name="campaignsTab"
         options={{
           title: 'Campaigns',
-          headerShown: false,
+          header: header,
           tabBarIcon: ({ color }) => <TabBarIcon name="book" color={color} />,
         }}
       />
@@ -53,3 +71,26 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  headerContainer: {
+    paddingBottom: 12,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+  },
+  topRow: {
+    height: 44,
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  headerTitle: {
+    fontSize: 28,
+    letterSpacing: 1,
+  },
+  headerButtons: {
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+  },
+});

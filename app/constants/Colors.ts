@@ -1,19 +1,21 @@
+export interface ColorScheme {
+  text: string;
+  tint: string;
+  background: string;
+}
+
 const tintColorLight = '#2f95dc';
 const tintColorDark = '#fff';
 
-export default {
+export const colors: { light: ColorScheme; dark: ColorScheme } = {
   light: {
     text: '#000',
     background: '#fff',
     tint: tintColorLight,
-    tabIconDefault: '#ccc',
-    tabIconSelected: tintColorLight,
   },
   dark: {
     text: '#fff',
-    background: '#000',
+    background: '#24303C',
     tint: tintColorDark,
-    tabIconDefault: '#ccc',
-    tabIconSelected: tintColorDark,
   },
 };
