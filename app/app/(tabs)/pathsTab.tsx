@@ -7,7 +7,7 @@ import { useCycle } from '../../hooks/useCycle';
 
 export default function PathsTabScreen() {
   const { paths, error, isLoading } = useGetPaths(
-    '3f222822-916e-47da-9897-95bce4965302',
+    '086f4eb7-5d90-4ef2-9240-4c44e0348149',
   );
   const { changeCycle } = useCycle();
 
