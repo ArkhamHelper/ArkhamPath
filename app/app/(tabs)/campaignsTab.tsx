@@ -1,5 +1,6 @@
 import { FlatList, ActivityIndicator, StyleSheet } from 'react-native';
-import { Text, View } from '../../components/Themed';
+import { Text } from '@/components/Text';
+import { View } from '@/components/View';
 import { useCampaignsWithPagination } from '../../hooks/useCampaignsWithPagination';
 import { CampaignElement } from '../../components/Campaign';
 

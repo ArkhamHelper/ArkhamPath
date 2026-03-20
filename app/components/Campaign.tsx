@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
 import type { Campaign } from '../models/campaign';
 import { AppIcon } from './AppIcon';
-import { Text, View } from './Themed';
+import { Text } from '@/components/Text';
+import { View } from '@/components/View';
 import { TranslatedText } from './TranslatedText';
 import { COLOR_FOR_CYCLE } from '../constants/colorsCycle';
 
@@ -19,10 +20,21 @@ export const CampaignElement: React.FC<CampaignElementProps> = ({
         { backgroundColor: COLOR_FOR_CYCLE[campaign.cycleCode] },
       ]}
     >
-      <AppIcon size={'medium'} name={`${campaign.cycleCode}_campaign`} />
-      <Text>{campaign.name}</Text>
-      <View style={styles.difficultyContainer} color="background-accent">
-        <TranslatedText text={campaign.difficulty} />
+      <View style={styles.campaignTitleContainer}>
+        <AppIcon
+          size={'medium'}
+          name={`${campaign.cycleCode}_campaign`}
+          style={styles.campaignTitleIcon}
+        />
+        <Text size="large" style={styles.campaignTitleText}>
+          {campaign.name}
+        </Text>
+      </View>
+      <View style={styles.difficultyContainer} color="background-secondary">
+        <TranslatedText
+          style={styles.difficultyText}
+          text={campaign.difficulty}
+        />
       </View>
     </View>
   );
@@ -38,9 +50,23 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 16,
   },
+  campaignTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  campaignTitleIcon: {
+    marginRight: 8,
+  },
+  campaignTitleText: {
+    fontFamily: 'Conkordia-Regular',
+  },
   difficultyContainer: {
     borderRadius: 8,
     paddingVertical: 4,
     paddingHorizontal: 8,
+  },
+  difficultyText: {
+    fontFamily: 'Conkordia-Regular',
   },
 });

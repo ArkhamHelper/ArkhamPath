@@ -1,6 +1,6 @@
 import { useColorScheme, type ImageStyle, type StyleProp } from 'react-native';
 import { APP_ICONS_DARK, APP_ICONS_LIGHT } from '../constants/icons';
-import { View } from './Themed';
+import { View } from '@/components/View';
 
 type IconName = keyof typeof APP_ICONS_LIGHT;
 

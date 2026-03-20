@@ -9,7 +9,7 @@ import type {
   ScenarioCondition,
   ScenarioResolution,
 } from '../../models/scenario';
-import { Text, View } from '../Themed';
+import { View } from '@/components/View';
 import { COMMON_NODE_HEIGHT_COEFFICIENT, CommonNode } from './CommonNode';
 import { ResolutionBlock } from './ResolutionBlock';
 import Svg from 'react-native-svg';

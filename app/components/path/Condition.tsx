@@ -1,6 +1,7 @@
 import { useTranslate } from '../../hooks/useTranslate';
 import type { ScenarioCondition } from '../../models/scenario';
-import { Text, View } from '../Themed';
+import { Text } from '@/components/Text';
+import { View } from '@/components/View';
 import type { PathElementProps } from './props';
 
 interface PathConditionProps extends PathElementProps {

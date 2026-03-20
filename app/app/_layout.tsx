@@ -1,5 +1,9 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -7,6 +11,9 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import ConkordiaRegular from '../assets/fonts/Conkordia-Regular.ttf';
+import MonserratRegular from '../assets/fonts/Montserrat-Regular.ttf';
+import MonserratSemiBold from '../assets/fonts/Montserrat-SemiBold.ttf';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -23,7 +30,9 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    'Conkordia-Regular': ConkordiaRegular as Record<string, string | number>,
+    'Monserrat-Regular': MonserratRegular as Record<string, string | number>,
+    'Monserrat-SemiBold': MonserratSemiBold as Record<string, string | number>,
     ...FontAwesome.font,
   });
 

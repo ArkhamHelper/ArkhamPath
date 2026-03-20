@@ -1,6 +1,7 @@
 import { Pressable, type LayoutChangeEvent } from 'react-native';
 import type { ScenarioResolution } from '../../models/scenario';
-import { Text, View } from '../Themed';
+import { Text } from '@/components/Text';
+import { View } from '@/components/View';
 import type { PathElementProps } from './props';
 import { CommonNode } from './CommonNode';
 import { useTranslate } from '../../hooks/useTranslate';

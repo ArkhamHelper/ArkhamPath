@@ -1,12 +1,11 @@
 import { useTranslate } from '../hooks/useTranslate';
-import { Text } from './Themed';
-import { Text as DefaultText } from 'react-native';
+import { Text, type TextProps } from '@/components/Text';
 
 type TranslateProps = {
   text: string;
 };
 
-export type TranslatedTextProps = TranslateProps & DefaultText['props'];
+export type TranslatedTextProps = TranslateProps & TextProps;
 
 export const TranslatedText = ({
   text,

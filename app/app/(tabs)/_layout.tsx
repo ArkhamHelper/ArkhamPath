@@ -3,7 +3,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { Tabs } from 'expo-router';
 
 import { useClientOnlyValue } from '@/hooks/useClientOnlyValue';
-import { Text, View } from '../../components/Themed';
+import { View } from '../../components/View';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native';
 import { TranslatedText } from '../../components/TranslatedText';
@@ -21,7 +21,11 @@ export default function TabLayout() {
     return (
       <SafeAreaView edges={['top']} style={styles.headerContainer}>
         <View style={styles.topRow}>
-          <TranslatedText style={styles.headerTitle} text="campaigns_tab" />
+          <TranslatedText
+            size="large"
+            style={styles.headerTitle}
+            text="campaigns_tab"
+          />
 
           {/**
            * @TODO Filter icon
@@ -80,13 +84,14 @@ const styles = StyleSheet.create({
   },
   topRow: {
     height: 44,
+    paddingVertical: 8,
     backgroundColor: 'transparent',
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   headerTitle: {
-    fontSize: 28,
+    fontFamily: 'Conkordia-Regular',
     letterSpacing: 1,
   },
   headerButtons: {

@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
-import { Text, View } from '@/components/Themed';
+import { Text } from '@/components/Text';
+import { View } from '@/components/View';
 import { useGetPaths } from '../../hooks/api/paths/usePaths';
 import { PathSchema } from '../../components/path/PathSchema';
 import { useCycle } from '../../hooks/useCycle';

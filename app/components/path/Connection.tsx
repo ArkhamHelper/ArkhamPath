@@ -1,5 +1,5 @@
 import type { ScenarioBlock } from '../../models/scenario';
-import { View } from '../Themed';
+import { View } from '@/components/View';
 import type { PathElementProps } from './props';
 
 interface PathConnectionProps extends PathElementProps {

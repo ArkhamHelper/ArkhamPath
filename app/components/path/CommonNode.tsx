@@ -1,5 +1,6 @@
 import type { PathElementProps } from './props';
-import { Text, View } from '../Themed';
+import { Text } from '@/components/Text';
+import { View } from '@/components/View';
 import { useWindowDimensions } from 'react-native';
 
 export const COMMON_NODE_HEIGHT_COEFFICIENT = 0.05;

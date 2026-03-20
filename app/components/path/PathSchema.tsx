@@ -1,5 +1,6 @@
 import type { Path } from '../../models/path';
-import { Text, View } from '../Themed';
+import { Text } from '@/components/Text';
+import { View } from '@/components/View';
 import { useCycle } from '../../hooks/useCycle';
 import { PathScenario } from './Scenario';
 import { ScrollView } from 'react-native';
