@@ -1,7 +1,10 @@
 {
   "campaigns_tab": "Кампании",
 
-
+  "easy_difficulty": "Лёгкая",
+  "normal_difficulty": "Нормальная",
+  "hard_difficulty": "Сложная",
+  "extreme_difficulty": "Экстремальная",
   "investigators_defeated": "Исход не достигнут",
   "start": "Начало",
   "setup": "Подготовка",

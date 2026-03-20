@@ -1,21 +1,24 @@
 export interface ColorScheme {
-  text: string;
-  tint: string;
-  background: string;
+  'text-primary': string;
+  'text-secondary': string;
+  'background-primary': string;
+  'background-secondary': string;
+  'background-accent': string;
 }
-
-const tintColorLight = '#2f95dc';
-const tintColorDark = '#fff';
 
 export const colors: { light: ColorScheme; dark: ColorScheme } = {
   light: {
-    text: '#000',
-    background: '#fff',
-    tint: tintColorLight,
+    'text-primary': '#000',
+    'text-secondary': '',
+    'background-primary': '#fff',
+    'background-secondary': '',
+    'background-accent': '#000',
   },
   dark: {
-    text: '#fff',
-    background: '#24303C',
-    tint: tintColorDark,
+    'text-primary': '#fff',
+    'text-secondary': '',
+    'background-primary': '#24303C',
+    'background-secondary': '#485359',
+    'background-accent': '#CFB03B',
   },
 };

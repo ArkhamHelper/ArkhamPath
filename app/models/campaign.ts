@@ -1,6 +1,8 @@
+import type { CycleCode } from './cycle';
+
 export interface Campaign {
   id: string;
   name: string;
-  cycleCode: string;
   difficulty: string;
+  cycleCode: CycleCode;
 }
