@@ -5,8 +5,9 @@ import { Tabs } from 'expo-router';
 import { useClientOnlyValue } from '@/hooks/useClientOnlyValue';
 import { View } from '../../components/View';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, useColorScheme } from 'react-native';
 import { TranslatedText } from '../../components/TranslatedText';
+import { colors } from '../../constants/colors';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -17,9 +18,22 @@ function TabBarIcon(props: {
 }
 
 export default function TabLayout() {
+  const theme = useColorScheme() ?? 'dark';
+
+  const backgroundPrimaryColor = colors[theme]['background-primary'];
+  const backgroundSecondaryColor = colors[theme]['background-secondary'];
+
   const header = () => {
     return (
-      <SafeAreaView edges={['top']} style={styles.headerContainer}>
+      <SafeAreaView
+        edges={['top']}
+        style={[
+          styles.headerContainer,
+          {
+            borderBottomColor: backgroundSecondaryColor,
+          },
+        ]}
+      >
         <View style={styles.topRow}>
           <TranslatedText
             size="large"
@@ -46,6 +60,17 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: useClientOnlyValue(false, true),
+        sceneStyle: {
+          backgroundColor: backgroundPrimaryColor,
+        },
+        headerStyle: {
+          borderColor: backgroundSecondaryColor,
+        },
+        tabBarStyle: {
+          backgroundColor: backgroundPrimaryColor,
+          borderTopWidth: 1,
+          borderTopColor: backgroundSecondaryColor,
+        },
       }}
     >
       <Tabs.Screen
