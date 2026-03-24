@@ -1,16 +1,18 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { UserService } from './user.service';
 import type { GetOneUserParams } from './dto/getOneUser.dto';
-import type { CreateUserBody } from './dto/createUser.dto';
-import type { UpdateUserBody, UpdateUserParams } from './dto/updateUser.dto';
-import type { AuthUserBody } from './dto/authUser.dto';
+import { CreateUserBody } from './dto/createUser.dto';
+import { UpdateUserBody, UpdateUserParams } from './dto/updateUser.dto';
+import { AuthUserBody } from './dto/authUser.dto';
 import { UserSchema } from './schema/user.schema';
+import { ApiBody } from '@nestjs/swagger';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('auth')
+  @ApiBody({ type: AuthUserBody })
   async auth(@Body() body: AuthUserBody): Promise<UserSchema> {
     const user = await this.userService.auth(body);
 
@@ -25,6 +27,7 @@ export class UserController {
   }
 
   @Post()
+  @ApiBody({ type: CreateUserBody })
   async create(@Body() body: CreateUserBody): Promise<UserSchema> {
     const user = await this.userService.create(body);
 
@@ -32,6 +35,7 @@ export class UserController {
   }
 
   @Put(':id')
+  @ApiBody({ type: UpdateUserBody })
   async update(
     @Param() params: UpdateUserParams,
     @Body() body: UpdateUserBody,
