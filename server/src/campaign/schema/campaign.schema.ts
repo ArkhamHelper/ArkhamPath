@@ -4,10 +4,9 @@ import { CampaignModel } from '../model/campaign.model';
 export class CampaignSchema {
   constructor(campaign: CampaignModel) {
     this.id = campaign.id;
+    this.data = campaign.data;
     this.name = campaign.name;
     this.cycleCode = campaign.cycleCode;
-    this.userResults = campaign.userResults;
-    this.journalNotes = campaign.journalNotes;
     this.difficulty = campaign.difficulty.name;
   }
 
@@ -23,13 +22,23 @@ export class CampaignSchema {
   @ApiProperty({ example: 'hard_difficulty' })
   difficulty: string;
 
-  @ApiProperty({ example: ['ghoul_priest_alive', 'house_burned'] })
-  journalNotes: string[];
-
   @ApiProperty({
     example: {
-      the_gathering: 'r1_house_burned',
+      code: 'night_of_zealot',
+      scenarios: [
+        {
+          lines: [{ startBlockCode: 'start', endBlockCode: 'end' }],
+          blocks: [
+            {
+              blockType: 'start',
+              code: 'start',
+              width: 0.5,
+              coordinates: { x: 0.25, y: 0 },
+            },
+          ],
+        },
+      ],
     },
   })
-  userResults: { [key: string]: string };
+  data: { [key: string]: any };
 }

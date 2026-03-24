@@ -14,9 +14,8 @@ model Campaign {
   dateUpdate DateTime @updatedAt
 
   name String
+  data Json @default("{}")
   cycleCode String
-  journalNotes String[]
-  userResults Json @default("{}")
 
   userId String
   difficultyId Int

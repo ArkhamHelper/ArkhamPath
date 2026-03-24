@@ -10,9 +10,23 @@ export class PathSchema {
   @ApiProperty({ example: 'the_dunwich_legacy' })
   cycleCode: string;
 
-  /**
-   * @todo Add example
-   */
-  @ApiProperty({ example: {} })
-  data: { [key: string]: string };
+  @ApiProperty({
+    example: {
+      code: 'night_of_zealot',
+      scenarios: [
+        {
+          lines: [{ startBlockCode: 'start', endBlockCode: 'end' }],
+          blocks: [
+            {
+              blockType: 'start',
+              code: 'start',
+              width: 0.5,
+              coordinates: { x: 0.25, y: 0 },
+            },
+          ],
+        },
+      ],
+    },
+  })
+  data: { [key: string]: any };
 }

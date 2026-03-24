@@ -5,15 +5,13 @@ export class CampaignModel {
   name: string;
   userId: string;
   cycleCode: string;
-  journalNotes: string[];
   difficulty: CampaignDifficultyModel;
-  userResults: {
-    [key: string]: string; // idScenario: idResolution
+  data: {
+    [key: string]: any;
   };
 
   constructor(campaign: Partial<CampaignModel>) {
-    this.userResults = {};
-    this.journalNotes = [];
+    this.data = {};
 
     Object.assign(this, campaign);
   }
