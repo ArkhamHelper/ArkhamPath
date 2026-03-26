@@ -18,30 +18,47 @@ export class UpdateCampaignBody {
     type: 'object',
     properties: {
       add: {
-        type: 'string',
-        isArray: true,
-        example: ['ghoul_priest_alive', 'house_burned'],
+        type: 'object',
+        properties: {
+          lines: { type: 'array', items: { type: 'object' } },
+          blocks: { type: 'array', items: { type: 'object' } },
+        },
+        example: {
+          lines: [
+            {
+              startBlockCode: 'start',
+              endBlockCode: 'end',
+              startBlockPadding: 0.2,
+              endBlockPadding: 0.5,
+              controlPointX: 0.3,
+              controlPointY: 0.05,
+            },
+          ],
+          blocks: [
+            {
+              blockType: 'end',
+              code: 'end',
+              width: 0.5,
+              coordinates: { x: 0.25, y: 0.7 },
+            },
+          ],
+        },
       },
       remove: {
-        type: 'string',
-        isArray: true,
-        example: ['ghoul_priest_alive', 'house_burned'],
+        type: 'object',
+        properties: {
+          lines: { type: 'array', items: { type: 'object' } },
+          blocks: { type: 'array', items: { type: 'object' } },
+        },
+        example: {
+          lines: [{ startBlockCode: 'start', endBlockCode: 'end' }],
+          blocks: [{ blockType: 'end', code: 'end' }],
+        },
       },
     },
   })
-  journalNotes?: {
-    add: string[];
-    remove: string[];
+  data?: {
+    add: any;
+    remove: any;
   };
-
-  @ApiPropertyOptional({
-    type: 'object',
-    additionalProperties: {
-      type: 'string',
-    },
-    example: {
-      the_gathering: 'r1_house_burned',
-    },
-  })
-  userResults?: Record<string, string>;
 }

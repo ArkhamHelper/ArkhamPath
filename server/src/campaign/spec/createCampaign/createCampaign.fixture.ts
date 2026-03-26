@@ -22,6 +22,14 @@ export class CreateCampaignFixture {
     name: 'My campaign',
     cycleCode: 'the_dunwich_legacy',
     userId: '1',
+    data: {
+      blocks: [
+        {
+          code: 'start',
+          blockType: 'start',
+        },
+      ],
+    },
   });
 
   getDateWithInvalidUserId = (): CreateCampaignDto => ({
@@ -29,13 +37,27 @@ export class CreateCampaignFixture {
     name: 'My campaign',
     cycleCode: 'the_dunwich_legacy',
     userId: '2',
+    data: {
+      blocks: [
+        {
+          code: 'start',
+          blockType: 'start',
+        },
+      ],
+    },
   });
 
   expectedCampaign = (): CampaignModel => ({
     id: '1',
     userId: '1',
-    userResults: {},
-    journalNotes: [],
+    data: {
+      blocks: [
+        {
+          code: 'start',
+          blockType: 'start',
+        },
+      ],
+    },
     name: 'My campaign',
     cycleCode: 'the_dunwich_legacy',
     difficulty: {

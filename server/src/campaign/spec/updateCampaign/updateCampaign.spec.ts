@@ -14,34 +14,36 @@ describe('UpdateCampaign', () => {
     fake.campaignRepository.set(fixture.campaigns);
   });
 
-  it('should update userResults', async () => {
-    await updateCampaign(fixture.getUpdateUserResults());
+  it('should add blocks and lines to data', async () => {
+    await updateCampaign(fixture.getAddDataBlocksAndLines());
 
-    wasSaved(fixture.expectedUpdateUserResults());
+    wasSaved(fixture.expectedAddDataBlocksAndLines());
   });
 
-  it('should replace userResults', async () => {
-    await updateCampaign(fixture.getReplaceUserResults());
+  it('should remove blocks and lines from data', async () => {
+    await updateCampaign(fixture.getRemoveDataBlocksAndLines());
 
-    wasSaved(fixture.expectedReplaceUserResults());
+    wasSaved(fixture.expectedRemoveDataBlocksAndLines());
   });
 
-  it('should add journal notes', async () => {
-    await updateCampaign(fixture.getAddJournalNotes());
+  it('should remove then add blocks and lines to data', async () => {
+    await updateCampaign(fixture.getRemoveAndAddDataBlocksAndLines());
 
-    wasSaved(fixture.expectedAddJournalNotes());
-  });
-
-  it('should remove journal notes', async () => {
-    await updateCampaign(fixture.getRemoveJournalNotes());
-
-    wasSaved(fixture.expectedRemoveJournalNotes());
+    wasSaved(fixture.expectedRemoveAndAddDataBlocksAndLines());
   });
 
   it('should throw error on invalid campaign id', async () => {
     await expect(
       updateCampaign(fixture.getInvalidCampaignId()),
     ).rejects.toThrow('Campaign with id 4 not found');
+  });
+
+  it('should throw error when block to remove not found', async () => {
+    await expect(
+      updateCampaign(fixture.getRemoveNonExistentBlock()),
+    ).rejects.toThrow(
+      'Campaign with id 1 not contain blocks with code start and type end',
+    );
   });
 
   function updateCampaign(campaign: UpdateCampaignDto): Promise<CampaignModel> {

@@ -20,4 +20,33 @@ export class CreateCampaignBody {
 
   @ApiProperty({ type: 'string', example: 'the_dunwich_legacy' })
   cycleCode: string;
+
+  @ApiProperty({
+    type: 'object',
+    properties: {
+      lines: { type: 'array', items: { type: 'object' } },
+      blocks: { type: 'array', items: { type: 'object' } },
+    },
+    example: {
+      lines: [
+        {
+          startBlockCode: 'start',
+          endBlockCode: 'end',
+          startBlockPadding: 0.2,
+          endBlockPadding: 0.5,
+          controlPointX: 0.3,
+          controlPointY: 0.05,
+        },
+      ],
+      blocks: [
+        {
+          blockType: 'end',
+          code: 'end',
+          width: 0.5,
+          coordinates: { x: 0.25, y: 0.7 },
+        },
+      ],
+    },
+  })
+  data: any;
 }

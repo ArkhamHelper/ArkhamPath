@@ -6,8 +6,19 @@ export class UpdateCampaignFixture {
     {
       id: '1',
       userId: '1',
-      userResults: {},
-      journalNotes: [],
+      data: {
+        scenarios: {
+          blocks: [
+            {
+              blockType: 'start',
+              code: 'start',
+              width: 0.5,
+              coordinates: { x: 0.25, y: 0 },
+            },
+          ],
+          lines: [],
+        },
+      },
       name: 'Dunwich User 1 Diff 1',
       cycleCode: 'the_dunwich_legacy',
       difficulty: { id: 1, name: 'easy_difficulty' },
@@ -15,84 +26,160 @@ export class UpdateCampaignFixture {
     {
       id: '2',
       userId: '1',
-      userResults: { the_gathering: 'r1_house_burned' },
-      journalNotes: [],
-      name: 'Dunwich User 1 Diff 1',
-      cycleCode: 'the_dunwich_legacy',
-      difficulty: { id: 1, name: 'easy_difficulty' },
-    },
-    {
-      id: '3',
-      userId: '1',
-      userResults: {},
-      journalNotes: ['ghoul_priest_alive'],
+      data: {
+        scenarios: {
+          blocks: [
+            {
+              blockType: 'start',
+              code: 'start',
+              width: 0.5,
+              coordinates: { x: 0.25, y: 0 },
+            },
+            {
+              blockType: 'end',
+              code: 'end',
+              width: 0.1,
+              coordinates: { x: 0.25, y: 0.2 },
+            },
+          ],
+          lines: [
+            {
+              startBlockCode: 'start',
+              endBlockCode: 'end',
+            },
+          ],
+        },
+      },
       name: 'Dunwich User 1 Diff 1',
       cycleCode: 'the_dunwich_legacy',
       difficulty: { id: 1, name: 'easy_difficulty' },
     },
   ];
 
-  getUpdateUserResults = (): UpdateCampaignDto => ({
+  getAddDataBlocksAndLines = (): UpdateCampaignDto => ({
     id: '1',
-    userResults: { the_gathering: 'r1_house_burned' },
+    data: {
+      add: {
+        blocks: [{ blockType: 'end', code: 'end' }],
+        lines: [{ startBlockCode: 'start', endBlockCode: 'end' }],
+      },
+      remove: {},
+    },
   });
 
-  getReplaceUserResults = (): UpdateCampaignDto => ({
+  expectedAddDataBlocksAndLines = (): CampaignModel => ({
+    id: '1',
+    userId: '1',
+    name: 'Dunwich User 1 Diff 1',
+    cycleCode: 'the_dunwich_legacy',
+    difficulty: { id: 1, name: 'easy_difficulty' },
+    data: {
+      scenarios: {
+        blocks: [
+          {
+            blockType: 'start',
+            code: 'start',
+            width: 0.5,
+            coordinates: { x: 0.25, y: 0 },
+          },
+          {
+            blockType: 'end',
+            code: 'end',
+          },
+          { blockType: 'end', code: 'end' },
+        ],
+        lines: [
+          {
+            startBlockCode: 'start',
+            endBlockCode: 'end',
+          },
+        ],
+      },
+    },
+  });
+
+  getRemoveDataBlocksAndLines = (): UpdateCampaignDto => ({
     id: '2',
-    userResults: { the_gathering: 'r2_house_stay' },
+    data: {
+      add: {},
+      remove: {
+        blocks: ['end'],
+        lines: [{ startBlockCode: 'start', endBlockCode: 'end' }],
+      },
+    },
   });
 
-  getAddJournalNotes = (): UpdateCampaignDto => ({
-    id: '1',
-    journalNotes: { add: ['ghoul_priest_alive'], remove: [] },
+  expectedRemoveDataBlocksAndLines = (): CampaignModel => ({
+    id: '2',
+    userId: '1',
+    name: 'Dunwich User 1 Diff 1',
+    cycleCode: 'the_dunwich_legacy',
+    difficulty: { id: 1, name: 'easy_difficulty' },
+    data: {
+      scenarios: {
+        blocks: [
+          {
+            blockType: 'start',
+            code: 'start',
+            width: 0.5,
+            coordinates: { x: 0.25, y: 0 },
+          },
+        ],
+        lines: [],
+      },
+    },
   });
 
-  getRemoveJournalNotes = (): UpdateCampaignDto => ({
-    id: '3',
-    journalNotes: { add: [], remove: ['ghoul_priest_alive'] },
+  getRemoveAndAddDataBlocksAndLines = (): UpdateCampaignDto => ({
+    id: '2',
+    data: {
+      add: {
+        blocks: [{ blockType: 'resolution', code: 'final_res' }],
+      },
+      remove: {
+        blocks: ['end'],
+        lines: [{ startBlockCode: 'start', endBlockCode: 'end' }],
+      },
+    },
+  });
+
+  expectedRemoveAndAddDataBlocksAndLines = (): CampaignModel => ({
+    id: '2',
+    userId: '1',
+    name: 'Dunwich User 1 Diff 1',
+    cycleCode: 'the_dunwich_legacy',
+    difficulty: { id: 1, name: 'easy_difficulty' },
+    data: {
+      scenarios: {
+        blocks: [
+          {
+            blockType: 'start',
+            code: 'start',
+            width: 0.5,
+            coordinates: { x: 0.25, y: 0 },
+          },
+          {
+            blockType: 'resolution',
+            code: 'final_res',
+          },
+          { blockType: 'resolution', code: 'final_res' },
+        ],
+        lines: [],
+      },
+    },
   });
 
   getInvalidCampaignId = (): UpdateCampaignDto => ({
     id: '4',
   });
 
-  expectedUpdateUserResults = (): CampaignModel => ({
+  getRemoveNonExistentBlock = (): UpdateCampaignDto => ({
     id: '1',
-    userId: '1',
-    userResults: { the_gathering: 'r1_house_burned' },
-    journalNotes: [],
-    name: 'Dunwich User 1 Diff 1',
-    cycleCode: 'the_dunwich_legacy',
-    difficulty: { id: 1, name: 'easy_difficulty' },
-  });
-
-  expectedReplaceUserResults = (): CampaignModel => ({
-    id: '2',
-    userId: '1',
-    userResults: { the_gathering: 'r2_house_stay' },
-    journalNotes: [],
-    name: 'Dunwich User 1 Diff 1',
-    cycleCode: 'the_dunwich_legacy',
-    difficulty: { id: 1, name: 'easy_difficulty' },
-  });
-
-  expectedAddJournalNotes = (): CampaignModel => ({
-    id: '1',
-    userId: '1',
-    userResults: {},
-    journalNotes: ['ghoul_priest_alive'],
-    name: 'Dunwich User 1 Diff 1',
-    cycleCode: 'the_dunwich_legacy',
-    difficulty: { id: 1, name: 'easy_difficulty' },
-  });
-
-  expectedRemoveJournalNotes = (): CampaignModel => ({
-    id: '3',
-    userId: '1',
-    userResults: {},
-    journalNotes: [],
-    name: 'Dunwich User 1 Diff 1',
-    cycleCode: 'the_dunwich_legacy',
-    difficulty: { id: 1, name: 'easy_difficulty' },
+    data: {
+      add: {},
+      remove: {
+        blocks: [{ blockType: 'end', code: 'start' }],
+      },
+    },
   });
 }
