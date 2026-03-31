@@ -17,48 +17,76 @@ export class UpdateCampaignBody {
   @ApiPropertyOptional({
     type: 'object',
     properties: {
-      add: {
-        type: 'object',
-        properties: {
-          lines: { type: 'array', items: { type: 'object' } },
-          blocks: { type: 'array', items: { type: 'object' } },
-        },
-        example: {
-          lines: [
-            {
-              startBlockCode: 'start',
-              endBlockCode: 'end',
-              startBlockPadding: 0.2,
-              endBlockPadding: 0.5,
-              controlPointX: 0.3,
-              controlPointY: 0.05,
+      scenarios: {
+        type: 'array',
+        items: {
+          type: 'object',
+          required: ['code'],
+          properties: {
+            code: { 
+              type: 'string', 
+              description: 'Unique identifier for the scenario',
+              example: 'the_gathering' 
             },
-          ],
-          blocks: [
-            {
-              blockType: 'end',
-              code: 'end',
-              width: 0.5,
-              coordinates: { x: 0.25, y: 0.7 },
+            add: {
+              type: 'object',
+              properties: {
+                lines: { type: 'array', items: { type: 'object' } },
+                blocks: { type: 'array', items: { type: 'object' } },
+              },
+              example: {
+                lines: [
+                  {
+                    startBlockCode: 'start',
+                    endBlockCode: 'choice_to_burn_house',
+                    startBlockPadding: 0.2,
+                    endBlockPadding: 0.5,
+                    controlPointX: 0.3,
+                    controlPointY: 0.05,
+                  },
+                ],
+                blocks: [
+                  {
+                    blockType: 'condition',
+                    code: 'ghoul_priest_is_dead',
+                    width: 0.4,
+                    coordinates: { x: 0.1, y: 0.1 },
+                    isSpoiler: true,
+                  },
+                ],
+              },
             },
-          ],
-        },
-      },
-      remove: {
-        type: 'object',
-        properties: {
-          lines: { type: 'array', items: { type: 'object' } },
-          blocks: { type: 'array', items: { type: 'object' } },
-        },
-        example: {
-          lines: [{ startBlockCode: 'start', endBlockCode: 'end' }],
-          blocks: [{ blockType: 'end', code: 'end' }],
+            remove: {
+              type: 'object',
+              properties: {
+                lines: { type: 'array', items: { type: 'object' } },
+                blocks: { type: 'array', items: { type: 'object' } },
+              },
+              example: {
+                lines: [
+                  { 
+                    startBlockCode: 'start', 
+                    endBlockCode: 'choice_to_burn_house' 
+                  }
+                ],
+                blocks: [
+                  { 
+                    blockType: 'condition', 
+                    code: 'ghoul_priest_is_dead' 
+                  }
+                ],
+              },
+            },
+          },
         },
       },
     },
   })
   data?: {
-    add: any;
-    remove: any;
+    scenarios: {
+      code: string;
+      add?: any;
+      remove?: any;
+    }[];
   };
 }

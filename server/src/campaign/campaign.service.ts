@@ -8,6 +8,14 @@ import { GetManyCampaignsDto } from './dto/getManyCampaigns.dto';
 import type { ICampaignRepository } from './repository/campaign.repository';
 import type { IUserRepository } from '../user/repository/user.repository';
 import type { DeleteCampaignDto } from './dto/deleteCampaign.dto';
+import { deepAdd, deepRemove } from '../tools/utils';
+import { cloneDeep, findIndex, get, isArray, last, set } from 'lodash';
+
+const KEYS_TO_COMPARE_BY_TYPE_FOR_UPDATE_CAMPAIGN_DATA: Record<string, string[]> = {
+  blocks: ['code', 'blockType'],
+  lines: ['startBlockCode', 'endBlockCode'],
+  default: ['code'],
+}
 
 @Injectable()
 export class CampaignService {
@@ -74,16 +82,12 @@ export class CampaignService {
       throw new NotFoundException(`Campaign with id ${campaign.id} not found`);
     }
 
+    const updatedData = this.addOrRemoveInCampaignData(foundCampaign, campaign);
+
     const campaignModel: CampaignModel = {
       ...foundCampaign,
       name: campaign.name ? campaign.name : foundCampaign.name,
-      userResults: {
-        ...foundCampaign.userResults,
-        ...campaign.userResults,
-      },
-      journalNotes: foundCampaign.journalNotes
-        .filter((note) => !campaign.journalNotes?.remove.includes(note))
-        .concat(campaign.journalNotes?.add ?? []),
+      data: updatedData
     };
 
     return await this.campaignRepository.save(campaignModel);
@@ -106,4 +110,76 @@ export class CampaignService {
       throw new Error(`User with id ${userId} not found`);
     }
   }
+
+  private addOrRemoveInCampaignData(foundCampaign: CampaignModel, campaign: UpdateCampaignDto) {
+    let updatedData = cloneDeep(foundCampaign.data);
+
+    for (let scenarioForUpdate of campaign.data?.scenarios ?? []) {
+      const scenarioIndex = findIndex(updatedData.scenarios, (s: any) => s.code === scenarioForUpdate.code);
+
+      if (scenarioIndex === -1) {
+        throw new Error(
+          `Campaign with id ${campaign.id} does not contain scenario with code ${scenarioForUpdate.code}`
+        );
+      }
+
+      const scenarioPath = `scenarios[${scenarioIndex}]`;
+      const currentScenarioData = get(updatedData, scenarioPath);
+
+      if (scenarioForUpdate.remove) {
+        this.validateRemoval(currentScenarioData, scenarioForUpdate.remove, campaign.id);
+
+        const updatedScenario = deepRemove(
+          currentScenarioData, 
+          scenarioForUpdate.remove, 
+          (currentItem, toRemoveItem, path) => {
+            const key = last(path) || '';
+            const fields = this.getIdentityFields(key);
+
+            return this.isMatchingForRemove(currentItem, toRemoveItem, fields);
+          }
+        );
+        set(updatedData, scenarioPath, updatedScenario);
+      }
+
+      if (scenarioForUpdate.add) {
+        const scenarioWithAddedData = deepAdd(get(updatedData, scenarioPath), scenarioForUpdate.add);
+        set(updatedData, scenarioPath, scenarioWithAddedData);
+      }
+    }
+
+    return updatedData;
+  }
+
+  private validateRemoval(currentScenarioData: any, removeDto: any, campaignId: string) {
+    for (const key in removeDto) {
+      const itemsToRemove = removeDto[key];
+      if (!isArray(itemsToRemove)) continue;
+
+      const targetArray = currentScenarioData[key];
+      const fields = this.getIdentityFields(key);
+
+      for (const toRemove of itemsToRemove) {
+        const exists = targetArray?.some((item: any) => this.isMatchingForRemove(item, toRemove, fields));
+        
+        if (!exists) {
+          // Generates a comma-separated list of key-value pairs (e.g., "code end, blockType end")
+          const details = fields.map(field => `${field} "${toRemove[field]}"`).join(', ');
+          const message = `Campaign with id ${campaignId} not contain ${key} with ${details}`;
+          
+          throw new Error(message);
+        }
+      }
+    }
+  }
+
+  private getIdentityFields(key: string): string[] {
+    return Object.keys(KEYS_TO_COMPARE_BY_TYPE_FOR_UPDATE_CAMPAIGN_DATA).includes(key)
+      ? KEYS_TO_COMPARE_BY_TYPE_FOR_UPDATE_CAMPAIGN_DATA[key]
+      : KEYS_TO_COMPARE_BY_TYPE_FOR_UPDATE_CAMPAIGN_DATA.default
+  }
+
+  private isMatchingForRemove = (storedRecord: any, deletionCriteria: any, identityFields: string[]): boolean => {
+    return identityFields.every(field => storedRecord[field] === deletionCriteria[field]);
+  };
 }
